@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;x&apos; from expression &apos;(0.1 + 0.1 + 0.1)&apos;&#x0D;&#x0A;- Original project: &apos;javaprac&apos;&#x0D;&#x0A;- Variable name: &apos;x&apos;&#x0D;&#x0A;- Destination method: &apos;CH02.test2.main()&apos;&#x0D;&#x0A;- Variable expression: &apos;(0.1 + 0.1 + 0.1)&apos;" description="Extract local variable &apos;x&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;CH02{test2.java" name="x" replace="false" selection="141 13" stamp="1615273776365" version="1.0"/>
+</session>

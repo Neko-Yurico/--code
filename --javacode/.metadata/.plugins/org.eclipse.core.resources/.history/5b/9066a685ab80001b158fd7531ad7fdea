@@ -1,0 +1,12 @@
+package ch02;
+
+public class NaughtyFloat {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		char c = 'a';
+		System.out.println(char c+3);
+		
+	}
+
+}
