@@ -14,12 +14,13 @@ import java.util.Scanner;
 public class ScannerTest {
     public static void main(String[] args)
     {
-        System.out.println("请连续输入值：");
+        System.out.println("请输入值，并使用回车连续输入值，使用ctrl+d结束输入：");
         Scanner scanner=new Scanner(System.in);
         int sum=0;
         int m=0;
         while (scanner.hasNextInt())
         {
+            System.out.printf("请输入第%d个值：",m+1);
             int p=scanner.nextInt();
             sum+=p;
             m=m+1;
