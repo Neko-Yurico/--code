@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class ScannerTest {
     public static void main(String[] args)
     {
+        System.out.println("请连续输入值：");
         Scanner scanner=new Scanner(System.in);
         int sum=0;
         int m=0;
