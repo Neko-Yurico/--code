@@ -19,7 +19,7 @@ public class FactorialSum
         int n;
         System.out.println("计算1!+2!+3!+……+n!");
         System.out.print("请输入n的数值:");
-        Scanner reader=new Scanner(System.in);
+        Scanner reader = new Scanner(System.in);
         //判断输入是否为整数
         while (!reader.hasNextInt())
         {
@@ -28,28 +28,29 @@ public class FactorialSum
 
             reader = new Scanner(System.in);
         }
-            n=reader.nextInt();
-            s=func(n);
-            System.out.printf("%s个数阶乘的和为：%d",n,s);
+        n = reader.nextInt();
+        s = func(n);
+        System.out.printf("%s个数阶乘的和为：%d", n, s);
     }
+
     //递归求Σn！
     //算法来自于acm社团
     public static long func(int n)
     {
-        int sum,fac=1;
-        if(n==1)
+        int sum, fac = 1;
+        if (n == 1)
         {
             return fac;
         }
         else
-            {
-            for(int i=2;i<=n;i++)
+        {
+            for (int i = 2; i <= n; i++)
             {
                 fac *= i;
             }
-            n=n-1;
-            sum=fac;
-            sum+=func(n);
+            n = n - 1;
+            sum = fac;
+            sum += func(n);
             return sum;
         }
     }
