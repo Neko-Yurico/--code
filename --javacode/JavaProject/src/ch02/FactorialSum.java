@@ -37,12 +37,16 @@ public class FactorialSum
     public static long func(int n)
     {
         int sum,fac=1;
-        if(n==1){
+        if(n==1)
+        {
             return fac;
         }
-        else{
+        else
+            {
             for(int i=2;i<=n;i++)
-                fac*=i;
+            {
+                fac *= i;
+            }
             n=n-1;
             sum=fac;
             sum+=func(n);
