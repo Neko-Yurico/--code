@@ -12,13 +12,11 @@
 ## 配置
 
 * Hwawei Matebook14
-* Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz   1.80 GHz
-* RAM 8.00 GB
-* Keyboard 双飞燕B760 
-
+* ===Windows版本信息===
 * 版本	Windows 10 家庭中文版
 * 版本号	20H2
 * 安装日期	‎2021/‎3/‎12
 * 操作系统内部版本	19042.867
 * 体验	Windows Feature Experience Pack 120.2212.551.0
+* =================
 
