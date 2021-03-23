@@ -17,6 +17,7 @@ public class FactorialSum
     public static void main(String[] args)
     {
         BigInteger s;
+        //biginteger结构表示任意大、带正负号的整数。
         int n;
         System.out.println("计算1!+2!+3!+……+n!");
         System.out.print("请输入n的数值:");
