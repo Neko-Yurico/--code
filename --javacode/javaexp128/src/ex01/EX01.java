@@ -32,7 +32,7 @@ public class EX01
         }
         n = reader.nextInt();
         s = func(n);
-        System.out.printf("1!+2!+...+n!的阶乘和为：：%d", s);
+        System.out.printf("1!+2!+...+n!的阶乘和为：%d", s);
     }
 
     //递归求Σn！
