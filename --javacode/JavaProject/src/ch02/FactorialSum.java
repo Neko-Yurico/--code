@@ -28,7 +28,6 @@ public class FactorialSum
         {
             System.out.println("请输入正确的n");
             System.out.print("请输入n的数值:");
-
             reader = new Scanner(System.in);
         }
         n = reader.nextInt();
