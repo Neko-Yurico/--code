@@ -1,4 +1,4 @@
-package ch02;
+package ex01;
 
 import java.math.BigInteger;
 import java.util.Scanner;
@@ -6,13 +6,13 @@ import java.util.Scanner;
 /**
  * @author Neko_Yurico
  * @description
- * @date 2021/3/16 15:46
+ * @date 2021/3/23 13:47
  * ========================
  * WELCOME TO MY WEBSITE
  * https://nekoyurico.me/
  * ========================
  */
-public class FactorialSum
+public class EX01
 {
     public static void main(String[] args)
     {
@@ -32,7 +32,7 @@ public class FactorialSum
         }
         n = reader.nextInt();
         s = func(n);
-        System.out.printf("%s个数阶乘的和为：%d", n, s);
+        System.out.printf("1!+2!+...+n!的阶乘和为：：%d", s);
     }
 
     //递归求Σn！
