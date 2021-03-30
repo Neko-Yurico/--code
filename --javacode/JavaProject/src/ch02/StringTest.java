@@ -1,7 +1,6 @@
 package ch02;
 
 import java.nio.charset.StandardCharsets;
-import java.util.SimpleTimeZone;
 
 /**
  * @author Neko_Yurico
@@ -16,7 +15,7 @@ public class StringTest
 {
     public static void main(String[] args)
     {
-        String a = new String("hello你好");
+        String a = "hello你好";
         System.out.println(a.length());
         System.out.println(a.contains("he") );
         System.out.println(a.indexOf("l") );
