@@ -38,7 +38,6 @@ public class StringTest
         }
         System.out.println("共找到"+inumber+"个数字");
         //
-
     }
 }
 
