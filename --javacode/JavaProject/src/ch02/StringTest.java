@@ -1,6 +1,7 @@
 package ch02;
 
 import java.nio.charset.StandardCharsets;
+import java.util.SimpleTimeZone;
 
 /**
  * @author Neko_Yurico
@@ -23,5 +24,15 @@ public class StringTest
         System.out.println(as.length );
         byte[] abs = a.getBytes(StandardCharsets.UTF_8);
         System.out.println(abs.length );
+        String s= "wdt=44,g=5";
+        char[] s1 = s.toCharArray();
+        for (int i = 0; i < s1.length; i++)
+        {
+            if (Character.isDigit(s1[i]))
+            {
+                System.out.printf("在%d处找到字符%c\n",i,s1[i]);
+            }
+        }
     }
 }
+
