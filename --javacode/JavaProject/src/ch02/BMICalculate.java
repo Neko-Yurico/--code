@@ -25,15 +25,15 @@ public class BMICalculate
         {
             System.out.println("过轻");
         }
-        else if (bmi < 25 & !(bmi < 18.5))
+        else if ((bmi < 25) && !(bmi < 18.5))
         {
             System.out.println("正常");
         }
-        else if (bmi < 28 & !(bmi < 25))
+        else if ((bmi < 28) && !(bmi < 25))
         {
             System.out.println("过重");
         }
-        else if (bmi < 32 & !(bmi < 28))
+        else if ((bmi < 32) && !(bmi < 28))
         {
             System.out.println("肥胖");
         }
