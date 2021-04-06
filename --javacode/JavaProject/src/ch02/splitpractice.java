@@ -13,6 +13,7 @@ public class splitpractice {
     public static void main(String[] args) {
         String str = "T=12.3 H=058 L=007";
         String[] ss = str.split("\\D*=") ;
+        System.out.println("找到"+ss.length +"个字符");
         for (String string : ss )
         {
             System.out.println(string);
