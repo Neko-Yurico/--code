@@ -15,7 +15,7 @@ public class LongSplit {
     public static void main(String[] args) {
         String str="市话费：176.8元；通话时间120分钟。长途费：187.98元；通话时间30分钟。网络费：928.66元；在线时间234分钟。";
         Scanner scanner =new Scanner(str) ;
-        scanner .useDelimiter("^([0-9]+\\.[0-9]{1,2})") ;
+        scanner .useDelimiter("^[0-9]+\\.[0-9]{1,2}") ;
         double s1=0;
         while (scanner.hasNext() ){
             double price=scanner.nextDouble() ;
