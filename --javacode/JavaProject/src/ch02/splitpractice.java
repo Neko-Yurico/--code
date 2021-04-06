@@ -24,7 +24,7 @@ public class splitpractice {
            }
  */
         Scanner scanner =new Scanner(str) ;
-        scanner .useDelimiter("[^0-9.]+") ;
+        scanner .useDelimiter("[^\\d.]+") ;
         double s=0;
         while (scanner .hasNext() ){
             s += Double.parseDouble(scanner.next());
