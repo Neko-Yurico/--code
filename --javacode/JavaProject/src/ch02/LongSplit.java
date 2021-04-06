@@ -12,16 +12,20 @@ import java.util.Scanner;
  * ========================
  */
 public class LongSplit {
-    public static void main(String[] args) {
-        String str="市话费：176.8元；通话时间120分钟。长途费：187.98元；通话时间30分钟。网络费：928.66元；在线时间234分钟。";
-        Scanner scanner =new Scanner(str) ;
-        scanner .useDelimiter("^[0-9]+\\.[0-9]{1,2}") ;
-        double s1=0;
-        while (scanner.hasNext() ){
-            double price=scanner.nextDouble() ;
-            s1 += price ;
+    public static void main ( String[] args ) {
+        String str = "市话费：176.8元；通话时间120分钟。长途费：187.98元；通话时间30分钟。网络费：928.66元；在线时间234分钟。";
+        Scanner scanner = new Scanner ( str );
+        //       scanner .useDelimiter("^[0-9]+\\.[0-9]{1,2}") ;
+        scanner.useDelimiter ( "[^0-9.分]" );
+        double s1 = 0, s2 = 0;
+        while ( scanner.hasNext ( ) ) {
+            if ( scanner.hasNextDouble ( ) ) {
+                s1 += Double.parseDouble ( scanner.next ( ) );
+            }
+            else {
+                scanner.next ( );
+            }
         }
-        System.out.println("总话费为"+s1);
-//        System.out.println("总时长为"+s2);
+        System.out.println ( "总话费为" + s1 + "元" );
     }
 }
