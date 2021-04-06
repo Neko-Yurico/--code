@@ -15,20 +15,21 @@ import java.util.Scanner;
  */
 public class splitpractice {
     public static void main(String[] args) {
-        String str = "T=12.3 H=058 L=007";
-/*
-       String[] ss = str.split("\\D*=") ;
-       System.out.println("找到"+ss.length +"个字符");
-       for (int i=1;i< ss.length ;i++ ) {
-           System.out.println(ss[i]);
-           }
- */
-        Scanner scanner =new Scanner(str) ;
-        scanner .useDelimiter("[^\\d.]+") ;
-        double s=0;
-        while (scanner .hasNext() ){
-            s += Double.parseDouble(scanner.next());
+        String str = "市话费：176.8元；通话时间120分钟。长途费：187.98元；通话时间30分钟。网络费：928.66元；在线时间234分钟。";
+        String streg="[^\\d.元分]+" ;
+        String[] ss = str .split(streg);
+        double s1=0,s2=0;
+        for (String string : ss) {
+            if (string .endsWith("元") ) {
+                String price = string .substring(0,string .length()-1);
+                s1+=Double .parseDouble(price );
+            }
+            else if (string .endsWith("分") )  {
+                String length = string .substring(0,string .length()-1);
+                s2+=Double .parseDouble(length );
+            }
         }
-        System.out.println("数据总和为"+s);
+        System.out.println("总计费用："+s1);
+        System.out.println("时长："+s2+"分钟");
     }
 }
