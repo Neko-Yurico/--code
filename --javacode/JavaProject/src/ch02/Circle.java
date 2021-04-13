@@ -12,8 +12,12 @@ package ch02;
 public class Circle {
     private static final double PI = 3.14;
     double radius;
+
+    public Circle (double d) {
+        radius = d;
+    }
+
     double getArea(){
-        double area = PI * radius * radius ;
-        return area ;
+        return PI * radius * radius;
     }
 }

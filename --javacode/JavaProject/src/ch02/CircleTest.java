@@ -14,10 +14,9 @@ import java.util.Scanner;
 public class CircleTest {
     public static void main ( String[] args ) {
         Circle circle ;
-        circle =new Circle () ;
         System.out.println ("请输入圆的半径:" );
         Scanner scanner =new Scanner (System .in);
-        circle .radius =scanner .nextDouble () ;
+        circle =new Circle (scanner .nextDouble () ) ;
         double area=circle .getArea () ;
         System.out.printf ("半径是%5.3f的圆的面积：\n%5.3f\n",circle .radius ,area );
     }
