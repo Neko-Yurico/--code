@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\IO.obj" 
+TO ".\Objects\Project1" 
+PRINT(".\Listings\Project1.m51")

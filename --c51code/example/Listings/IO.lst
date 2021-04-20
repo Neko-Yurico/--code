@@ -1,0 +1,46 @@
+A51 MACRO ASSEMBLER  IO                                                                   04/20/2021 10:33:23 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\IO.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE IO.asm SET(SMALL) DEBUG PRINT(.\Listings\IO.lst) OBJECT(.\Objects\IO.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 0100H
+0100 7401              4     MAIN:  MOV A, #01H
+0102 F5A0              5     LOOP:  MOV P2, A
+0104 12010C            6     LCALL DELAY
+0107 23                7     RL A
+0108 80F8              8     SJMP LOOP
+010A 80FE              9     SJMP $
+010C 7AE8             10     DELAY:  MOV R2,#1000
+*** _________________________________________^
+*** WARNING #A52 IN 10 (IO.asm, LINE 10): VALUE HAS BEEN TRUNCATED TO 8 BITS
+010E 7BFF             11     DELAY1: MOV R3,#0FFH
+0110 DBFE             12     DJNZ R3,$
+0112 DAFA             13     DJNZ R2, DELAY1
+0114 22               14     RET
+                      15     END
+A51 MACRO ASSEMBLER  IO                                                                   04/20/2021 10:33:23 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   010CH   A   
+DELAY1 . . . . . .  C ADDR   010EH   A   
+LOOP . . . . . . .  C ADDR   0102H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)
