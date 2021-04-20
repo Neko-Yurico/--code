@@ -13,8 +13,8 @@ public class Circle {
     private static final double PI = 3.14;
     double radius;
 
-    public Circle (double d) {
-        radius = d;
+    public Circle (double radius) {
+        this.radius = radius;
     }
 
     double getArea(){
