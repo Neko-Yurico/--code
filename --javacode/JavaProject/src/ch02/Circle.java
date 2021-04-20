@@ -11,7 +11,7 @@ package ch02;
  */
 public class Circle {
     private static final double PI = 3.14;
-    double radius;
+    private double radius;
 
     public Circle (double radius) {
         this.radius = radius;
