@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Neko-Yurico.github.io/--code/--cppcode/Project8/main.cpp
+iostream
+-
+
+D:/Neko-Yurico.github.io/--code/--cppcode/Project8/main1.cpp
+iostream
+-
+

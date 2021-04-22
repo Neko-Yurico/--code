@@ -5,7 +5,7 @@ using namespace std;
 class Circle
 {
 public:
-    void setR(double r) {//设置半径
+    void setR(double r) {//璁剧疆鍗婂緞
         m_r = r;
     }
     static double getCircleGirth(double  r);
@@ -16,23 +16,23 @@ private:
 };
 
 
-double Circle ::getCircleGirth(double r) {//计算周长
+double Circle ::getCircleGirth(double r) {//璁＄畻鍛ㄩ暱
     return 2 * 3.14 * r;
 }
-double Circle ::getCircleArea(double r) {//计算面积
+double Circle ::getCircleArea(double r) {//璁＄畻闈㈢Н
     return 3.14 * r * r;
 }
 
 int main() {
     Circle myclass{};
     double r;
-    cout << "请输入圆的半径：" << endl;
-    cin >> r;//输入半径
+    cout << "璇疯緭鍏ュ渾鐨勫崐寰勶細" << endl;
+    cin >> r;//杈撳叆鍗婂緞
     myclass.setR(r);
     double girth,area;
-    girth = myclass.getCircleGirth(r);//计算周长
-    area = myclass.getCircleArea(r);//计算面积
-    cout << "圆的周长" << girth << endl;//输出周长
-    cout << "圆的面积" << area << endl;//输出面积
+    girth = myclass.getCircleGirth(r);//璁＄畻鍛ㄩ暱
+    area = myclass.getCircleArea(r);//璁＄畻闈㈢Н
+    cout << "鍦嗙殑鍛ㄩ暱" << girth << endl;//杈撳嚭鍛ㄩ暱
+    cout << "鍦嗙殑闈㈢Н" << area << endl;//杈撳嚭闈㈢Н
     return 0;
 }
