@@ -14,19 +14,15 @@ import java.util.Timer;
  * ========================
  */
 public class DateTest {
-    public static void main ( String[] args ) {
+    public static void main ( String[] args ) throws InterruptedException {
         while ( true ) {
-            try {
-                Date date = new Date ( );
-                System.out.println ( date );
-                SimpleDateFormat sdf = new SimpleDateFormat ( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n今年是yyyy年MM月dd日 E\naHH时mm分ss秒\n\n\n\n" );
-                //清奇脑回路源于`https://blog.csdn.net/ywh22122/article/details/98765764`
-                String f = sdf.format ( new Date ( ) );
-                System.out.println ( f );
-                Thread.sleep ( 1000 );
-            } catch (InterruptedException e) {
-                e.printStackTrace ( );
-            }
+            Date date = new Date ( );
+            System.out.println ( date );
+            SimpleDateFormat sdf = new SimpleDateFormat ( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n现在是yyyy年MM月dd日 E\naHH时mm分ss秒\n\n\n" );
+            //清奇脑回路源于`https://blog.csdn.net/ywh22122/article/details/98765764`
+            String f = sdf.format ( new Date ( ) );
+            System.out.println ( f );
+            Thread.sleep ( 1000 );
         }
     }
 }
