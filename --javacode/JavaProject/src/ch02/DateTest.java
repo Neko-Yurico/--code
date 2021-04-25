@@ -2,7 +2,6 @@ package ch02;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
 
 /**
  * @author Neko_Yurico

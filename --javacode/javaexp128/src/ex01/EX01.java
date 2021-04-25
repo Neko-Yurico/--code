@@ -18,7 +18,7 @@ public class EX01
     {
         BigInteger s;
         //biginteger结构表示任意大、带正负号的整数。
-        //参考资料：https://docs.microsoft.com/zh-tw/dotnet/api/system.numerics.biginteger?view=net-5.0
+        //参考资料：·https://docs.microsoft.com/zh-tw/dotnet/api/system.numerics.biginteger?view=net-5.0
         int n;
         System.out.println("计算1!+2!+3!+……+n!");
         System.out.print("请输入n的数值:");
