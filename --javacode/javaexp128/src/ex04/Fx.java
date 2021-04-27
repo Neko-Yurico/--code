@@ -20,7 +20,7 @@ public class Fx {
     private int ch=0;
 
     public Fx ( String x ) throws InputMismatchException {
-        double num = 0;
+        double num;
         Scanner scanner =new Scanner (x) ;
         scanner .useDelimiter ("[^0123456789.-]+") ;
         while (scanner .hasNext ()){
@@ -95,30 +95,16 @@ public class Fx {
     }
 
     String getX (){
-        String f = "";
-        switch (this.ch) {
-            case 1:
-                f="abs("+this.y+")=";
-                break;
-            case 2:
-                f="sqrt("+this.y+")=";
-                break;
-            case 3:
-                f="log("+this.y+")=";
-                break;
-            case 4:
-                f="sin("+this.y+")=";
-                break;
-            case 5:
-                f="cos("+this.y+")=";
-                break;
-            case 6:
-                f="("+this.y+")=";
-                break;
-            case 7:
-                f="出现了未知的错误,可能是公式哪里写错了？";
-                break;
-        }
+        String f = switch (this.ch) {
+            case 1 -> "abs(" + this.y + ")=";
+            case 2 -> "sqrt(" + this.y + ")=";
+            case 3 -> "log(" + this.y + ")=";
+            case 4 -> "sin(" + this.y + ")=";
+            case 5 -> "cos(" + this.y + ")=";
+            case 6 -> "(" + this.y + ")=";
+            case 7 -> "出现了未知的错误,可能是公式哪里写错了？";
+            default -> "";
+        };
         f= f + this.x;
         return f;
     }
