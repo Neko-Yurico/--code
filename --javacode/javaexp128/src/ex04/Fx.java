@@ -17,61 +17,61 @@ import static java.lang.Math.*;
 public class Fx {
     private double x;
     private double y;
-    private int ch=0;
+    private int ch = 0;
 
     public Fx ( String x ) throws InputMismatchException {
         double num;
-        Scanner scanner =new Scanner (x) ;
-        scanner .useDelimiter ("[^0123456789.-]+") ;
-        while (scanner .hasNext ()){
-            num = scanner .nextDouble ();
-            if(x.startsWith ("abs")||x.startsWith ("Abs") ){
-                this.x = getXabs (num) ;
-                this.ch=1;
-                this.y=num;
+        Scanner scanner = new Scanner ( x );
+        scanner.useDelimiter ( "[^0123456789.-]+" );
+        while ( scanner.hasNext ( ) ) {
+            num = scanner.nextDouble ( );
+            if ( x.startsWith ( "abs" ) || x.startsWith ( "Abs" ) ) {
+                this.x = getXabs ( num );
+                this.ch = 1;
+                this.y = num;
             }
-            else if(x.startsWith ("sqrt")||x.startsWith ("Sqrt") ){
-                this.x = getXsqrt (num) ;
-                this.ch=2;
-                this.y=num;
+            else if ( x.startsWith ( "sqrt" ) || x.startsWith ( "Sqrt" ) ) {
+                this.x = getXsqrt ( num );
+                this.ch = 2;
+                this.y = num;
             }
-            else if(x.startsWith ("log")||x.startsWith ("Log") ){
-                this.x = getXlog (num) ;
-                this.ch=3;
-                this.y=num;
+            else if ( x.startsWith ( "log" ) || x.startsWith ( "Log" ) ) {
+                this.x = getXlog ( num );
+                this.ch = 3;
+                this.y = num;
             }
-            else if(x.startsWith ("sin")||x.startsWith ("Sin") ){
-                this.x = getXsin (num) ;
-                this.ch=4;
-                this.y=num;
+            else if ( x.startsWith ( "sin" ) || x.startsWith ( "Sin" ) ) {
+                this.x = getXsin ( num );
+                this.ch = 4;
+                this.y = num;
             }
-            else if(x.startsWith ("cos")||x.startsWith ("Cos") ){
-                this.x = getXcos (num) ;
-                this.ch=5;
-                this.y=num;
+            else if ( x.startsWith ( "cos" ) || x.startsWith ( "Cos" ) ) {
+                this.x = getXcos ( num );
+                this.ch = 5;
+                this.y = num;
             }
-            else if ( isDigit ( x )){
-                x = x.trim ();
-                this.x=Double.parseDouble ( x );
-                this.ch=6;
-                this.y=this.x;
+            else if ( isDigit ( x ) ) {
+                x = x.trim ( );
+                this.x = Double.parseDouble ( x );
+                this.ch = 6;
+                this.y = this.x;
             }
             else {
-                this.x=0;
-                this.ch=7;
-                this.y=0;
+                this.x = 0;
+                this.ch = 7;
+                this.y = 0;
             }
         }
-        if ( !isDigit ( x ) && this.ch==0)  {
-            this.x=0;
-            this.ch=7;
-            this.y=0;
+        if ( ! isDigit ( x ) && this.ch == 0 ) {
+            this.x = 0;
+            this.ch = 7;
+            this.y = 0;
         }
     }
 
     private boolean isDigit ( String x ) {
         String reg = "^[0-9]+(.[0-9]+)?$";
-        return x.matches(reg);
+        return x.matches ( reg );
     }
 
     double getXabs ( double x ) {
@@ -94,8 +94,8 @@ public class Fx {
         return cos ( x );
     }
 
-    String getX (){
-        String f = switch (this.ch) {
+    String getX ( ) {
+        String f = switch ( this.ch ) {
             case 1 -> "abs(" + this.y + ")=";
             case 2 -> "sqrt(" + this.y + ")=";
             case 3 -> "log(" + this.y + ")=";
@@ -105,7 +105,7 @@ public class Fx {
             case 7 -> "出现了未知的错误,可能是公式哪里写错了？";
             default -> "";
         };
-        f= f + this.x;
+        f = f + this.x;
         return f;
     }
 
