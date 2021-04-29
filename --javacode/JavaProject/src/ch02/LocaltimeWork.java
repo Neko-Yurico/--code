@@ -13,13 +13,13 @@ import java.time.LocalTime;
  * ========================
  */
 public class LocaltimeWork {
-    public static void main(String[] args) throws InterruptedException {
-        while (true) {
+    public static void main ( String[] args ) throws InterruptedException {
+        while ( true ) {
             LocalDate ld = LocalDate.now ( );
-            System.out.println ( "现在是"+ld.getYear ( )+"年"+ld.getMonthValue () +"月"+ld.getDayOfMonth () +"日");
-            System.out.println (ld.getDayOfWeek () );
+            System.out.println ( "现在是" + ld.getYear ( ) + "年" + ld.getMonthValue ( ) + "月" + ld.getDayOfMonth ( ) + "日" );
+            System.out.println ( ld.getDayOfWeek ( ) );
             LocalTime lt = LocalTime.now ( );
-            System.out.println ( lt.getHour ()+"时"+lt.getMinute ()+"分"+lt.getSecond ()+"秒" );
+            System.out.println ( lt.getHour ( ) + "时" + lt.getMinute ( ) + "分" + lt.getSecond ( ) + "秒" );
             Thread.sleep ( 1000 );
         }
     }

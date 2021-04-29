@@ -1,7 +1,5 @@
 package ch02;
 
-import com.sun.tools.javac.Main;
-
 /**
  * @author Neko_Yurico
  * @description
@@ -11,13 +9,11 @@ import com.sun.tools.javac.Main;
  * https://nekoyurico.me/
  * ========================
  */
-public class TestCode
-{
-    public static void main(String[] args)
-    {
-        String a =new String("hello") ;
-        String b =new String("hello") ;
-        System.out.println(a==b);
-        System.out.println(a.equals(b) );
+public class TestCode {
+    public static void main ( String[] args ) {
+        String a = new String ( "hello" );
+        String b = new String ( "hello" );
+        System.out.println ( a == b );
+        System.out.println ( a.equals ( b ) );
     }
 }

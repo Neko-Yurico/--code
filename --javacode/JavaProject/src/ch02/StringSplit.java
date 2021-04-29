@@ -9,15 +9,12 @@ package ch02;
  * https://nekoyurico.me/
  * ========================
  */
-public class StringSplit
-{
-    public static void main(String[] args)
-    {
+public class StringSplit {
+    public static void main ( String[] args ) {
         String str = "I love this game, yes I do. ";
-        String[] ss = str.split("[,.]? ") ;
-        for (String string : ss )
-        {
-            System.out.println(string);
+        String[] ss = str.split ( "[,.]? " );
+        for ( String string : ss ) {
+            System.out.println ( string );
         }
     }
 }
