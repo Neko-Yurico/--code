@@ -1,8 +1,8 @@
 package me.nekoyurico.project;
 
 /**
- * @author Neko_Yurico
- * @description
+ * @author Neko_Yurico，相欠
+ * @description Communicate with the board
  * @date 2021/5/5 22:37
  * ========================
  * <p>

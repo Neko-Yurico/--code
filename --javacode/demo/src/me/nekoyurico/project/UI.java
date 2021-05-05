@@ -1,8 +1,8 @@
 package me.nekoyurico.project;
 
 /**
- * @author Neko_Yurico
- * @description
+ * @author Neko_Yurico，相欠
+ * @description UI
  * @date 2021/5/5 22:37
  * ========================
  * <p>
@@ -21,6 +21,6 @@ package me.nekoyurico.project;
  * https://nekoyurico.me/
  * ========================
  */
-public class Interface { //用户界面
+public class UI { //用户界面
 
 }
