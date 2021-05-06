@@ -1,9 +1,9 @@
 package me.nekoyurico.project;
 
 /**
- * @author Neko_Yurico，相欠
- * @description UI
- * @date 2021/5/5 22:37
+ * @author Neko_Yurico
+ * @description
+ * @date 2021/5/6 12:35
  * ========================
  * <p>
  * ,---.   .--.    .-''-.  .--.   .--.      ,-----.                      ____     __   ___    _ .-------.   .-./`)     _______      ,-----.
@@ -47,7 +47,5 @@ package me.nekoyurico.project;
  * https://nekoyurico.me/
  * ========================
  */
-
 public class UI {
-
 }
