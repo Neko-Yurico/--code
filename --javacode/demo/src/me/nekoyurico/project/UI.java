@@ -64,7 +64,7 @@ public class UI extends JFrame {
         Communication lights = new Communication ( "COM8" );
         ImageIcon imageOFF = new ImageIcon ( "led_off.jpg" );
         ImageIcon imageON = new ImageIcon ( "led_on.jpg" );
-        // using JButton
+        //using JButton
         JButton leds = new JButton ( imageOFF );
         leds.addActionListener ( new ActionListener ( ) {
             @Override
@@ -82,7 +82,7 @@ public class UI extends JFrame {
                 }
             }
         } );
-        // JFrame基本结构
+        //JFrame基本结构
         setTitle ( "LED Control" );
         setBounds ( 500 , 300 , 330 , 370 );
         setVisible ( true );
