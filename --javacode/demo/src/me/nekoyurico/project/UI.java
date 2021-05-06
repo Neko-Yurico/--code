@@ -83,7 +83,7 @@ public class UI extends JFrame {
             }
         } );
         // JFrame基本结构
-        setTitle ( "LED控制" );
+        setTitle ( "LED Control" );
         setBounds ( 500 , 300 , 330 , 370 );
         setVisible ( true );
         setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
