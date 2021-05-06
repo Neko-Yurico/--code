@@ -1,5 +1,7 @@
 package me.nekoyurico.project;
 
+import javax.swing.*;
+
 /**
  * @author Neko_Yurico
  * @description
@@ -47,5 +49,16 @@ package me.nekoyurico.project;
  * https://nekoyurico.me/
  * ========================
  */
+
 public class UI {
+    public static void main ( String[] args ) {
+        JFrame frame = new JFrame ( "UI" );
+        frame.setContentPane ( new UI ( ).panel1 );
+        frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
+        frame.pack ( );
+        frame.setVisible ( true );
+    }
+
+    private JPanel panel1;
+
 }
