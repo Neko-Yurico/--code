@@ -1,13 +1,5 @@
 package me.nekoyurico.project;
 
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 /**
  * @author Neko_Yurico，相欠
  * @description UI
@@ -56,40 +48,6 @@ import javax.swing.JFrame;
  * ========================
  */
 
-@SuppressWarnings ( "serial" )
-public class UI extends JFrame {
-    public final int ledCNT = 3;
-    private boolean ledStatus = false;
-    public UI ( ) {
-        Communication lights = new Communication ( "COM8" );
-        ImageIcon imageOFF = new ImageIcon ( "led_off.jpg" );
-        ImageIcon imageON = new ImageIcon ( "led_on.jpg" );
-        //using JButton
-        JButton leds = new JButton ( imageOFF );
-        leds.addActionListener ( new ActionListener ( ) {
-            @Override
-            public void actionPerformed ( ActionEvent e ) {
-                if ( ledStatus ) {
-                    leds.setIcon ( imageOFF );
-                    //lights.setOneLed(1, 0);
-                    ledStatus = false;
-                }
-                else {
+public class UI {
 
-                    leds.setIcon ( imageON );
-                    //lights.setOneLed(1, 1);
-                    ledStatus = true;
-                }
-            }
-        } );
-        //JFrame基本结构
-        setTitle ( "LED Control" );
-        setBounds ( 500 , 300 , 330 , 370 );
-        setVisible ( true );
-        setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
-        add ( leds );
-    }
-    public static void main ( String[] args ) {
-        new UI ( );
-    }
 }
