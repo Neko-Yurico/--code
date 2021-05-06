@@ -51,6 +51,7 @@ import javax.swing.*;
  */
 
 public class UI {
+
     public static void main ( String[] args ) {
         JFrame frame = new JFrame ( "UI" );
         frame.setContentPane ( new UI ( ).panel1 );
@@ -60,5 +61,12 @@ public class UI {
     }
 
     private JPanel panel1;
+    private JRadioButton LED1RadioButton;
+    private JRadioButton LED2RadioButton;
+    private JRadioButton LED3RadioButton;
+    private JButton LEDStringButton;
+    private JButton SingleLightControlButton;
+    private JButton TimeSetButton;
+    private JButton mainButton;
 
 }
