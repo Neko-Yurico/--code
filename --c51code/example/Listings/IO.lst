@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  IO                                                                   04/20/2021 10:33:23 PAGE     1
+A51 MACRO ASSEMBLER  IO                                                                   05/07/2021 16:31:35 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02c
@@ -11,21 +11,17 @@ LOC  OBJ            LINE     SOURCE
 0000                   1     ORG 0000H
 0000 020100            2     LJMP MAIN
 0100                   3     ORG 0100H
-0100 7401              4     MAIN:  MOV A, #01H
-0102 F5A0              5     LOOP:  MOV P2, A
-0104 12010C            6     LCALL DELAY
-0107 23                7     RL A
-0108 80F8              8     SJMP LOOP
-010A 80FE              9     SJMP $
-010C 7AE8             10     DELAY:  MOV R2,#1000
-*** _________________________________________^
-*** WARNING #A52 IN 10 (IO.asm, LINE 10): VALUE HAS BEEN TRUNCATED TO 8 BITS
-010E 7BFF             11     DELAY1: MOV R3,#0FFH
-0110 DBFE             12     DJNZ R3,$
-0112 DAFA             13     DJNZ R2, DELAY1
-0114 22               14     RET
-                      15     END
-A51 MACRO ASSEMBLER  IO                                                                   04/20/2021 10:33:23 PAGE     2
+0100 758902            4     MAIN:  MOV TMOD,#02H
+0103 758C06            5     MOV TH0,#06H
+0106 758A06            6     MOV TL0,#06H
+0109 D28C              7     SETB TR0
+010B 108D02            8     LOOP:  JBC  TF0,NEXT
+010E 80FB              9     SJMP LOOP
+0110 B290             10     NEXT:  CPL P1.0
+0112 80F7             11     SJMP LOOP
+0114 80FE             12     SJMP $
+                      13     END
+A51 MACRO ASSEMBLER  IO                                                                   05/07/2021 16:31:35 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -33,14 +29,18 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-DELAY. . . . . . .  C ADDR   010CH   A   
-DELAY1 . . . . . .  C ADDR   010EH   A   
-LOOP . . . . . . .  C ADDR   0102H   A   
+LOOP . . . . . . .  C ADDR   010BH   A   
 MAIN . . . . . . .  C ADDR   0100H   A   
-P2 . . . . . . . .  D ADDR   00A0H   A   
+NEXT . . . . . . .  C ADDR   0110H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
 
 
 REGISTER BANK(S) USED: 0 
 
 
-ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
