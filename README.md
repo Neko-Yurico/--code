@@ -14,7 +14,7 @@
 >
 > web： WebStorm 2020.3.2（professional）& Google Web Designer 
 >
-> c51： Keil uVision5（我也不知道是哪个年代的哪个版本）& isis7 （我也不知道是哪个年代的哪个版本）（教学版）
+> c51： Keil uVision5（我也不知道是哪个年代的哪个版本）& ISIS7 （我也不知道是哪个年代的哪个版本）（教学版）
 
 # 合作成员
 
