@@ -18,9 +18,6 @@
 
 # 合作成员
 
-- demo：
+- demo： [Bowjk(Bow)](https://github.com/Bowjk) *仅在项目demo中进行合作*
 
-  [Bowjk（Bow）]: https://github.com/Bowjk
-
-  <!--仅在项目“demo”中参与合作-->
-
+  
