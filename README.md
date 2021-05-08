@@ -10,7 +10,7 @@
 >
 > c&cpp： CLion 2020.3.2（professional）
 >
-> Python： py3.7，PyCharm 2020.3.3 （professional）
+> Python： py3.9.4，PyCharm 2020.3.3 （professional）
 >
 > web： WebStorm 2020.3.2（professional）& Google Web Designer 
 >
