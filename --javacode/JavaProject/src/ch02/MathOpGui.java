@@ -38,16 +38,13 @@ public class MathOpGui {
         f.add ( input , BorderLayout.NORTH );
         f.add ( button , BorderLayout.CENTER );
 
-        button .addActionListener ( new ActionListener ( ) {
-            @Override
-            public void actionPerformed ( ActionEvent actionEvent ) {
-                String exp = input.getText ();
-                exp = exp.trim ();
-                Fx f = new Fx ( exp );
-                String result = f.getX ();
-                disp.setText (result);
-            }
-        });
+        button .addActionListener ( actionEvent -> {
+            String exp = input.getText ();
+            exp = exp.trim ();
+            Fx f1 = new Fx ( exp );
+            String result = f1.getX ();
+            disp.setText (result);
+        } );
     }
 }
 
