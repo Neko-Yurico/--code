@@ -1,14 +1,11 @@
 package ch02;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author Neko_Yurico
  * @description
- * @date 2021/5/11 13:47
+ * @date 2021/5/11 14:39
  * ========================
  * ,---.   .--.    .-''-.  .--.   .--.      ,-----.                      ____     __   ___    _ .-------.   .-./`)     _______      ,-----.
  * |    \  |  |  .'_ _   \ |  | _/  /     .'  .-,  '.                    \   \   /  /.'   |  | ||  _ _   \  \ .-.')   /   __  \   .'  .-,  '.
@@ -24,30 +21,22 @@ import java.awt.event.ActionListener;
  * https://nekoyurico.me/
  * ========================
  */
-public class MathOpGui {
+public class OptionPaneTest {
     public static void main ( String[] args ) {
-
-        JLabel disp = new JLabel ( "这是文本标签" );
-        JTextField input = new JTextField ( "我是输入框" );
-        JButton button = new JButton ( "按钮" );
-        JFrame f = new JFrame ( "1" );
-        f.setBounds ( 100 , 100 , 500 , 200 );
-        f.setVisible ( true );
-        f.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
-        f.add ( disp , BorderLayout.SOUTH);
-        f.add ( input , BorderLayout.NORTH );
-        f.add ( button , BorderLayout.CENTER );
-
-        button .addActionListener ( new ActionListener ( ) {
-            @Override
-            public void actionPerformed ( ActionEvent actionEvent ) {
-                String exp = input.getText ();
-                exp = exp.trim ();
-                Fx f = new Fx ( exp );
-                String result = f.getX ();
-                disp.setText (result);
-            }
-        });
+        String name =JOptionPane.showInputDialog ( "请输入名字" );
+        System.out.println (name );
+        JOptionPane.showMessageDialog ( null,"欢迎"+name );
+        int isMale = JOptionPane.showConfirmDialog ( null,"你是男生吗" );
+        System.out.println (isMale );
+        String sportType=null;
+        if ( isMale==0 ){
+            String[] sportList = {"足球","篮球","游戏"};
+            sportType=(String) JOptionPane.showInputDialog ( null,"清选择你喜欢的运动","title",JOptionPane.PLAIN_MESSAGE,null,sportList,null);
+        }
+        else if ( isMale==1 ){
+            String[] sportList = {"1","2","3"};
+            sportType=(String) JOptionPane.showInputDialog ( null,"清选择你喜欢的运动","title",JOptionPane.PLAIN_MESSAGE,null,sportList,null);
+        }
+        JOptionPane.showMessageDialog ( null,name +"喜欢"+sportType);
     }
 }
-
