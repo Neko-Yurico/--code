@@ -1,8 +1,8 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        05/14/2021  14:37:14  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/14/2021  14:15:25  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\IO.obj TO .\Objects\Project2 PRINT (.\Listings\Project2.m51
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\IO.obj TO .\Objects\Project3 PRINT (.\Listings\Project3.m51
 >> )
 
 
@@ -14,7 +14,7 @@ INPUT MODULES INCLUDED:
   .\Objects\IO.obj (IO)
 
 
-LINK MAP OF MODULE:  .\Objects\Project2 (?C_STARTUP)
+LINK MAP OF MODULE:  .\Objects\Project3 (?C_STARTUP)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -26,16 +26,13 @@ LINK MAP OF MODULE:  .\Objects\Project2 (?C_STARTUP)
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-                    0003H     0008H                  *** GAP ***
-            CODE    000BH     0003H     ABSOLUTE     
-                    000EH     07F2H                  *** GAP ***
-            CODE    0800H     0011H     UNIT         ?PR?MAIN?IO
-            CODE    0811H     000CH     UNIT         ?C_C51STARTUP
-            CODE    081DH     0003H     UNIT         ?PR?TIME0_INT?IO
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0027H     UNIT         ?PR?MAIN?IO
+            CODE    0827H     000CH     UNIT         ?C_C51STARTUP
 
 
 
-OVERLAY MAP OF MODULE:   .\Objects\Project2 (?C_STARTUP)
+OVERLAY MAP OF MODULE:   .\Objects\Project3 (?C_STARTUP)
 
 
 SEGMENT
@@ -46,26 +43,26 @@ SEGMENT
 
 
 
-SYMBOL TABLE OF MODULE:  .\Objects\Project2 (?C_STARTUP)
+SYMBOL TABLE OF MODULE:  .\Objects\Project3 (?C_STARTUP)
 
   VALUE           TYPE          NAME
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
-  C:0811H         SEGMENT       ?C_C51STARTUP
+  C:0827H         SEGMENT       ?C_C51STARTUP
   I:0008H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
   D:0083H         SYMBOL        DPH
   D:0082H         SYMBOL        DPL
-BL51 BANKED LINKER/LOCATER V6.22                                                      05/14/2021  14:37:14  PAGE 2
-
-
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-  C:0814H         SYMBOL        IDATALOOP
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/14/2021  14:15:25  PAGE 2
+
+
+  C:082AH         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -74,54 +71,49 @@ SYMBOL TABLE OF MODULE:  .\Objects\Project2 (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:0811H         SYMBOL        STARTUP1
+  C:0827H         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:0811H         LINE#         133
-  C:0813H         LINE#         134
-  C:0814H         LINE#         135
-  C:0815H         LINE#         136
-  C:0817H         LINE#         185
-  C:081AH         LINE#         196
+  C:0827H         LINE#         133
+  C:0829H         LINE#         134
+  C:082AH         LINE#         135
+  C:082BH         LINE#         136
+  C:082DH         LINE#         185
+  C:0830H         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        IO
   C:0000H         SYMBOL        _ICE_DUMMY_
-  D:0090H         PUBLIC        P1
-  B:00A8H.7       PUBLIC        EA
-  C:081DH         PUBLIC        time0_int
-  B:0090H.0       PUBLIC        P1_0
+  B:0098H.1       PUBLIC        TI
   C:0800H         PUBLIC        main
-  D:0089H         PUBLIC        TMOD
-  B:00A8H.1       PUBLIC        ET0
-  D:008CH         PUBLIC        TH0
-  D:008AH         PUBLIC        TL0
-  B:0088H.4       PUBLIC        TR0
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
   -------         PROC          MAIN
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
   C:0800H         LINE#         3
   C:0800H         LINE#         4
-  C:0800H         LINE#         5
-  C:0803H         LINE#         6
-  C:0809H         LINE#         7
-  C:080DH         LINE#         8
-  C:080FH         LINE#         9
+  C:0800H         LINE#         7
+  C:0803H         LINE#         8
+  C:0805H         LINE#         9
+  C:0805H         LINE#         10
+  C:0805H         LINE#         11
+  C:0807H         LINE#         12
+  C:080AH         LINE#         13
+  C:080CH         LINE#         14
+  C:081BH         LINE#         15
+  C:0825H         LINE#         16
   -------         ENDPROC       MAIN
-  -------         PROC          TIME0_INT
-  C:081DH         LINE#         11
-  C:081DH         LINE#         13
-  C:081FH         LINE#         14
-  -------         ENDPROC       TIME0_INT
   -------         ENDMOD        IO
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0026H BYTE ( 1%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0036H BYTE ( 2%) *
 ******************************************************************************
-BL51 BANKED LINKER/LOCATER V6.22                                                      05/14/2021  14:37:14  PAGE 3
 
-
-
-Program Size: data=9.0 xdata=0 code=38
+Program Size: data=9.0 xdata=0 code=54
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
