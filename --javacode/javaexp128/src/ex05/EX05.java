@@ -2,6 +2,8 @@ package ex05;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * @author Neko_Yurico
@@ -35,7 +37,35 @@ public class EX05 {
         f.add ( disp , BorderLayout.SOUTH );
         f.add ( input , BorderLayout.NORTH );
         f.add ( button , BorderLayout.CENTER );
-
+        
+        input.addMouseListener ( new MouseListener ( ) {
+            @Override
+            public void mouseClicked ( MouseEvent e ) {
+                if ( input.getText ( ).equals ( "请在此输入运算表达式" ) ){
+                    input.setText ( "" );
+                }
+            }
+    
+            @Override
+            public void mousePressed ( MouseEvent e ) {
+        
+            }
+    
+            @Override
+            public void mouseReleased ( MouseEvent e ) {
+        
+            }
+    
+            @Override
+            public void mouseEntered ( MouseEvent e ) {
+        
+            }
+    
+            @Override
+            public void mouseExited ( MouseEvent e ) {
+        
+            }
+        } );
         button.addActionListener ( actionEvent -> {
             try {
                 String exp = input.getText ( );
@@ -43,8 +73,11 @@ public class EX05 {
                 ex05.Fx f1 = new ex05.Fx ( exp );
                 String result = f1.getX ( );
                 disp.setText ( result );
+                input.setText ( "请在此输入运算表达式" );
             } catch ( ex05.FxException exception ) {
                 JOptionPane.showMessageDialog ( null , exception.getMessage ( ) , "发生异常" , JOptionPane.WARNING_MESSAGE );
+                disp.setText ( "计算结果" );
+                input.setText ( "请在此输入运算表达式" );
             }
         } );
     }

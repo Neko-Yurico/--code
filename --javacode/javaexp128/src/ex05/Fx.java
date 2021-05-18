@@ -19,16 +19,16 @@ class FxException extends Exception {
 
     FxException ( int a ) {
         if ( a == 1 ) {
-            message = "sqrt()内应是非零负数";
+            message = "sqrt的运算数必须大于0";
         }
         if ( a == 0 ) {
             message = "出现了未知的错误,可能是公式错误或函数未收录";
         }
         if ( a == 2 ) {
-            message = "不支持的运算方法";
+            message = "不支持的运算";
         }
         if ( a == 3 ) {
-            message = "log()内应是正数";
+            message = "log的运算数必须大于等于0";
         }
     }
 
@@ -79,7 +79,7 @@ public class Fx {
                 this.ch = 5;
                 this.y = num;
             }
-            else if ( x.startsWith ( "tan" ) ) {
+            else if ( x.startsWith ( "tan" ) || x.startsWith ( "cot" ) ) {
                 this.x = 0;
                 this.ch = 8;
                 this.y = 0;
