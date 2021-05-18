@@ -26,6 +26,9 @@ class FxException extends Exception{
         if(a==2){
             message="不支持的运算方法";
         }
+        if(a==3){
+            message="log()内应是正数";
+        }
     }
     public String getMessage(){
         return message;
@@ -58,6 +61,10 @@ public class Fx {
                     this.y = num;
                 }
                 else if ( x.startsWith ( "log" ) || x.startsWith ( "Log" ) ) {
+                    if(num<=0){
+                        FxException exception =new FxException (3);
+                        throw (exception);
+                    }
                     this.x = getXlog ( num );
                     this.ch = 3;
                     this.y = num;
