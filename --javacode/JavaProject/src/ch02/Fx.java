@@ -14,59 +14,72 @@ import static java.lang.Math.*;
  * https://nekoyurico.me/
  * ========================
  */
+class SqrtNegativeException extends Exception{
+    String message;
+    SqrtNegativeException( ){
+        message="sqrt()内应是非零负数";
+    }
+    public String getMessage(){
+        return message;
+    }
+}
 public class Fx {
     private double x;
     private double y;
     private int ch = 0;
 
-    public Fx ( String x ) throws InputMismatchException {
-        double num;
-        Scanner scanner = new Scanner ( x );
-        scanner.useDelimiter ( "[^0123456789.-]+" );
-        while ( scanner.hasNext ( ) ) {
-            num = scanner.nextDouble ( );
-            if ( x.startsWith ( "abs" ) || x.startsWith ( "Abs" ) ) {
-                this.x = getXabs ( num );
-                this.ch = 1;
-                this.y = num;
+    public Fx ( String x ) throws InputMismatchException, SqrtNegativeException {
+            double num;
+            Scanner scanner = new Scanner ( x );
+            scanner.useDelimiter ( "[^0123456789.-]+" );
+            while ( scanner.hasNext ( ) ) {
+                num = scanner.nextDouble ( );
+                if ( x.startsWith ( "abs" ) || x.startsWith ( "Abs" ) ) {
+                    this.x = getXabs ( num );
+                    this.ch = 1;
+                    this.y = num;
+                }
+                else if ( x.startsWith ( "sqrt" ) || x.startsWith ( "Sqrt" ) ) {
+                    if(num<0){
+                        SqrtNegativeException exception =new SqrtNegativeException ();
+                        throw (exception);
+                    }
+                    this.x = getXsqrt ( num );
+                    this.ch = 2;
+                    this.y = num;
+                }
+                else if ( x.startsWith ( "log" ) || x.startsWith ( "Log" ) ) {
+                    this.x = getXlog ( num );
+                    this.ch = 3;
+                    this.y = num;
+                }
+                else if ( x.startsWith ( "sin" ) || x.startsWith ( "Sin" ) ) {
+                    this.x = getXsin ( num );
+                    this.ch = 4;
+                    this.y = num;
+                }
+                else if ( x.startsWith ( "cos" ) || x.startsWith ( "Cos" ) ) {
+                    this.x = getXcos ( num );
+                    this.ch = 5;
+                    this.y = num;
+                }
+                else if ( isDigit ( x ) ) {
+                    x = x.trim ( );
+                    this.x = Double.parseDouble ( x );
+                    this.ch = 6;
+                    this.y = this.x;
+                }
+                else {
+                    this.x = 0;
+                    this.ch = 7;
+                    this.y = 0;
+                }
             }
-            else if ( x.startsWith ( "sqrt" ) || x.startsWith ( "Sqrt" ) ) {
-                this.x = getXsqrt ( num );
-                this.ch = 2;
-                this.y = num;
-            }
-            else if ( x.startsWith ( "log" ) || x.startsWith ( "Log" ) ) {
-                this.x = getXlog ( num );
-                this.ch = 3;
-                this.y = num;
-            }
-            else if ( x.startsWith ( "sin" ) || x.startsWith ( "Sin" ) ) {
-                this.x = getXsin ( num );
-                this.ch = 4;
-                this.y = num;
-            }
-            else if ( x.startsWith ( "cos" ) || x.startsWith ( "Cos" ) ) {
-                this.x = getXcos ( num );
-                this.ch = 5;
-                this.y = num;
-            }
-            else if ( isDigit ( x ) ) {
-                x = x.trim ( );
-                this.x = Double.parseDouble ( x );
-                this.ch = 6;
-                this.y = this.x;
-            }
-            else {
+            if ( ! isDigit ( x ) && this.ch == 0 ) {
                 this.x = 0;
                 this.ch = 7;
                 this.y = 0;
             }
-        }
-        if ( ! isDigit ( x ) && this.ch == 0 ) {
-            this.x = 0;
-            this.ch = 7;
-            this.y = 0;
-        }
     }
 
     private boolean isDigit ( String x ) {

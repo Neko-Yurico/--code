@@ -1,0 +1,3 @@
+[console_scripts]
+pymd5 = pymd5:_read_args
+

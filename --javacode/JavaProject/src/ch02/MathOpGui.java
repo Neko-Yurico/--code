@@ -37,12 +37,14 @@ public class MathOpGui {
         f.add ( button , BorderLayout.CENTER );
 
         button .addActionListener ( actionEvent -> {
-            String exp = input.getText ();
-            exp = exp.trim ();
-            Fx f1 = new Fx ( exp );
-            String result = f1.getX ();
-            disp.setText (result);
-        } );
+            try {
+                String exp = input.getText ( );
+                exp = exp.trim ( );
+                Fx f1 = new Fx ( exp );
+                String result = f1.getX ( );
+                disp.setText ( result );
+            }catch ( SqrtNegativeException exception ){JOptionPane.showMessageDialog (null,exception.getMessage ());}
+        });
     }
 }
 
