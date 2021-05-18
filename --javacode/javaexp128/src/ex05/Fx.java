@@ -1,4 +1,4 @@
-package ch02;
+package ex05;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -31,6 +31,7 @@ class FxException extends Exception{
         return message;
     }
 }
+
 public class Fx {
     private double x;
     private double y;

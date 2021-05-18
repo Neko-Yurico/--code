@@ -23,7 +23,7 @@ public class EX04 {
                 System.out.println ( f.getX ( ) + "\n请输入下一个算数表达式,退出请输入“q”：" );
                 s = scanner.next ( );
                 s = s.trim ( );
-            }catch ( SqrtNegativeException exception ){System.out.println ( exception.getMessage ()+ "\n请输入下一个算数表达式,退出请输入“q”：" );}
+            }catch ( FxException exception ){System.out.println ( exception.getMessage ()+ "\n请输入下一个算数表达式,退出请输入“q”：" );}
         }
         System.out.println ( "检测到输入为“q”，程序退出结束" );
     }

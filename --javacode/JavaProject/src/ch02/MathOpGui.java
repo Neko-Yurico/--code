@@ -43,7 +43,7 @@ public class MathOpGui {
                 Fx f1 = new Fx ( exp );
                 String result = f1.getX ( );
                 disp.setText ( result );
-            }catch ( SqrtNegativeException exception ){JOptionPane.showMessageDialog (null,exception.getMessage ());}
+            }catch ( FxException exception ){JOptionPane.showMessageDialog (null,exception.getMessage ());}
         });
     }
 }
