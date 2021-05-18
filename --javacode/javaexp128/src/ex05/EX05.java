@@ -25,10 +25,10 @@ import java.awt.*;
 public class EX05 {
     public static void main ( String[] args ) {
 
-        JLabel disp = new JLabel ( "这是文本标签" );
-        JTextField input = new JTextField ( "我是输入框" );
-        JButton button = new JButton ( "按钮" );
-        JFrame f = new JFrame ( "1" );
+        JLabel disp = new JLabel ( "计算结果" );
+        JTextField input = new JTextField ( "请在此输入运算表达式" );
+        JButton button = new JButton ( "开始运算" );
+        JFrame f = new JFrame ( "EX05" );
         f.setBounds ( 100 , 100 , 500 , 200 );
         f.setVisible ( true );
         f.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
