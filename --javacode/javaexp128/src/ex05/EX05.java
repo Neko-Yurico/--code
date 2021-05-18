@@ -32,19 +32,21 @@ public class EX05 {
         f.setBounds ( 100 , 100 , 500 , 200 );
         f.setVisible ( true );
         f.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
-        f.add ( disp , BorderLayout.SOUTH);
+        f.add ( disp , BorderLayout.SOUTH );
         f.add ( input , BorderLayout.NORTH );
         f.add ( button , BorderLayout.CENTER );
 
-        button .addActionListener ( actionEvent -> {
+        button.addActionListener ( actionEvent -> {
             try {
                 String exp = input.getText ( );
                 exp = exp.trim ( );
                 ex05.Fx f1 = new ex05.Fx ( exp );
                 String result = f1.getX ( );
                 disp.setText ( result );
-            }catch ( ex05.FxException exception ){JOptionPane.showMessageDialog ( null, exception.getMessage ());}
-        });
+            } catch ( ex05.FxException exception ) {
+                JOptionPane.showMessageDialog ( null , exception.getMessage ( ) );
+            }
+        } );
     }
 }
 
