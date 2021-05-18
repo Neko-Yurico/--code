@@ -44,7 +44,7 @@ public class EX05 {
                 String result = f1.getX ( );
                 disp.setText ( result );
             } catch ( ex05.FxException exception ) {
-                JOptionPane.showMessageDialog ( null , exception.getMessage ( ) ,"发生异常",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog ( null , exception.getMessage ( ) , "发生异常" , JOptionPane.WARNING_MESSAGE );
             }
         } );
     }
