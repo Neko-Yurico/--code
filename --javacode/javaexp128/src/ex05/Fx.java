@@ -49,7 +49,7 @@ public class Fx {
         while ( scanner.hasNext ( ) ) {
             num = scanner.nextDouble ( );
             if ( x.startsWith ( "abs" ) || x.startsWith ( "Abs" ) ) {
-                this.x = getXabs ( num );
+                this.x = getXAbs ( num );
                 this.ch = 1;
                 this.y = num;
             }
@@ -57,7 +57,7 @@ public class Fx {
                 if ( num < 0 ) {
                     throw ( new FxException ( 1 ) );
                 }
-                this.x = getXsqrt ( num );
+                this.x = getXSqrt ( num );
                 this.ch = 2;
                 this.y = num;
             }
@@ -65,17 +65,17 @@ public class Fx {
                 if ( num <= 0 ) {
                     throw ( new FxException ( 3 ) );
                 }
-                this.x = getXlog ( num );
+                this.x = getXLog ( num );
                 this.ch = 3;
                 this.y = num;
             }
             else if ( x.startsWith ( "sin" ) || x.startsWith ( "Sin" ) ) {
-                this.x = getXsin ( num );
+                this.x = getXSin ( num );
                 this.ch = 4;
                 this.y = num;
             }
             else if ( x.startsWith ( "cos" ) || x.startsWith ( "Cos" ) ) {
-                this.x = getXcos ( num );
+                this.x = getXCos ( num );
                 this.ch = 5;
                 this.y = num;
             }
@@ -108,23 +108,23 @@ public class Fx {
         return x.matches ( reg );
     }
 
-    double getXabs ( double x ) {
+    double getXAbs ( double x ) {
         return abs ( x );
     }
 
-    double getXsqrt ( double x ) {
+    double getXSqrt ( double x ) {
         return sqrt ( x );
     }
 
-    double getXlog ( double x ) {
+    double getXLog ( double x ) {
         return log ( x );
     }
 
-    double getXsin ( double x ) {
+    double getXSin ( double x ) {
         return sin ( x );
     }
 
-    double getXcos ( double x ) {
+    double getXCos ( double x ) {
         return cos ( x );
     }
 
