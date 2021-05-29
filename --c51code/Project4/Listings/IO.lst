@@ -1,0 +1,77 @@
+A51 MACRO ASSEMBLER  IO                                                                   05/28/2021 12:45:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\IO.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE IO.asm SET(SMALL) DEBUG PRINT(.\Listings\IO.lst) OBJECT(.\Objects\IO.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020100            2             LJMP MAIN
+                       3             
+0100                   4             ORG 0100H
+0100 7400              5                     MAIN: MOV A,#0
+0102 7A08              6                     MOV R2,#8
+0104 7850              7                     MOV R0,#50H
+0106 F6                8                     LOOP: MOV @R0,A
+0107 08                9                     INC R0
+0108 04               10                     INC A
+0109 DAFB             11                     DJNZ R2,LOOP
+010B 120112           12                     LOOP1:LCALL DISPLAY
+010E 80FB             13                     SJMP LOOP1
+0110 80FE             14                     SJMP $
+0112 7857             15                             DISPLAY:MOV R0,#57H
+0114 7B7F             16                             MOV R3,#7FH
+0116 EB               17                             MOV A,R3
+0117 F5A0             18                             LD0: MOV P2,A
+0119 E6               19                             MOV A,@R0
+011A 240E             20                             ADD A,#0EH
+011C 83               21                             MOVC A,@A+PC
+011D F580             22                             MOV P0,A
+011F 313A             23                             ACALL DL1
+0121 18               24                             DEC R0
+0122 EB               25                             MOV A,R3
+0123 30E004           26                             JNB ACC.0,LD1
+0126 03               27                             RR A
+0127 FB               28                             MOV R3,A
+0128 2117             29                             AJMP LD0
+012A 22               30                             LD1: RET
+012B 3F065B4F         31                             TAB: DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H
+012F 666D7D07                
+0133 7F6F7739         32                                     DB 7FH,6FH,77H,39H,5EH,79H,71H
+0137 5E7971                  
+013A 7F02             33                                             DL1: MOV R7,#02H
+013C 7EFF             34                                             DL: MOV R6,#0FFH
+013E DEFE             35                                             DL0: DJNZ R6,DL0
+0140 DFFA             36                                             DJNZ R7,DL
+0142 22               37                                             RET
+                      38                                             END
+A51 MACRO ASSEMBLER  IO                                                                   05/28/2021 12:45:53 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+DISPLAY. . . . . .  C ADDR   0112H   A   
+DL . . . . . . . .  C ADDR   013CH   A   
+DL0. . . . . . . .  C ADDR   013EH   A   
+DL1. . . . . . . .  C ADDR   013AH   A   
+LD0. . . . . . . .  C ADDR   0117H   A   
+LD1. . . . . . . .  C ADDR   012AH   A   
+LOOP . . . . . . .  C ADDR   0106H   A   
+LOOP1. . . . . . .  C ADDR   010BH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+TAB. . . . . . . .  C ADDR   012BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

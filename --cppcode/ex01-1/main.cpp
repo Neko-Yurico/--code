@@ -8,7 +8,7 @@ float compare(float *a,float &b)
 int main()
 {
     float x,y;
-    cout<<"请输入两个数:"<<endl;
+    cout<<"please enter 2 number:"<<endl;
     cin>>x>>y;
     cout<<"The max="<<compare(&x,y)<<endl;
     return 0;

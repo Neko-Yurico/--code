@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 template <typename T>
-T max(T a=0,T b=0,T c=0){
+T max(T a,T b,T c){
     if(b>a)a=b;
     if(c>a)a=c;
     return a;
@@ -10,11 +10,11 @@ int main(){
     int i1,i2,i3,i;
     double d1,d2,d3,d;
     long g1,g2,g3,g;
-    cout<<"请输入三个int:"<<endl;
+    cout<<"3int:"<<endl;
     cin>>i1>>i2>>i3;
-    cout<<"请输入三个double:"<<endl;
+    cout<<"3double:"<<endl;
     cin>>d1>>d2>>d3;
-    cout<<"请输入三个long:"<<endl;
+    cout<<"3long:"<<endl;
     cin>>g1>>g2>>g3;
     i=max(i1,i2,i3);
     d=max(d1,d2,d3);

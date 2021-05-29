@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\Neko-Yurico.github.io\--code\--cppcode\ex01
+"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\Neko-Yurico.github.io\--code\--cppcode\ex01-1
 -- The C compiler identification is GNU 8.1.0
 -- The CXX compiler identification is GNU 8.1.0
 -- Check for working C compiler: D:/Environment/mingw64/bin/gcc.exe
@@ -15,4 +15,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: D:/Neko-Yurico.github.io/--code/--cppcode/ex01/cmake-build-debug
+-- Build files have been written to: D:/Neko-Yurico.github.io/--code/--cppcode/ex01-1/cmake-build-debug

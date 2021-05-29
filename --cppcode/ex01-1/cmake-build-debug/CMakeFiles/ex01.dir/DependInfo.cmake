@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/Neko-Yurico.github.io/--code/--cppcode/ex01/main.cpp" "D:/Neko-Yurico.github.io/--code/--cppcode/ex01/cmake-build-debug/CMakeFiles/ex01.dir/main.cpp.obj"
+  "D:/Neko-Yurico.github.io/--code/--cppcode/ex01-1/main.cpp" "D:/Neko-Yurico.github.io/--code/--cppcode/ex01-1/cmake-build-debug/CMakeFiles/ex01.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

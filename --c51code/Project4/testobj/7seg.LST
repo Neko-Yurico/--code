@@ -1,0 +1,165 @@
+A51 MACRO ASSEMBLER  7SEG                                                                 10/18/2018 10:27:39 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN 7seg.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE 7seg.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     ;±¾³ÌÐòÊµÏÖÆß¶ÎÂë¶¯Ì¬ÏÔÊ¾¹¦ÄÜ
+                       3     ;///////////////////////////////////////////
+0000                   4                             org     0000h
+0000 0130              5                             ajmp    main
+0030                   6                             org     0030h
+0030                   7     main:
+0030 9000B7            8                             mov dptr,#tab                           ;½«±íÍ·Î»ÖÃËÍÈëDPTR        
+                                                                  
+0033 753000            9                             mov 30h,#00h                ;½«30H¸öÎ»ÏÔÊ¾»º³åµ¥ÔªÇåÁã          
+0036 753100           10                             mov 31h,#00h                ;½«31HÊ®Î»ÏÔÊ¾»º³åµ¥ÔªÇåÁã          
+0039 753200           11                             mov 32h,#00h                ;½«32H°ÙÎ»ÏÔÊ¾»º³åµ¥ÔªÇåÁã          
+003C 753300           12                             mov 33h,#00h                ;½«33HÇ§Î»ÏÔÊ¾»º³åµ¥ÔªÇåÁã          
+003F                  13     loop:
+003F 7C05             14                             mov r4,#5                                       ;r4×÷ÎªÈí¼þ¼ÆÊÆ÷
+0041                  15     tt1:
+0041 12004B           16                             lcall display                           ;µ÷ÓÃÏÔÊ¾³ÌÐò 
+0044 DCFB             17                             djnz    r4,tt1                          ;r4¼õÒ»ºó²»ÎªÁã,·µ»Øtt1
+0046 120080           18                             lcall update                            ;µ÷ÓÃË¢ÐÂÏÔÊ¾×Ó³ÌÐò
+0049 013F             19                             ajmp loop                                       ;Ìø»Øloop,¼ÌÐøÑ­»·Ï
+                             ÔÊ¾.
+                      20     
+004B                  21     display:                       
+004B 7F64             22                             mov r7,#100                                     ;Èí¼þ¼ÆÊÆ÷¸³Öµ     
+                                                  
+004D                  23     dd1:                                                                            
+004D E530             24                             mov a,30h                   ;½«ÏÔÊ¾»º³åÇø30HÖÐµÄÖµËÍÈëACC          
+                              
+004F 93               25                             movc a,@a+dptr              ;²é±íÈ¡ÒªÏÔÊ¾µÄÊ²¢°Ñ²é±íµÄ½á¹ûËÍÈëACC  
+0050 F580             26                             mov p0,a                    ;½«ÒªÏÔÊ¾µÄÊËÍÈëP0¿Ú                   
+0052 C2A7             27                             clr p2.7                    ;¿ª¸öÎ»ÏÔÊ¾µ¥Ôª                        
+                              
+0054 1200A9           28                             lcall delay100us            ;ÑÓÊ±100US                             
+                              
+0057 D2A7             29                             setb p2.7                   ;¹Ø¸öÎ»ÏÔÊ¾µ¥                          
+                              
+                      30                                                                                         
+0059 E531             31                             mov a,31h                   ;½«ÏÔÊ¾»º³åÇø±ð31HÖÐµÄÖµËÍÈëA          
+                              
+005B 93               32                             movc a,@a+dptr              ;²é±íÈ¡ÒªÏÔÊ¾µÄÊ²¢°Ñ²é±íµÄ½á¹ûËÍÈëACC  
+005C F580             33                             mov p0,a                    ;½«ÒªÏÔÊ¾µÄÊËÍÈëP0¿Ú                   
+005E C2A6             34                             clr p2.6                    ;¿ªÊ®Î»ÏÔÊ¾µ¥Ôª                        
+                              
+0060 1200A9           35                             lcall delay100us            ;ÑÓÊ±100US                             
+                              
+0063 D2A6             36                             setb p2.6                   ;¹ØÊ®Î»ÏÔÊ¾µ¥Ôª                        
+                              
+                      37                                                                                         
+0065 E532             38                             mov a,32h                   ;½«ÏÔÊ¾»º³åÇø32HÖÐµÄÖµËÍÈëACC          
+                              
+0067 93               39                             movc a,@a+dptr              ;²é±íÈ¡ÒªÏÔÊ¾µÄÊ²¢°Ñ²é±íµÄ½á¹ûËÍÈëACC  
+0068 F580             40                             mov p0,a                    ;½«ÒªÏÔÊ¾µÄÊËÍÈëP0¿Ú                   
+006A C2A5             41                             clr p2.5                    ;¿ª°ÙÎ»ÏÔÊ¾µ¥Ôª                        
+                              
+006C 1200A9           42                             lcall delay100us            ;ÑÓÊ±100US                             
+                              
+006F D2A5             43                             setb p2.5                   ;¹Ø°ÙÎ»ÏÔÊ¾µ¥Ôª                        
+                              
+A51 MACRO ASSEMBLER  7SEG                                                                 10/18/2018 10:27:39 PAGE     2
+
+                      44                                                                                         
+0071 E533             45                             mov a,33h                   ;½«ÏÔÊ¾»º³åÇø33HÖÐµÄÖµËÍÈëACC          
+                              
+0073 93               46                             movc a,@a+dptr              ;²é±íÈ¡ÒªÏÔÊ¾µÄÊ²¢°Ñ²é±íµÄ½á¹ûËÍÈëACC  
+0074 F580             47                             mov p0,a                    ;½«ÒªÏÔÊ¾µÄÊËÍÈëP0¿Ú                   
+0076 C2A4             48                             clr p2.4                    ;¿ªÇ§Î»ÏÔÊ¾µ¥Ôª                        
+                              
+0078 1200A9           49                             lcall delay100us            ;ÑÓÊ±100US                             
+                              
+007B D2A4             50                             setb p2.4                   ;¹ØÇ§Î»ÏÔÊ¾µ¥Ôª                        
+                              
+007D DFCE             51                             djnz r7,dd1                 ;R7²»µÈÓÚ0·µ»ØÖÁDD1´¦                  
+                              
+007F 22               52                             ret                         ;R7µÈÓÚ0×Ó³ÌÐò·µ»Ø                     
+                              
+                      53     
+0080                  54     update:                                                                 ;Ë¢ÐÂÏÔÊ¾×Ó³ÌÐò
+0080 0530             55                             inc 30h                                         ;¸öÎ»ÏÔÊ¾»º³åµ¥Ôª¼Ó
+                             Ò»           
+0082 E530             56                             mov a,30h
+0084 B40A21           57                             cjne a,#10,exit                         ;»¹Ã»¼Óµ½Ê®,ÍË³ö
+0087 753000           58                             mov 30h,#00h                            ;¼Óµ½Ê®ÁË,¸öÎ»ÇåÁã
+008A 0531             59                             inc 31h                                         ;Ê®Î»ÏÔÊ¾»º³åµ¥Ôª¼Ó
+                             Ò»           
+008C E531             60                             mov a,31h                                               
+008E B40A17           61                             cjne a,#10,exit             ;»¹Ã»¼Óµ½Ê®,ÍË³ö            
+0091 753100           62                             mov 31h,#00h                ;¼Óµ½Ê®ÁË,Ê®Î»ÇåÁã          
+0094 0532             63                             inc 32h                                         ;°ÙÎ»ÏÔÊ¾»º³åµ¥Ôª¼Ó
+                             Ò»           
+0096 E532             64                             mov a,32h                                               
+0098 B40A0D           65                             cjne a,#10,exit             ;»¹Ã»¼Óµ½Ê®,ÍË³ö            
+009B 753200           66                             mov 32h,#00h                ;¼Óµ½Ê®ÁË,°ÙÎ»ÇåÁã          
+009E 0533             67                             inc 33h                                         ;Ç§Î»ÏÔÊ¾»º³åµ¥Ôª¼Ó
+                             Ò»           
+00A0 E533             68                             mov a,33h                                                          
+                                              
+00A2 B40A03           69                             cjne a,#10,exit             ;»¹Ã»¼Óµ½Ê®,ÍË³ö            
+00A5 753300           70                             mov 33h,#00h                ;¼Óµ½Ê®ÁË,Ç§Î»ÇåÁã          
+00A8                  71     exit:
+00A8 22               72                             ret                                                     ;Ë¢ÐÂÏÔÊ¾×Ó
+                             ³ÌÐò·µ»Ø
+                      73     
+00A9                  74     delay100us:
+00A9 7D32             75                             mov r5,#50
+00AB DDFE             76                             djnz    r5,$
+00AD 22               77                             ret
+                      78     
+00AE                  79     delay10ms:
+00AE 7E64             80                             mov r6,#100
+00B0                  81     tt2:
+00B0 7D32             82                             mov r5,#50
+00B2 DDFE             83                             djnz r5,$
+00B4 DEFA             84                             djnz r6,tt2
+00B6 22               85                             ret
+                      86                             
+00B7 03               87     tab:       DB        003H;0
+00B8 9F               88                DB        09FH;1
+00B9 25               89                DB        025H;2
+00BA 0D               90                DB        00DH;3
+00BB 99               91                DB        099H;4
+00BC 49               92                DB        049H;5
+00BD 41               93                DB        041H;6
+00BE 1F               94                DB        01FH;7
+00BF 01               95                DB        001H;8
+00C0 09               96                DB        009H;9 ;013456789×ÖÐÎÂë
+                      97     
+A51 MACRO ASSEMBLER  7SEG                                                                 10/18/2018 10:27:39 PAGE     3
+
+                      98                END
+A51 MACRO ASSEMBLER  7SEG                                                                 10/18/2018 10:27:39 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DD1. . . . . . . .  C ADDR   004DH   A   
+DELAY100US . . . .  C ADDR   00A9H   A   
+DELAY10MS. . . . .  C ADDR   00AEH   A   
+DISPLAY. . . . . .  C ADDR   004BH   A   
+EXIT . . . . . . .  C ADDR   00A8H   A   
+LOOP . . . . . . .  C ADDR   003FH   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+TAB. . . . . . . .  C ADDR   00B7H   A   
+TT1. . . . . . . .  C ADDR   0041H   A   
+TT2. . . . . . . .  C ADDR   00B0H   A   
+UPDATE . . . . . .  C ADDR   0080H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,114 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/18/2018  10:27:43  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE 7seg.obj TO 7seg CODE (0X0000-0X0FFF)
+
+
+INPUT MODULES INCLUDED:
+  7seg.obj (7SEG)
+
+
+LINK MAP OF MODULE:  7seg (7SEG)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     00C1H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  7seg (7SEG)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        7SEG
+  C:004DH         SYMBOL        DD1
+  C:00A9H         SYMBOL        DELAY100US
+  C:00AEH         SYMBOL        DELAY10MS
+  C:004BH         SYMBOL        DISPLAY
+  C:00A8H         SYMBOL        EXIT
+  C:003FH         SYMBOL        LOOP
+  C:0030H         SYMBOL        MAIN
+  D:0080H         SYMBOL        P0
+  D:00A0H         SYMBOL        P2
+  C:00B7H         SYMBOL        TAB
+  C:0041H         SYMBOL        TT1
+  C:00B0H         SYMBOL        TT2
+  C:0080H         SYMBOL        UPDATE
+  C:0000H         LINE#         5
+  C:0030H         LINE#         8
+  C:0033H         LINE#         9
+  C:0036H         LINE#         10
+  C:0039H         LINE#         11
+  C:003CH         LINE#         12
+  C:003FH         LINE#         14
+  C:0041H         LINE#         16
+  C:0044H         LINE#         17
+  C:0046H         LINE#         18
+  C:0049H         LINE#         19
+  C:004BH         LINE#         22
+  C:004DH         LINE#         24
+  C:004FH         LINE#         25
+  C:0050H         LINE#         26
+  C:0052H         LINE#         27
+  C:0054H         LINE#         28
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/18/2018  10:27:43  PAGE 2
+
+
+  C:0057H         LINE#         29
+  C:0059H         LINE#         31
+  C:005BH         LINE#         32
+  C:005CH         LINE#         33
+  C:005EH         LINE#         34
+  C:0060H         LINE#         35
+  C:0063H         LINE#         36
+  C:0065H         LINE#         38
+  C:0067H         LINE#         39
+  C:0068H         LINE#         40
+  C:006AH         LINE#         41
+  C:006CH         LINE#         42
+  C:006FH         LINE#         43
+  C:0071H         LINE#         45
+  C:0073H         LINE#         46
+  C:0074H         LINE#         47
+  C:0076H         LINE#         48
+  C:0078H         LINE#         49
+  C:007BH         LINE#         50
+  C:007DH         LINE#         51
+  C:007FH         LINE#         52
+  C:0080H         LINE#         55
+  C:0082H         LINE#         56
+  C:0084H         LINE#         57
+  C:0087H         LINE#         58
+  C:008AH         LINE#         59
+  C:008CH         LINE#         60
+  C:008EH         LINE#         61
+  C:0091H         LINE#         62
+  C:0094H         LINE#         63
+  C:0096H         LINE#         64
+  C:0098H         LINE#         65
+  C:009BH         LINE#         66
+  C:009EH         LINE#         67
+  C:00A0H         LINE#         68
+  C:00A2H         LINE#         69
+  C:00A5H         LINE#         70
+  C:00A8H         LINE#         72
+  C:00A9H         LINE#         75
+  C:00ABH         LINE#         76
+  C:00ADH         LINE#         77
+  C:00AEH         LINE#         80
+  C:00B0H         LINE#         82
+  C:00B2H         LINE#         83
+  C:00B4H         LINE#         84
+  C:00B6H         LINE#         85
+  -------         ENDMOD        7SEG
+
+Program Size: data=8.0 xdata=0 code=193
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

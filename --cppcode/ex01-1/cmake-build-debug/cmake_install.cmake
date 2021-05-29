@@ -1,4 +1,4 @@
-# Install script for directory: D:/Neko-Yurico.github.io/--code/--cppcode/ex01
+# Install script for directory: D:/Neko-Yurico.github.io/--code/--cppcode/ex01-1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/Neko-Yurico.github.io/--code/--cppcode/ex01/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Neko-Yurico.github.io/--code/--cppcode/ex01-1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
