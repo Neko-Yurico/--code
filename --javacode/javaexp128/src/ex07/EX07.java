@@ -34,7 +34,7 @@ public class EX07 {
 class MyCalc extends JFrame{
     public MyCalc(){
         setTitle("新计算器");
-        setBounds(100,100,500,800);
+        setBounds(100,100,500,150);
         setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
     
         JPanel Container = new JPanel ();
@@ -54,10 +54,13 @@ class MyCalc extends JFrame{
         Container.add ( bCalc );
         Container.add ( bCle );
         
+        
         bCalc.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                new MathThread ( input ).start ();
+                MathThread m=new MathThread ( input );
+                Thread thread=new Thread (m);
+                thread.start ();
             }
         } );
         
@@ -71,7 +74,7 @@ class MyCalc extends JFrame{
         setVisible ( true );
     }
     
-    class MathThread extends Thread{
+    class MathThread implements Runnable{
         JTextField input;
         
         public MathThread(JTextField input){
@@ -80,8 +83,6 @@ class MyCalc extends JFrame{
         }
         @Override
         public void run(){
-            super.run ();
-    
             try {
                 String exp = input.getText ( );
                 exp = exp.trim ( );
