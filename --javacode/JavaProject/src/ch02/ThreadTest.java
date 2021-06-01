@@ -40,7 +40,7 @@ class MyThread extends Thread{
             System.out.println (getName () );
             try {
                 sleep ( 1000 );
-            }catch ( InterruptedException e ){}
+            } catch ( InterruptedException e ) {  }
         }
     }
 }
