@@ -2,7 +2,6 @@ package ex06;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 /**
  * @author Neko_Yurico
  * @description
