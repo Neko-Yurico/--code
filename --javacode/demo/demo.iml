@@ -8,5 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jSerialComm-2.7.0" level="project" />
+    <orderEntry type="library" name="comm-2.0" level="project" />
+    <orderEntry type="library" name="comm-2.0" level="project" />
   </component>
 </module>

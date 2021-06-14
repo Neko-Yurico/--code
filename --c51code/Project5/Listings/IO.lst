@@ -1,0 +1,36 @@
+A51 MACRO ASSEMBLER  IO                                                                   06/11/2021 13:32:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\IO.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE IO.asm SET(SMALL) DEBUG PRINT(.\Listings\IO.lst) OBJECT(.\Objects\IO.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020100            2             LJMP MAIN
+                       3             
+0100                   4             ORG 0100H
+0100 907FFF            5                     MAIN: MOV DPTR,#7FFFH
+0103 E4                6                     CLR A
+0104 F0                7                     LOOP: MOVX @DPTR,A
+0105 04                8                     INC A
+0106 80FC              9                     SJMP LOOP
+                      10                     END
+A51 MACRO ASSEMBLER  IO                                                                   06/11/2021 13:32:53 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOOP . . . . . . .  C ADDR   0104H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
