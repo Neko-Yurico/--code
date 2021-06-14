@@ -70,8 +70,6 @@ public class StreamLED extends Thread{
                         Thread.sleep ( 500 );
                     }
                 }
-                bytes[ 0 ] = 0x00;
-                sp.ControlLed ( bytes );
                 Thread.sleep ( 500 );
             }
         }

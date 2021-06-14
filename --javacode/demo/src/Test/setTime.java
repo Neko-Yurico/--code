@@ -23,34 +23,5 @@ import java.util.Scanner;
  * ========================
  */
 public class setTime extends Thread{
-    private JLabel Label1;
-    String string;
-    double num;
-    boolean isStop = false;
-    
-    public setTime ( String str ) {
-        string = str.trim ( );
-    }
-    
-    public boolean getIsStop ( ) {
-        return isStop;
-    }
-    
-    @Override
-    public void run ( ) {
-        try {
-            Scanner scanner = new Scanner ( string );
-            num = scanner.nextInt ( );
-            Label1.setText ( "当前任务剩余时间：" + num + "秒" );
-            while ( num != 0 ) {
-                Thread.sleep ( 1000 );
-                num--;
-                Label1.setText ( "当前任务剩余时间：" + num + "秒" );
-            }
-            isStop = ! isStop;
-        }
-        catch ( InterruptedException e ) {
-            e.printStackTrace ( );
-        }
-    }
+
 }

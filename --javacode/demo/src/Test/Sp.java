@@ -24,7 +24,7 @@ import com.fazecast.jSerialComm.SerialPort;
 public class Sp {
     public String Port ;
     public static SerialPort sp;
-    public static boolean isStream = false;//判断流水灯是否开启
+    public static boolean isStream = true;//判断流水灯是否开启
     
     public static void open ( ){
         isStream=true;

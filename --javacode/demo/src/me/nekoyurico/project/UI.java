@@ -1,17 +1,12 @@
 package me.nekoyurico.project;
 
-import Test.MyDateThread;
-import Test.MyPortThread;
-import Test.Sp;
-import Test.StreamLED;
-import com.fazecast.jSerialComm.SerialPort;
+import Test.*;
 
-import javax.sound.sampled.Port;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.text.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 
 /**
@@ -56,6 +51,10 @@ public class UI {
         //时钟线程
         MyDateThread thread1 = new MyDateThread ( "timer" ,TimeLabel);
         thread1.start ( );
+        //灯的选择
+        final int[] select = new int[ 1 ];
+        
+        
         
         try {
             Thread.sleep ( 1000 );
@@ -97,43 +96,31 @@ public class UI {
                 }
             }
         } );
-        
-        TimeSetButton.addActionListener ( new ActionListener ( ) {                  //定时器
+    
+        TimeSetButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                try {
-                    String str = JOptionPane.showInputDialog ( null , "需要在多少秒后启动/关闭？" , "定时器" , JOptionPane.PLAIN_MESSAGE );
+                try{
+                    String str = JOptionPane.showInputDialog(null,"需要在多少秒后启动/关闭？","定时器",JOptionPane.PLAIN_MESSAGE);
                     boolean is = isDigit ( str );//判断输入的是否是数字
-                    if ( is ) {
-                        int time = Integer.parseInt (str);
-                        for(int i = time;i >= 0;i--){
-                            Label1.setText ( "当前任务剩余时间：" + i + "秒" );
-                            Thread.sleep ( 1000 );
+                    if(is){
+                        setTime setTime = new setTime(str);
+                        setTime.start ();
+                        Thread.sleep ( setTime.getTime ()*1000 );
+                        if ( !IsRun[0] ){
+                            thread1.open ();
+                            Sp.open ();
+                            mainButton.setText ( "退出/暂停" );
+                            IsRun[ 0 ]=true;
+                        }else {
+                            thread1.close ();
+                            Sp.close ();
+                            mainButton.setText ( "重新启动" );
+                            TimeLabel.setText ( "已暂停" );
+                            IsRun[ 0 ] =false;
                         }
-//                        TimeLabel.setVisible ( false );
-//                        Robot r = new Robot ( );
-//                        Label1.setText ( "当前任务剩余时间：" + time + "秒" );
-//                        while ( time != 0 ) {
-//                            r.delay ( 1000 );
-//                            time--;
-//                            Label1.setText ( "当前任务剩余时间：" + time + "秒" );
-//                        }
-//                        setTime setTime = new setTime ( str );
-//                        setTime.start ( );
-//                        if ( setTime.getIsStop ( ) ) {
-//                            thread1.open ( );
-//                            Sp.open ( );
-//                            mainButton.setText ( "退出/暂停" );
-//                            IsRun[ 0 ] = true;
-//                        } else {
-//                            thread1.close ( );
-//                            Sp.close ( );
-//                            mainButton.setText ( "重新启动" );
-//                            TimeLabel.setText ( "已暂停" );
-//                            IsRun[ 0 ] = false;
-//                        }
-                    } else {
-                        JOptionPane.showMessageDialog ( null , "输入有误" , "提示" , JOptionPane.YES_NO_OPTION );
+                    }else {
+                        JOptionPane.showMessageDialog ( null, "输入有误", "提示", JOptionPane.YES_NO_OPTION);
                     }
                 }
                 catch ( Exception exception ) {
@@ -141,7 +128,8 @@ public class UI {
                 }
             }
         } );
-        
+    
+    
         LEDStringButton.addActionListener ( new ActionListener ( ) {                //流水灯控制
             @Override
             public void actionPerformed ( ActionEvent e ) {
@@ -156,21 +144,54 @@ public class UI {
             @Override
             public void actionPerformed ( ActionEvent e ) {
                 Sp.close ();
-                LED1RadioButton.setEnabled ( !LED1RadioButton.isEnabled () );
-                LED2RadioButton.setEnabled ( !LED2RadioButton.isEnabled () );
-                LED3RadioButton.setEnabled ( !LED3RadioButton.isEnabled () );
-                
+                if(select[ 0 ] == 1){
+                    if ( LED1RadioButton.isSelected () ){
+                        byte[] bytes = {0x11};
+                        Sp.ControlLed ( bytes );
+                    }else {
+                        byte[] bytes = {0x10};
+                        Sp.ControlLed ( bytes );
+                    }
+                }if(select[ 0 ] == 2){
+                    if ( LED2RadioButton.isSelected () ){
+                        byte[] bytes = {0x21};
+                        Sp.ControlLed ( bytes );
+                    }else {
+                        byte[] bytes = {0x20};
+                        Sp.ControlLed ( bytes );
+                    }
+                }if(select[ 0 ] == 3){
+                    if ( LED3RadioButton.isSelected () ){
+                        byte[] bytes = {0x31};
+                        Sp.ControlLed ( bytes );
+                    }else {
+                        byte[] bytes = {0x30};
+                        Sp.ControlLed ( bytes );
+                    }
+                }
             }
         } );
-//        LED1RadioButton.addItemListener ( new ItemListener ( ) {
-//            @Override
-//            public void itemStateChanged ( ItemEvent e ) {
-////                sp sp=new sp ( Port );
-//                byte[] bytes = {0x11};
-//                Sp.ControlLed ( bytes );
-//                LED1change ();
-//            }
-//        });
+        Button1.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                LED1RadioButton.setSelected ( ! LED1RadioButton.isSelected ( ) );
+                select[ 0 ] = 1;
+            }
+        } );
+        Button2.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                LED2RadioButton.setSelected ( ! LED2RadioButton.isSelected ( ) );
+                select[ 0 ] = 2;
+            }
+        } );
+        Button3.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                LED3RadioButton.setSelected ( ! LED3RadioButton.isSelected ( ) );
+                select[ 0 ] = 3;
+            }
+        } );
     }
     
     
@@ -182,7 +203,6 @@ public class UI {
         frame.pack ( );
         frame.setVisible ( true );
     }
-    
     private JPanel panel1;
     private JRadioButton LED1RadioButton;
     private JRadioButton LED2RadioButton;
@@ -193,54 +213,40 @@ public class UI {
     private JButton mainButton;
     private JLabel TimeLabel;
     private JLabel Label1;
-    
-    class setTime extends Thread {                                      //定时
-        String string;
-        double num;
-        boolean isStop = false;
-    
-        public setTime ( String str ) {
-            string = str.trim ( );
-        }
-    
-        public boolean getIsStop ( ) {
-            return isStop;
-        }
-    
-        @Override
-        public void run ( ) {
-            try {
-                Scanner scanner = new Scanner ( string );
-                num = scanner.nextInt ( );
-                Label1.setText ( "当前任务剩余时间：" + num + "秒" );
-                while ( num != 0 ) {
-                    Thread.sleep ( 1000 );
-                    num--;
-                    Label1.setText ( "当前任务剩余时间：" + num + "秒" );
-                }
-                isStop = ! isStop;
-            }
-            catch ( InterruptedException e ) {
-                e.printStackTrace ( );
-            }
-        }
-    }
-    
-    public void LED1change ( ) {
-        LED1RadioButton.setSelected ( ! LED1RadioButton.isSelected ( ) );
-    }
-    
-    public void LED2change ( ) {
-        LED2RadioButton.setSelected ( ! LED2RadioButton.isSelected ( ) );
-    }
-    
-    public void LED3change ( ) {
-        LED3RadioButton.setSelected ( ! LED3RadioButton.isSelected ( ) );
-    }
+    private JButton Button1;
+    private JButton Button2;
+    private JButton Button3;
     
     private boolean isDigit ( String x ) {                      //判断是否为数字
         String reg = "^[0-9]+(.[0-9]+)?$";
         return x.matches ( reg );
     }
-    
+    class setTime extends Thread{
+        String string;
+        double num;
+        boolean isStop =false;
+        public setTime ( String str ) { string = str.trim ();}
+        public long getTime(){
+            Scanner scanner = new Scanner ( string );
+            return scanner.nextLong ();
+        }
+        public boolean getIsStop(){return isStop;}
+        @Override
+        public void run(){
+            try{
+                Scanner scanner = new Scanner ( string );
+                num =scanner.nextDouble ();
+                Label1.setText ( "当前任务剩余时间："+num+"秒" );
+                while ( num!=0 ){
+                    Thread.sleep ( 1000 );
+                    num--;
+                    Label1.setText ( "当前任务剩余时间："+num+"秒" );
+                }
+                isStop =! isStop;
+            }
+            catch ( InterruptedException e ){
+                e.printStackTrace ();
+            }
+        }
+    }
 }
