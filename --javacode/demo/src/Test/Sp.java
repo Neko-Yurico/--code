@@ -37,6 +37,9 @@ public class Sp {
     public static void change ( ) {
         isStream = ! isStream;
     }
+    public static boolean getIsStream(){
+        return isStream;
+    }
     public void setPort(String s){
         Port=s;
     }

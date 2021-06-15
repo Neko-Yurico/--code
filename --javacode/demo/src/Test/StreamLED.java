@@ -27,8 +27,7 @@ public class StreamLED extends Thread{
     private JRadioButton LED3RadioButton;
     byte[] bytes = { 0x00 };
     String Port ;
-    
-    
+
     public StreamLED(String s,JRadioButton L1,JRadioButton L2,JRadioButton L3){
         Port=s;
         LED1RadioButton = L1;

@@ -1,7 +1,6 @@
 package me.nekoyurico.project;
 
 import Test.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,7 +63,7 @@ public class UI {
             e.printStackTrace ( );
         }
         StreamLED streamLED = new StreamLED ( Port , LED1RadioButton, LED2RadioButton, LED3RadioButton);
-        streamLED.start ( );
+        streamLED.start ( );                                            //程序开始后直接启动流水灯
         
         boolean[] IsRun = { true };
         
@@ -98,7 +97,7 @@ public class UI {
             }
         } );
     
-        TimeSetButton.addActionListener ( new ActionListener ( ) {
+        TimeSetButton.addActionListener ( new ActionListener ( ) {                  //流水灯的延时控制
             @Override
             public void actionPerformed ( ActionEvent e ) {
                 try{
@@ -134,77 +133,95 @@ public class UI {
         LEDStringButton.addActionListener ( new ActionListener ( ) {                //流水灯控制
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                
                 if ( IsRun[ 0 ] ){
                     Sp.change ( );
                 }
             }
         } );
         
-        SingleLightControlButton.addActionListener ( new ActionListener ( ) {       //单灯控制
-            @Override
-            public void actionPerformed ( ActionEvent e ) {
-                Sp.close ();
-                if(select[ 0 ] == 1){
-                    if ( LED1RadioButton.isSelected () ){
-                        byte[] bytes = {0x11};
-                        Sp.ControlLed ( bytes );
-                    }else {
-                        byte[] bytes = {0x10};
-                        Sp.ControlLed ( bytes );
-                    }
-                }if(select[ 0 ] == 2){
-                    if ( LED2RadioButton.isSelected () ){
-                        byte[] bytes = {0x21};
-                        Sp.ControlLed ( bytes );
-                    }else {
-                        byte[] bytes = {0x20};
-                        Sp.ControlLed ( bytes );
-                    }
-                }if(select[ 0 ] == 3){
-                    if ( LED3RadioButton.isSelected () ){
-                        byte[] bytes = {0x31};
-                        Sp.ControlLed ( bytes );
-                    }else {
-                        byte[] bytes = {0x30};
-                        Sp.ControlLed ( bytes );
-                    }
-                }
-            }
-        } );
+//        SingleLightControlButton.addActionListener ( new ActionListener ( ) {       //单灯控制
+//            @Override
+//            public void actionPerformed ( ActionEvent e ) {
+//                Sp.close ();
+//                if(select[ 0 ] == 1){
+//                    if ( LED1RadioButton.isSelected () ){
+//                        byte[] bytes = {0x11};
+//                        Sp.ControlLed ( bytes );
+//                    }else {
+//                        byte[] bytes = {0x10};
+//                        Sp.ControlLed ( bytes );
+//                    }
+//                }if(select[ 0 ] == 2){
+//                    if ( LED2RadioButton.isSelected () ){
+//                        byte[] bytes = {0x21};
+//                        Sp.ControlLed ( bytes );
+//                    }else {
+//                        byte[] bytes = {0x20};
+//                        Sp.ControlLed ( bytes );
+//                    }
+//                }if(select[ 0 ] == 3){
+//                    if ( LED3RadioButton.isSelected () ){
+//                        byte[] bytes = {0x31};
+//                        Sp.ControlLed ( bytes );
+//                    }else {
+//                        byte[] bytes = {0x30};
+//                        Sp.ControlLed ( bytes );
+//                    }
+//                }
+//            }
+//        } );
         Button1.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                boolean flag;
-                LED1RadioButton.setSelected ( ! LED1RadioButton.isSelected ( ) );
-                select[ 0 ] = 1;
+                boolean flag = LED1RadioButton.isSelected ( );
+                if ( flag == true ){
+                    byte[] bytes = {0x10};
+                    Sp.ControlLed ( bytes );
+                }else {
+                    byte[] bytes = {0x11};
+                    Sp.ControlLed ( bytes );
+                }
+//                LED1RadioButton.setSelected ( ! LED1RadioButton.isSelected ( ) );
+//                select[ 0 ] = 1;
             }
         } );
         Button2.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                LED2RadioButton.setSelected ( ! LED2RadioButton.isSelected ( ) );
-                select[ 0 ] = 2;
+                boolean flag = LED2RadioButton.isSelected ( );
+                if ( flag == true ){
+                    byte[] bytes = {0x20};
+                    Sp.ControlLed ( bytes );
+                }else {
+                    byte[] bytes = {0x21};
+                    Sp.ControlLed ( bytes );
+                }
+//                LED2RadioButton.setSelected ( ! LED2RadioButton.isSelected ( ) );
+//                select[ 0 ] = 2;
             }
         } );
         Button3.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                LED3RadioButton.setSelected ( ! LED3RadioButton.isSelected ( ) );
-                select[ 0 ] = 3;
+                boolean flag = LED3RadioButton.isSelected ( );
+                if ( flag == true ){
+                    byte[] bytes = {0x30};
+                    Sp.ControlLed ( bytes );
+                }else {
+                    byte[] bytes = {0x31};
+                    Sp.ControlLed ( bytes );
+                }
+//                LED3RadioButton.setSelected ( ! LED3RadioButton.isSelected ( ) );
+//                select[ 0 ] = 3;
             }
         } );
     }
-    
-    
-    public static void main ( String[] args ) {
-        JFrame frame = new JFrame ( "UI" );
-        frame.setBounds ( 500 , 200 , 0 , 0 );
-        frame.setContentPane ( new UI ( ).panel1 );
-        frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
-        frame.pack ( );
-        frame.setVisible ( true );
+
+    private boolean isDigit ( String x ) {                      //判断是否为数字
+        String reg = "^[0-9]+(.[0-9]+)?$";
+        return x.matches ( reg );
     }
+
     private JPanel panel1;
     private JRadioButton LED1RadioButton;
     private JRadioButton LED2RadioButton;
@@ -218,9 +235,13 @@ public class UI {
     private JButton Button1;
     private JButton Button2;
     private JButton Button3;
-    
-    private boolean isDigit ( String x ) {                      //判断是否为数字
-        String reg = "^[0-9]+(.[0-9]+)?$";
-        return x.matches ( reg );
+
+    public static void main ( String[] args ) {
+        JFrame frame = new JFrame ( "UI" );
+        frame.setBounds ( 500 , 200 , 0 , 0 );
+        frame.setContentPane ( new UI ( ).panel1 );
+        frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
+        frame.pack ( );
+        frame.setVisible ( true );
     }
 }
