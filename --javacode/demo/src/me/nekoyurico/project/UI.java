@@ -51,10 +51,7 @@ public class UI {
         //时钟线程
         MyDateThread thread1 = new MyDateThread ( "timer" ,TimeLabel);
         thread1.start ( );
-        //灯的选择
-        final int[] select = new int[ 1 ];
-        
-        
+
         
         try {
             Thread.sleep ( 1000 );
@@ -74,9 +71,11 @@ public class UI {
                 if ( IsRun[ 0 ] ) {
                     if ( JOptionPane.showOptionDialog ( null , "你想要做什么？" , "提示" , JOptionPane.YES_NO_OPTION , JOptionPane.QUESTION_MESSAGE , null , options , options[ 0 ] ) == JOptionPane.YES_OPTION ) {
                         Sp.close ( );
+                        byte[] bytes = {0x00};
+                        Sp.ControlLed ( bytes );
                         try {
                             Thread.sleep ( 500 );
-                        } 
+                        }
                         catch ( InterruptedException interruptedException ) {
                             interruptedException.printStackTrace ( );
                         }
@@ -106,19 +105,6 @@ public class UI {
                     if(is){
                         setTime setTime = new setTime(str,Label1);
                         setTime.start ();
-//                        Thread.sleep ( setTime.getTime ()*1000 );
-//                        if ( !IsRun[0] ){
-//                            thread1.open ();
-//                            Sp.open ();
-//                            mainButton.setText ( "退出/暂停" );
-//                            IsRun[ 0 ]=true;
-//                        }else {
-//                            thread1.close ();
-//                            Sp.close ();
-//                            mainButton.setText ( "重新启动" );
-//                            TimeLabel.setText ( "已暂停" );
-//                            IsRun[ 0 ] =false;
-//                        }
                     }else {
                         JOptionPane.showMessageDialog ( null, "输入有误", "提示", JOptionPane.YES_NO_OPTION);
                     }
@@ -128,8 +114,7 @@ public class UI {
                 }
             }
         } );
-    
-    
+
         LEDStringButton.addActionListener ( new ActionListener ( ) {                //流水灯控制
             @Override
             public void actionPerformed ( ActionEvent e ) {
@@ -181,8 +166,6 @@ public class UI {
                     byte[] bytes = {0x11};
                     Sp.ControlLed ( bytes );
                 }
-//                LED1RadioButton.setSelected ( ! LED1RadioButton.isSelected ( ) );
-//                select[ 0 ] = 1;
             }
         } );
         Button2.addActionListener ( new ActionListener ( ) {
@@ -196,8 +179,7 @@ public class UI {
                     byte[] bytes = {0x21};
                     Sp.ControlLed ( bytes );
                 }
-//                LED2RadioButton.setSelected ( ! LED2RadioButton.isSelected ( ) );
-//                select[ 0 ] = 2;
+
             }
         } );
         Button3.addActionListener ( new ActionListener ( ) {
@@ -211,8 +193,6 @@ public class UI {
                     byte[] bytes = {0x31};
                     Sp.ControlLed ( bytes );
                 }
-//                LED3RadioButton.setSelected ( ! LED3RadioButton.isSelected ( ) );
-//                select[ 0 ] = 3;
             }
         } );
     }
