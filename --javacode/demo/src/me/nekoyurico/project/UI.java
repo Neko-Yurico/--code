@@ -76,7 +76,7 @@ public class UI {
                         Sp.close ( );
                         try {
                             Thread.sleep ( 500 );
-                        }
+                        } 
                         catch ( InterruptedException interruptedException ) {
                             interruptedException.printStackTrace ( );
                         }
