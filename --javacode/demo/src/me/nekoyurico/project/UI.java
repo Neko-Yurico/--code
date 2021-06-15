@@ -47,6 +47,7 @@ public class UI {
         Port.trim ( );
         MyPortThread threadPort = new MyPortThread ( );
         //测试串口
+//        Port="COM3";
         threadPort.test ( Port );
         //时钟线程
         MyDateThread thread1 = new MyDateThread ( "timer" ,TimeLabel);
@@ -104,21 +105,21 @@ public class UI {
                     String str = JOptionPane.showInputDialog(null,"需要在多少秒后启动/关闭？","定时器",JOptionPane.PLAIN_MESSAGE);
                     boolean is = isDigit ( str );//判断输入的是否是数字
                     if(is){
-                        setTime setTime = new setTime(str);
+                        setTime setTime = new setTime(str,Label1);
                         setTime.start ();
-                        Thread.sleep ( setTime.getTime ()*1000 );
-                        if ( !IsRun[0] ){
-                            thread1.open ();
-                            Sp.open ();
-                            mainButton.setText ( "退出/暂停" );
-                            IsRun[ 0 ]=true;
-                        }else {
-                            thread1.close ();
-                            Sp.close ();
-                            mainButton.setText ( "重新启动" );
-                            TimeLabel.setText ( "已暂停" );
-                            IsRun[ 0 ] =false;
-                        }
+//                        Thread.sleep ( setTime.getTime ()*1000 );
+//                        if ( !IsRun[0] ){
+//                            thread1.open ();
+//                            Sp.open ();
+//                            mainButton.setText ( "退出/暂停" );
+//                            IsRun[ 0 ]=true;
+//                        }else {
+//                            thread1.close ();
+//                            Sp.close ();
+//                            mainButton.setText ( "重新启动" );
+//                            TimeLabel.setText ( "已暂停" );
+//                            IsRun[ 0 ] =false;
+//                        }
                     }else {
                         JOptionPane.showMessageDialog ( null, "输入有误", "提示", JOptionPane.YES_NO_OPTION);
                     }
@@ -174,6 +175,7 @@ public class UI {
         Button1.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
+                boolean flag;
                 LED1RadioButton.setSelected ( ! LED1RadioButton.isSelected ( ) );
                 select[ 0 ] = 1;
             }
@@ -220,33 +222,5 @@ public class UI {
     private boolean isDigit ( String x ) {                      //判断是否为数字
         String reg = "^[0-9]+(.[0-9]+)?$";
         return x.matches ( reg );
-    }
-    class setTime extends Thread{
-        String string;
-        double num;
-        boolean isStop =false;
-        public setTime ( String str ) { string = str.trim ();}
-        public long getTime(){
-            Scanner scanner = new Scanner ( string );
-            return scanner.nextLong ();
-        }
-        public boolean getIsStop(){return isStop;}
-        @Override
-        public void run(){
-            try{
-                Scanner scanner = new Scanner ( string );
-                num =scanner.nextDouble ();
-                Label1.setText ( "当前任务剩余时间："+num+"秒" );
-                while ( num!=0 ){
-                    Thread.sleep ( 1000 );
-                    num--;
-                    Label1.setText ( "当前任务剩余时间："+num+"秒" );
-                }
-                isStop =! isStop;
-            }
-            catch ( InterruptedException e ){
-                e.printStackTrace ();
-            }
-        }
     }
 }

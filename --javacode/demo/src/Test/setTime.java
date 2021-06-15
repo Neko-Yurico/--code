@@ -22,6 +22,42 @@ import java.util.Scanner;
  * https://nekoyurico.me/
  * ========================
  */
-public class setTime extends Thread{
-
+public class setTime extends Thread {
+    JLabel Label1;
+    String string;
+    double num;
+    boolean isStop = false;
+    
+    public setTime ( String str , JLabel L ) {
+        string = str.trim ( );
+        Label1 = L;
+    }
+    
+    public long getTime ( ) {
+        Scanner scanner = new Scanner ( string );
+        return scanner.nextLong ( );
+    }
+    
+    public boolean getIsStop ( ) {
+        return isStop;
+    }
+    
+    @Override
+    public void run ( ) {
+        try {
+            Scanner scanner = new Scanner ( string );
+            num = scanner.nextDouble ( );
+            Label1.setText ( "当前任务剩余时间：" + num + "秒" );
+            while ( num != 0 ) {
+                Thread.sleep ( 1000 );
+                num--;
+                Label1.setText ( "当前任务剩余时间：" + num + "秒" );
+            }
+            isStop = ! isStop;
+        }
+        catch ( InterruptedException e ) {
+            e.printStackTrace ( );
+        }
+    }
+    
 }
