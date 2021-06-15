@@ -2,10 +2,8 @@ package me.nekoyurico.project;
 
 import Test.*;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 
 /**
@@ -124,37 +122,15 @@ public class UI {
             }
         } );
         
-//        SingleLightControlButton.addActionListener ( new ActionListener ( ) {       //单灯控制
-//            @Override
-//            public void actionPerformed ( ActionEvent e ) {
-//                Sp.close ();
-//                if(select[ 0 ] == 1){
-//                    if ( LED1RadioButton.isSelected () ){
-//                        byte[] bytes = {0x11};
-//                        Sp.ControlLed ( bytes );
-//                    }else {
-//                        byte[] bytes = {0x10};
-//                        Sp.ControlLed ( bytes );
-//                    }
-//                }if(select[ 0 ] == 2){
-//                    if ( LED2RadioButton.isSelected () ){
-//                        byte[] bytes = {0x21};
-//                        Sp.ControlLed ( bytes );
-//                    }else {
-//                        byte[] bytes = {0x20};
-//                        Sp.ControlLed ( bytes );
-//                    }
-//                }if(select[ 0 ] == 3){
-//                    if ( LED3RadioButton.isSelected () ){
-//                        byte[] bytes = {0x31};
-//                        Sp.ControlLed ( bytes );
-//                    }else {
-//                        byte[] bytes = {0x30};
-//                        Sp.ControlLed ( bytes );
-//                    }
-//                }
-//            }
-//        } );
+        SingleLightControlButton.addActionListener ( new ActionListener ( ) {       //单灯控制
+            @Override
+            public void actionPerformed ( ActionEvent e ) {
+                Sp.close ();
+                Button1.setEnabled ( !Button1.isEnabled () );
+                Button2.setEnabled ( !Button2.isEnabled () );
+                Button3.setEnabled ( !Button3.isEnabled () );
+            }
+        } );
         Button1.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
@@ -162,9 +138,11 @@ public class UI {
                 if ( flag == true ){
                     byte[] bytes = {0x10};
                     Sp.ControlLed ( bytes );
+                    LED1RadioButton.setSelected ( !LED1RadioButton.isSelected () );
                 }else {
                     byte[] bytes = {0x11};
                     Sp.ControlLed ( bytes );
+                    LED1RadioButton.setSelected ( !LED1RadioButton.isSelected () );
                 }
             }
         } );
@@ -175,9 +153,11 @@ public class UI {
                 if ( flag == true ){
                     byte[] bytes = {0x20};
                     Sp.ControlLed ( bytes );
+                    LED2RadioButton.setSelected ( !LED2RadioButton.isSelected () );
                 }else {
                     byte[] bytes = {0x21};
                     Sp.ControlLed ( bytes );
+                    LED2RadioButton.setSelected ( !LED2RadioButton.isSelected () );
                 }
 
             }
@@ -189,9 +169,11 @@ public class UI {
                 if ( flag == true ){
                     byte[] bytes = {0x30};
                     Sp.ControlLed ( bytes );
+                    LED3RadioButton.setSelected ( !LED3RadioButton.isSelected () );
                 }else {
                     byte[] bytes = {0x31};
                     Sp.ControlLed ( bytes );
+                    LED3RadioButton.setSelected ( !LED3RadioButton.isSelected () );
                 }
             }
         } );
@@ -215,7 +197,8 @@ public class UI {
     private JButton Button1;
     private JButton Button2;
     private JButton Button3;
-
+    private JLabel labell;
+    
     public static void main ( String[] args ) {
         JFrame frame = new JFrame ( "UI" );
         frame.setBounds ( 500 , 200 , 0 , 0 );
