@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 /**
  * @author Neko_Yurico,BOW
  * @description
@@ -58,7 +57,8 @@ public class UI {
             e.printStackTrace ( );
         }
         StreamLED streamLED = new StreamLED ( Port , LED1RadioButton, LED2RadioButton, LED3RadioButton);
-        streamLED.start ( );                                            //程序开始后直接启动流水灯
+        //程序开始后直接启动流水灯
+        streamLED.start ( );
         
         boolean[] IsRun = { true };
         
@@ -93,8 +93,8 @@ public class UI {
                 }
             }
         } );
-    
-        TimeSetButton.addActionListener ( new ActionListener ( ) {                  //流水灯的延时控制
+        //流水灯的延时控制
+        TimeSetButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
                 try{
@@ -112,8 +112,8 @@ public class UI {
                 }
             }
         } );
-
-        LEDStringButton.addActionListener ( new ActionListener ( ) {                //流水灯控制
+        //流水灯控制
+        LEDStringButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
                 if ( IsRun[ 0 ] ){
@@ -121,16 +121,19 @@ public class UI {
                 }
             }
         } );
-        
-        SingleLightControlButton.addActionListener ( new ActionListener ( ) {       //单灯控制
+        //单灯控制
+        SingleLightControlButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
                 Sp.close ();
                 Button1.setEnabled ( !Button1.isEnabled () );
                 Button2.setEnabled ( !Button2.isEnabled () );
                 Button3.setEnabled ( !Button3.isEnabled () );
+                LEDStringButton.setEnabled( !LEDStringButton.isEnabled() );
+                TimeSetButton.setEnabled( !TimeSetButton.isEnabled() );
             }
         } );
+        //单灯控制开关
         Button1.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
@@ -178,8 +181,8 @@ public class UI {
             }
         } );
     }
-
-    private boolean isDigit ( String x ) {                      //判断是否为数字
+    //判断是否为数字
+    private boolean isDigit ( String x ) {
         String reg = "^[0-9]+(.[0-9]+)?$";
         return x.matches ( reg );
     }
@@ -189,14 +192,14 @@ public class UI {
     private JRadioButton LED2RadioButton;
     private JRadioButton LED3RadioButton;
     private static JButton LEDStringButton;
-    private JButton SingleLightControlButton;
-    private JButton TimeSetButton;
-    private JButton mainButton;
+    private static JButton SingleLightControlButton;
+    private static JButton TimeSetButton;
+    private static JButton mainButton;
     private JLabel TimeLabel;
     private JLabel Label1;
-    private JButton Button1;
-    private JButton Button2;
-    private JButton Button3;
+    private static JButton Button1;
+    private static JButton Button2;
+    private static JButton Button3;
     private JLabel labell;
     
     public static void main ( String[] args ) {
@@ -217,4 +220,17 @@ public class UI {
     public static JButton getLEDStringButton() {
         return LEDStringButton;
     }
+
+    public static JButton getMainButton() {
+        return mainButton;
+    }
+
+    public static JButton getSingleLightControlButton() {
+        return SingleLightControlButton;
+    }
+
+    public static JButton getTimeSetButton() {
+        return TimeSetButton;
+    }
+
 }
