@@ -36,7 +36,7 @@ import java.awt.event.ActionListener;
  */
 
 public class UI {
-    
+
     public UI ( ) {
         //获取串口列表Port
         Object[] options = ComPortScanUtil.getComPorts ( );// ComPortScanUtil.getComPorts () 获取一个串口列表
@@ -188,7 +188,7 @@ public class UI {
     private JRadioButton LED1RadioButton;
     private JRadioButton LED2RadioButton;
     private JRadioButton LED3RadioButton;
-    private JButton LEDStringButton;
+    private static JButton LEDStringButton;
     private JButton SingleLightControlButton;
     private JButton TimeSetButton;
     private JButton mainButton;
@@ -206,5 +206,15 @@ public class UI {
         frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         frame.pack ( );
         frame.setVisible ( true );
+        //
+        BackGround b = new BackGround();
+        b.setBg();
+        //
+        Button LEDString = new Button(getLEDStringButton(),"image/exit.png");
+        LEDString.setPicture();
+    }
+
+    public static JButton getLEDStringButton() {
+        return LEDStringButton;
     }
 }
