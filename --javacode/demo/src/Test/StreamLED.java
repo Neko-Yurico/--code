@@ -43,29 +43,41 @@ public class StreamLED extends Thread{
                     bytes[ 0 ] = 0x31;
                     sp.ControlLed ( bytes );
                     LED3change ();
+                    Icon LED3Radio = new ImageIcon("image\\LED-Blue.png");
+                    LED3RadioButton.setIcon(LED3Radio);
                     Thread.sleep ( 500 );
                     bytes[ 0 ] = 0x30;
                     sp.ControlLed ( bytes );
+                    LED3Radio = new ImageIcon("image\\LED-Off.png");
+                    LED3RadioButton.setIcon(LED3Radio);
                     LED3change ();
                     Thread.sleep ( 500 );
                     if ( sp.isStream ) {
                         bytes[ 0 ] = 0x21;
                         sp.ControlLed ( bytes );
                         LED2change ();
+                        Icon LED2Radio = new ImageIcon("image\\LED-Green.png");
+                        LED2RadioButton.setIcon(LED2Radio);
                         Thread.sleep ( 500 );
                         bytes[ 0 ] = 0x20;
                         sp.ControlLed ( bytes );
                         LED2change ();
+                        LED2Radio = new ImageIcon("image\\LED-Off.png");
+                        LED2RadioButton.setIcon(LED2Radio);
                         Thread.sleep ( 500 );
                     }
                     if ( sp.isStream ) {
                         bytes[ 0 ] = 0x11;
                         sp.ControlLed ( bytes );
                         LED1change ();
+                        Icon LED1Radio = new ImageIcon("image\\LED-Red.png");
+                        LED1RadioButton.setIcon(LED1Radio);
                         Thread.sleep ( 500 );
                         bytes[ 0 ] = 0x10;
                         sp.ControlLed ( bytes );
                         LED1change ();
+                        LED1Radio = new ImageIcon("image\\LED-Off.png");
+                        LED1RadioButton.setIcon(LED1Radio);
                         Thread.sleep ( 500 );
                     }
                 }

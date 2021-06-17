@@ -20,7 +20,7 @@
           </grid>
         </constraints>
         <properties>
-          <enabled value="false"/>
+          <enabled value="true"/>
           <font name="Gadugi" size="14" style="0"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="11"/>
@@ -35,7 +35,7 @@
           </grid>
         </constraints>
         <properties>
-          <enabled value="false"/>
+          <enabled value="true"/>
           <font name="Gadugi" size="14" style="0"/>
           <horizontalAlignment value="0"/>
           <text value="LED2(绿灯)"/>
@@ -48,7 +48,7 @@
           </grid>
         </constraints>
         <properties>
-          <enabled value="false"/>
+          <enabled value="true"/>
           <font name="Gadugi" size="14" style="0"/>
           <horizontalAlignment value="0"/>
           <text value="LED3(蓝灯)"/>
