@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with BOM">
+    <file url="file://$PROJECT_DIR$/src/Test/BackGround.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Test/Button.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Test/MyDateThread.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Test/MyPortThread.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Test/Sp.java" charset="UTF-8" />

@@ -8,6 +8,8 @@
     <properties>
       <enabled value="true"/>
       <font name="Microsoft YaHei UI" size="18" style="0"/>
+      <inheritsPopupMenu value="false"/>
+      <opaque value="true"/>
     </properties>
     <border type="none"/>
     <children>
@@ -84,6 +86,7 @@
           </grid>
         </constraints>
         <properties>
+          <autoscrolls value="false"/>
           <font name="Gadugi" size="14" style="0"/>
           <text value="退出/暂停"/>
         </properties>
