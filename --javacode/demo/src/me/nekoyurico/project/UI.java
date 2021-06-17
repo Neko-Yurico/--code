@@ -37,6 +37,11 @@ import java.awt.event.ActionListener;
 public class UI {
 
     public UI ( ) {
+        Icon LEDRadio = new ImageIcon("image\\LED-Off.png");
+        LED1RadioButton.setIcon(LEDRadio);
+        LED2RadioButton.setIcon(LEDRadio);
+        LED2RadioButton.setIcon(LEDRadio);
+        
         //获取串口列表Port
         Object[] options = ComPortScanUtil.getComPorts ( );// ComPortScanUtil.getComPorts () 获取一个串口列表
         String Port = ( String ) JOptionPane.showInputDialog ( null , "请选择输出串口:\n" , "ComC" , JOptionPane.PLAIN_MESSAGE , new ImageIcon ( ) , options , "xx" );
@@ -141,6 +146,10 @@ public class UI {
                 if ( flag == true ){
                     byte[] bytes = {0x10};
                     Sp.ControlLed ( bytes );
+                    //
+                    Icon LED1Radio = new ImageIcon("image\\LED-Red.png");
+                    LED1RadioButton.setIcon(LED1Radio);
+                    
                     LED1RadioButton.setSelected ( !LED1RadioButton.isSelected () );
                 }else {
                     byte[] bytes = {0x11};
@@ -191,15 +200,15 @@ public class UI {
     private JRadioButton LED1RadioButton;
     private JRadioButton LED2RadioButton;
     private JRadioButton LED3RadioButton;
-    private static JButton LEDStringButton;
-    private static JButton SingleLightControlButton;
-    private static JButton TimeSetButton;
-    private static JButton mainButton;
+    private JButton LEDStringButton;
+    private JButton SingleLightControlButton;
+    private JButton TimeSetButton;
+    private JButton mainButton;
     private JLabel TimeLabel;
     private JLabel Label1;
-    private static JButton Button1;
-    private static JButton Button2;
-    private static JButton Button3;
+    private JButton Button1;
+    private JButton Button2;
+    private JButton Button3;
     private JLabel labell;
     
     public static void main ( String[] args ) {
@@ -209,28 +218,5 @@ public class UI {
         frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         frame.pack ( );
         frame.setVisible ( true );
-        //
-        BackGround b = new BackGround();
-        b.setBg();
-        //
-        Button LEDString = new Button(getLEDStringButton(),"image/exit.png");
-        LEDString.setPicture();
     }
-
-    public static JButton getLEDStringButton() {
-        return LEDStringButton;
-    }
-
-    public static JButton getMainButton() {
-        return mainButton;
-    }
-
-    public static JButton getSingleLightControlButton() {
-        return SingleLightControlButton;
-    }
-
-    public static JButton getTimeSetButton() {
-        return TimeSetButton;
-    }
-
 }

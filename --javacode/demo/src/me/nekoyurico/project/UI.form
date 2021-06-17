@@ -88,6 +88,7 @@
         <properties>
           <autoscrolls value="false"/>
           <font name="Gadugi" size="14" style="0"/>
+          <hideActionText value="true"/>
           <text value="退出/暂停"/>
         </properties>
       </component>
