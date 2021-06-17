@@ -75,8 +75,8 @@
         </constraints>
         <properties>
           <font name="Gadugi" size="14" style="0"/>
-          <horizontalTextPosition value="0"/>
-          <text value="流水灯"/>
+          <horizontalTextPosition value="11"/>
+          <text value="流水灯~"/>
         </properties>
       </component>
       <component id="cc3c3" class="javax.swing.JButton" binding="mainButton">

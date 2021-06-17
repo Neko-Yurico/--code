@@ -41,13 +41,21 @@ public class UI {
         LED1RadioButton.setIcon(LEDRadio);
         LED2RadioButton.setIcon(LEDRadio);
         LED3RadioButton.setIcon(LEDRadio);
-        ImageIcon button = new ImageIcon("image\\Button.png");
-        Button1.setIcon(button);
-        Button2.setIcon(button);
-        Button3.setIcon(button);
+        Icon button = new ImageIcon("image\\Button.png");
         LEDStringButton.setIcon(button);
         Icon main = new ImageIcon("image\\Power.png");
         mainButton.setIcon(main);
+        Icon light1 = new ImageIcon("image\\light3.png");
+        Icon light2 = new ImageIcon("image\\light1.png");
+        Icon light3 = new ImageIcon("image\\light2.png");
+        Button1.setIcon(light1);
+        Button2.setIcon(light2);
+        Button3.setIcon(light3);
+        Icon light = new ImageIcon("image\\light.png");
+        SingleLightControlButton.setIcon(light);
+        Icon Time = new ImageIcon("image\\clock in.png");
+        TimeSetButton.setIcon(Time);
+
 
 
         //获取串口列表Port
