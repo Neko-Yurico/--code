@@ -2,6 +2,7 @@ package me.nekoyurico.project;
 
 import Test.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,50 +36,43 @@ import java.awt.event.ActionListener;
  */
 
 public class UI {
+    private JPanel panel1;
+    private JRadioButton LED1RadioButton;
+    private JRadioButton LED2RadioButton;
+    private JRadioButton LED3RadioButton;
+    private JButton LEDStringButton;
+    private JButton SingleLightControlButton;
+    private JButton TimeSetButton;
+    private JButton mainButton;
+    private JLabel TimeLabel;
+    private JLabel Label1;
+    private JButton Button1;
+    private JButton Button2;
+    private JButton Button3;
+    private JLabel labell;
 
     public UI ( ) {
-        Icon LEDRadio = new ImageIcon("image\\LED-Off.png");
-        LED1RadioButton.setIcon(LEDRadio);
-        LED2RadioButton.setIcon(LEDRadio);
-        LED3RadioButton.setIcon(LEDRadio);
-        Icon button = new ImageIcon("image\\Button.png");
-        LEDStringButton.setIcon(button);
-        Icon main = new ImageIcon("image\\Power.png");
-        mainButton.setIcon(main);
-        Icon light1 = new ImageIcon("image\\light3.png");
-        Icon light2 = new ImageIcon("image\\light1.png");
-        Icon light3 = new ImageIcon("image\\light2.png");
-        Button1.setIcon(light1);
-        Button2.setIcon(light2);
-        Button3.setIcon(light3);
-        Icon light = new ImageIcon("image\\light.png");
-        SingleLightControlButton.setIcon(light);
-        Icon Time = new ImageIcon("image\\clock in.png");
-        TimeSetButton.setIcon(Time);
-
-
-
+        //添加图标
+        setPicture();
         //获取串口列表Port
         Object[] options = ComPortScanUtil.getComPorts ( );// ComPortScanUtil.getComPorts () 获取一个串口列表
         String Port = ( String ) JOptionPane.showInputDialog ( null , "请选择输出串口:\n" , "ComC" , JOptionPane.PLAIN_MESSAGE , new ImageIcon ( ) , options , "xx" );
         Port.trim ( );
+        Exp exp = new Exp();
+        exp.start();
         MyPortThread threadPort = new MyPortThread ( );
-        //测试串口
-//        Port="COM3";
         threadPort.test ( Port );
         //时钟线程
         MyDateThread thread1 = new MyDateThread ( "timer" ,TimeLabel);
         thread1.start ( );
-
-        
         try {
             Thread.sleep ( 1000 );
         }
         catch ( InterruptedException e ) {
             e.printStackTrace ( );
         }
-        StreamLED streamLED = new StreamLED ( Port , LED1RadioButton, LED2RadioButton, LED3RadioButton);
         //程序开始后直接启动流水灯
+        StreamLED streamLED = new StreamLED ( Port , LED1RadioButton, LED2RadioButton, LED3RadioButton);
         streamLED.start ( );
         
         boolean[] IsRun = { true };
@@ -224,28 +218,77 @@ public class UI {
         String reg = "^[0-9]+(.[0-9]+)?$";
         return x.matches ( reg );
     }
+    //给按钮添加图标
+    private void setPicture(){
+        Icon LEDRadio = new ImageIcon("image\\LED-Off.png");
+        LED1RadioButton.setIcon(LEDRadio);
+        LED2RadioButton.setIcon(LEDRadio);
+        LED3RadioButton.setIcon(LEDRadio);
+        Icon button = new ImageIcon("image\\Button.png");
+        LEDStringButton.setIcon(button);
+        Icon main = new ImageIcon("image\\Power.png");
+        mainButton.setIcon(main);
+        Icon light1 = new ImageIcon("image\\light3.png");
+        Icon light2 = new ImageIcon("image\\light1.png");
+        Icon light3 = new ImageIcon("image\\light2.png");
+        Button1.setIcon(light1);
+        Button2.setIcon(light2);
+        Button3.setIcon(light3);
+        Icon light = new ImageIcon("image\\light.png");
+        SingleLightControlButton.setIcon(light);
+        Icon Time = new ImageIcon("image\\clock in.png");
+        TimeSetButton.setIcon(Time);
+        //
+//        ImageIcon background = new ImageIcon("image\\Background.png");
+//        JLabel labelGround = new JLabel(background);
+//        labelGround.setBounds(0,0,background.getIconWidth(),background.getIconHeight());
 
-    private JPanel panel1;
-    private JRadioButton LED1RadioButton;
-    private JRadioButton LED2RadioButton;
-    private JRadioButton LED3RadioButton;
-    private JButton LEDStringButton;
-    private JButton SingleLightControlButton;
-    private JButton TimeSetButton;
-    private JButton mainButton;
-    private JLabel TimeLabel;
-    private JLabel Label1;
-    private JButton Button1;
-    private JButton Button2;
-    private JButton Button3;
-    private JLabel labell;
-    
+
+//        Image image1 = new ImageIcon("image\\BackGround.jpg").getImage();
+//        panel1.getGraphics().drawImage(image1, 0, 0, panel1.getWidth(), panel1.getHeight(), panel1);
+//        ImagePanel imagePanel=new ImagePanel(image1);
+//        imagePanel.paintComponent(panel1.getGraphics());
+
+    }
     public static void main ( String[] args ) {
         JFrame frame = new JFrame ( "UI" );
         frame.setBounds ( 500 , 200 , 0 , 0 );
         frame.setContentPane ( new UI ( ).panel1 );
+        //
+        JPanel imagePanel ;
+        ImageIcon background;
+        background = new ImageIcon("image\\Background.jpg");
+        JLabel label = new JLabel(background);//把背景图片显示在一个标签里面
+        //     把标签的大小位置设置为图片刚好填充整个面板
+        label.setBounds(0,0,background.getIconWidth(),background.getIconHeight());
+        //     把内容窗格转化为JPanel，否则不能用方法setOpaque()来使内容窗格透明
+        imagePanel = (JPanel)frame.getContentPane();
+        imagePanel.setOpaque(false);
+
+        frame.getLayeredPane().setLayout(null);
+        //     把背景图片添加到分层窗格的最底层作为背景
+        frame.getLayeredPane().add(label,new Integer(Integer.MIN_VALUE));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(background.getIconWidth(),background.getIconHeight());
+        frame.setVisible(true);
         frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         frame.pack ( );
         frame.setVisible ( true );
     }
 }
+//class Background extends JPanel{
+//    private Image image = (Image) new ImageIcon("image\\BackGround.jpg").getImage();
+//    protected void paintComponent(Graphics g) {
+//        g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+//    }
+//class ImagePanel extends JComponent {
+//    private Image image;
+//    public ImagePanel(Image image) {
+//        this.image = image;
+//    }
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        g.drawImage(image, 0, 0, this);
+//    }
+//}
