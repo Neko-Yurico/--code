@@ -25,7 +25,7 @@
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="11"/>
           <selected value="false"/>
-          <text value="LED1(红灯)"/>
+          <text value="LED1"/>
         </properties>
       </component>
       <component id="dd3bb" class="javax.swing.JRadioButton" binding="LED2RadioButton" default-binding="true">
@@ -38,7 +38,7 @@
           <enabled value="true"/>
           <font name="Gadugi" size="14" style="0"/>
           <horizontalAlignment value="0"/>
-          <text value="LED2(绿灯)"/>
+          <text value="LED2"/>
         </properties>
       </component>
       <component id="7eda3" class="javax.swing.JRadioButton" binding="LED3RadioButton" default-binding="true">
@@ -51,7 +51,7 @@
           <enabled value="true"/>
           <font name="Gadugi" size="14" style="0"/>
           <horizontalAlignment value="0"/>
-          <text value="LED3(蓝灯)"/>
+          <text value="LED3"/>
         </properties>
       </component>
       <component id="4c94d" class="javax.swing.JLabel" binding="TimeLabel">
