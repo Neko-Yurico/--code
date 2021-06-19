@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * @author Neko_Yurico,BOW
@@ -94,16 +95,23 @@ public class UI {
                         }
                         System.exit ( 0 );
                     } else {
-                        thread1.close ( );
-                        Sp.close ( );
-                        mainButton.setText ( "重新启动" );
-                        TimeLabel.setText ( "已暂停" );
-                        IsRun[ 0 ] = false;
+                        String Port = Arrays.toString(ComPortScanUtil.getComPorts());
+                        if(Port=="[]"){
+                            setUnable();
+                        }else{
+//                            thread1.close ( );
+                            Sp.close ( );
+                            mainButton.setText ( "重新启动" );
+//                            TimeLabel.setText ( "已暂停" );
+                            labell.setText("已暂停");
+                            IsRun[ 0 ] = false;
+                        }
                     }
                 } else {
-                    thread1.open ( );
+//                    thread1.open ( );
                     Sp.open ( );
                     mainButton.setText ( "退出/暂停" );
+                    Label1.setText("当前没有定时任务");
                     IsRun[ 0 ] = true;
                 }
             }
@@ -112,18 +120,23 @@ public class UI {
         TimeSetButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                try{
-                    String str = JOptionPane.showInputDialog(null,"需要在多少秒后启动/关闭？","定时器",JOptionPane.PLAIN_MESSAGE);
-                    boolean is = isDigit ( str );//判断输入的是否是数字
-                    if(is){
-                        setTime setTime = new setTime(str,Label1);
-                        setTime.start ();
-                    }else {
-                        JOptionPane.showMessageDialog ( null, "输入有误", "提示", JOptionPane.YES_NO_OPTION);
+                String Port = Arrays.toString(ComPortScanUtil.getComPorts());
+                if(Port=="[]"){
+                    setUnable();
+                }else{
+                    try{
+                        String str = JOptionPane.showInputDialog(null,"需要在多少秒后启动/关闭？","定时器",JOptionPane.PLAIN_MESSAGE);
+                        boolean is = isDigit ( str );//判断输入的是否是数字
+                        if(is){
+                            setTime setTime = new setTime(str,Label1);
+                            setTime.start ();
+                        }else {
+                            JOptionPane.showMessageDialog ( null, "输入有误", "提示", JOptionPane.YES_NO_OPTION);
+                        }
                     }
-                }
-                catch ( Exception exception ) {
-                    exception.printStackTrace ( );
+                    catch ( Exception exception ) {
+                        exception.printStackTrace ( );
+                    }
                 }
             }
         } );
@@ -131,8 +144,13 @@ public class UI {
         LEDStringButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                if ( IsRun[ 0 ] ){
-                    Sp.change ( );
+                String Port = Arrays.toString(ComPortScanUtil.getComPorts());
+                if(Port=="[]"){
+                    setUnable();
+                }else{
+                    if ( IsRun[ 0 ] ){
+                        Sp.change ( );
+                    }
                 }
             }
         } );
@@ -140,75 +158,94 @@ public class UI {
         SingleLightControlButton.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                Sp.close ();
-                Button1.setEnabled ( !Button1.isEnabled () );
-                Button2.setEnabled ( !Button2.isEnabled () );
-                Button3.setEnabled ( !Button3.isEnabled () );
-                LEDStringButton.setEnabled( !LEDStringButton.isEnabled() );
-                TimeSetButton.setEnabled( !TimeSetButton.isEnabled() );
+                String Port = Arrays.toString(ComPortScanUtil.getComPorts());
+                if(Port=="[]"){
+                    setUnable();
+                }else{
+                    Sp.close ();
+                    Button1.setEnabled ( !Button1.isEnabled () );
+                    Button2.setEnabled ( !Button2.isEnabled () );
+                    Button3.setEnabled ( !Button3.isEnabled () );
+                    LEDStringButton.setEnabled( !LEDStringButton.isEnabled() );
+                    TimeSetButton.setEnabled( !TimeSetButton.isEnabled() );
+                }
             }
         } );
         //单灯控制开关
         Button1.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                boolean flag = LED1RadioButton.isSelected ( );
-                if ( flag == true ){
-                    byte[] bytes = {0x10};
-                    Sp.ControlLed ( bytes );
-                    //
-                    Icon LED1Radio = new ImageIcon("image\\LED-Off.png");
-                    LED1RadioButton.setIcon(LED1Radio);
-                    LED1RadioButton.setSelected ( !LED1RadioButton.isSelected () );
-                }else {
-                    byte[] bytes = {0x11};
-                    Sp.ControlLed ( bytes );
-                    //
-                    Icon LED1Radio = new ImageIcon("image\\LED-Red.png");
-                    LED1RadioButton.setIcon(LED1Radio);
-                    LED1RadioButton.setSelected ( !LED1RadioButton.isSelected () );
+                String Port = Arrays.toString(ComPortScanUtil.getComPorts());
+                if(Port=="[]"){
+                    setUnable();
+                }else{
+                    boolean flag = LED1RadioButton.isSelected ( );
+                    if ( flag == true ){
+                        byte[] bytes = {0x10};
+                        Sp.ControlLed ( bytes );
+                        //
+                        Icon LED1Radio = new ImageIcon("image\\LED-Off.png");
+                        LED1RadioButton.setIcon(LED1Radio);
+                        LED1RadioButton.setSelected ( !LED1RadioButton.isSelected () );
+                    }else {
+                        byte[] bytes = {0x11};
+                        Sp.ControlLed ( bytes );
+                        //
+                        Icon LED1Radio = new ImageIcon("image\\LED-Red.png");
+                        LED1RadioButton.setIcon(LED1Radio);
+                        LED1RadioButton.setSelected ( !LED1RadioButton.isSelected () );
+                    }
                 }
             }
         } );
         Button2.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                boolean flag = LED2RadioButton.isSelected ( );
-                if ( flag == true ){
-                    byte[] bytes = {0x20};
-                    Sp.ControlLed ( bytes );
-                    //
-                    Icon LED2Radio = new ImageIcon("image\\LED-Off.png");
-                    LED2RadioButton.setIcon(LED2Radio);
-                    LED2RadioButton.setSelected ( !LED2RadioButton.isSelected () );
-                }else {
-                    byte[] bytes = {0x21};
-                    Sp.ControlLed ( bytes );
-                    //
-                    Icon LED2Radio = new ImageIcon("image\\LED-Green.png");
-                    LED2RadioButton.setIcon(LED2Radio);
-                    LED2RadioButton.setSelected ( !LED2RadioButton.isSelected () );
+                String Port = Arrays.toString(ComPortScanUtil.getComPorts());
+                if(Port=="[]"){
+                    setUnable();
+                }else{
+                    boolean flag = LED2RadioButton.isSelected ( );
+                    if ( flag == true ){
+                        byte[] bytes = {0x20};
+                        Sp.ControlLed ( bytes );
+                        //
+                        Icon LED2Radio = new ImageIcon("image\\LED-Off.png");
+                        LED2RadioButton.setIcon(LED2Radio);
+                        LED2RadioButton.setSelected ( !LED2RadioButton.isSelected () );
+                    }else {
+                        byte[] bytes = {0x21};
+                        Sp.ControlLed ( bytes );
+                        //
+                        Icon LED2Radio = new ImageIcon("image\\LED-Green.png");
+                        LED2RadioButton.setIcon(LED2Radio);
+                        LED2RadioButton.setSelected ( !LED2RadioButton.isSelected () );
+                    }
                 }
-
             }
         } );
         Button3.addActionListener ( new ActionListener ( ) {
             @Override
             public void actionPerformed ( ActionEvent e ) {
-                boolean flag = LED3RadioButton.isSelected ( );
-                if ( flag == true ){
-                    byte[] bytes = {0x30};
-                    Sp.ControlLed ( bytes );
-                    Icon LED3Radio = new ImageIcon("image\\LED-Off.png");
-                    LED3RadioButton.setIcon(LED3Radio);
-                    LED3RadioButton.setSelected ( !LED3RadioButton.isSelected () );
-                }else {
-                    byte[] bytes = {0x31};
-                    Sp.ControlLed ( bytes );
-                    //
-                    Icon LED3Radio = new ImageIcon("image\\LED-Blue.png");
-                    LED3RadioButton.setIcon(LED3Radio);
-                    LED3RadioButton.setSelected ( !LED3RadioButton.isSelected () );
+                String Port = Arrays.toString(ComPortScanUtil.getComPorts());
+                if(Port=="[]"){
+                    setUnable();
+                }else{
+                    boolean flag = LED3RadioButton.isSelected ( );
+                    if ( flag == true ){
+                        byte[] bytes = {0x30};
+                        Sp.ControlLed ( bytes );
+                        Icon LED3Radio = new ImageIcon("image\\LED-Off.png");
+                        LED3RadioButton.setIcon(LED3Radio);
+                        LED3RadioButton.setSelected ( !LED3RadioButton.isSelected () );
+                    }else {
+                        byte[] bytes = {0x31};
+                        Sp.ControlLed ( bytes );
+                        //
+                        Icon LED3Radio = new ImageIcon("image\\LED-Blue.png");
+                        LED3RadioButton.setIcon(LED3Radio);
+                        LED3RadioButton.setSelected ( !LED3RadioButton.isSelected () );
+                    }
                 }
             }
         } );
@@ -239,6 +276,17 @@ public class UI {
         Icon Time = new ImageIcon("image\\clock in.png");
         TimeSetButton.setIcon(Time);
     }
+    //使按钮失效
+    private void setUnable(){
+        Button1.setEnabled (false);
+        Button2.setEnabled (false);
+        Button3.setEnabled (false);
+        LEDStringButton.setEnabled(false);
+        TimeSetButton.setEnabled(false);
+        SingleLightControlButton.setEnabled(false);
+        JOptionPane.showMessageDialog(null , "已与设备断开连接！" , "提示" , JOptionPane.YES_OPTION  );
+    }
+    //
     public static void main ( String[] args ) {
         JFrame frame = new JFrame ( "UI" );
         frame.setBounds ( 500 , 200 , 0 , 0 );
