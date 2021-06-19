@@ -243,7 +243,7 @@ public class UI {
         JFrame frame = new JFrame ( "UI" );
         frame.setBounds ( 500 , 200 , 0 , 0 );
         frame.setContentPane ( new UI ( ).panel1 );
-        //
+         //
         JPanel imagePanel ;
         ImageIcon background;
         background = new ImageIcon("image\\Background.jpg");
