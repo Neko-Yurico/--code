@@ -58,7 +58,7 @@ public class UI {
         Object[] options = ComPortScanUtil.getComPorts ( );// ComPortScanUtil.getComPorts () 获取一个串口列表
         String Port = ( String ) JOptionPane.showInputDialog ( null , "请选择输出串口:\n" , "ComC" , JOptionPane.PLAIN_MESSAGE , new ImageIcon ( ) , options , "xx" );
         Port.trim ( );
-        Exp exp = new Exp();
+        Exp exp = new Exp(LED1RadioButton,LED2RadioButton,LED3RadioButton);
         exp.start();
         MyPortThread threadPort = new MyPortThread ( );
         threadPort.test ( Port );
@@ -224,8 +224,8 @@ public class UI {
         LED1RadioButton.setIcon(LEDRadio);
         LED2RadioButton.setIcon(LEDRadio);
         LED3RadioButton.setIcon(LEDRadio);
-        Icon button = new ImageIcon("image\\Button.png");
-        LEDStringButton.setIcon(button);
+        Icon LEDButton = new ImageIcon("image\\Button.png");
+        LEDStringButton.setIcon(LEDButton);
         Icon main = new ImageIcon("image\\Power.png");
         mainButton.setIcon(main);
         Icon light1 = new ImageIcon("image\\light3.png");
@@ -238,17 +238,6 @@ public class UI {
         SingleLightControlButton.setIcon(light);
         Icon Time = new ImageIcon("image\\clock in.png");
         TimeSetButton.setIcon(Time);
-        //
-//        ImageIcon background = new ImageIcon("image\\Background.png");
-//        JLabel labelGround = new JLabel(background);
-//        labelGround.setBounds(0,0,background.getIconWidth(),background.getIconHeight());
-
-
-//        Image image1 = new ImageIcon("image\\BackGround.jpg").getImage();
-//        panel1.getGraphics().drawImage(image1, 0, 0, panel1.getWidth(), panel1.getHeight(), panel1);
-//        ImagePanel imagePanel=new ImagePanel(image1);
-//        imagePanel.paintComponent(panel1.getGraphics());
-
     }
     public static void main ( String[] args ) {
         JFrame frame = new JFrame ( "UI" );
@@ -258,37 +247,19 @@ public class UI {
         JPanel imagePanel ;
         ImageIcon background;
         background = new ImageIcon("image\\Background.jpg");
-        JLabel label = new JLabel(background);//把背景图片显示在一个标签里面
-        //     把标签的大小位置设置为图片刚好填充整个面板
+            //把背景图片显示在一个标签里面
+        JLabel label = new JLabel(background);
+            //把标签的大小位置设置为图片刚好填充整个面板
         label.setBounds(0,0,background.getIconWidth(),background.getIconHeight());
-        //     把内容窗格转化为JPanel，否则不能用方法setOpaque()来使内容窗格透明
+            //把内容窗格转化为JPanel，否则不能用方法setOpaque()来使内容窗格透明
         imagePanel = (JPanel)frame.getContentPane();
         imagePanel.setOpaque(false);
-
         frame.getLayeredPane().setLayout(null);
-        //     把背景图片添加到分层窗格的最底层作为背景
+            //把背景图片添加到分层窗格的最底层作为背景
         frame.getLayeredPane().add(label,new Integer(Integer.MIN_VALUE));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(background.getIconWidth(),background.getIconHeight());
-        frame.setVisible(true);
         frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         frame.pack ( );
         frame.setVisible ( true );
     }
 }
-//class Background extends JPanel{
-//    private Image image = (Image) new ImageIcon("image\\BackGround.jpg").getImage();
-//    protected void paintComponent(Graphics g) {
-//        g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-//    }
-//class ImagePanel extends JComponent {
-//    private Image image;
-//    public ImagePanel(Image image) {
-//        this.image = image;
-//    }
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        g.drawImage(image, 0, 0, this);
-//    }
-//}
