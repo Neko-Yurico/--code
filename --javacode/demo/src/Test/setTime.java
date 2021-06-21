@@ -27,7 +27,10 @@ public class setTime extends Thread {
     String string;
     double time;
     boolean isStop = false;
-    
+
+    public setTime(){
+
+    }
     public setTime ( String str , JLabel L ) {
         string = str.trim ( );
         Label1 = L;

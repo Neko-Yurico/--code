@@ -103,7 +103,7 @@ public class UI {
                             Sp.close ( );
                             mainButton.setText ( "重新启动" );
 //                            TimeLabel.setText ( "已暂停" );
-                            labell.setText("已暂停");
+                            Label1.setText("已暂停");
                             IsRun[ 0 ] = false;
                         }
                     }
