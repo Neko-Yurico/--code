@@ -32,16 +32,6 @@ public class setTime extends Thread {
         string = str.trim ( );
         Label1 = L;
     }
-    
-//    public long getTime ( ) {
-//        Scanner scanner = new Scanner ( string );
-//        return scanner.nextLong ( );
-//    }
-//
-//    public boolean getIsStop ( ) {
-//        return isStop;
-//    }
-    
     @Override
     public void run ( ) {
         try {
@@ -53,15 +43,13 @@ public class setTime extends Thread {
                 time--;
                 Label1.setText ( "当前任务剩余时间：" + time + "秒" );
             }
-            boolean stage = Sp.getIsStream();
-            if(stage){
-                Sp.change();
+            boolean stage = Sp.getIsStream ( );
+            if ( stage ) {
                 Label1.setText ( "流水灯已关闭" );
-            }else{
-                Sp.change();
+            } else {
                 Label1.setText ( "流水灯已开启" );
             }
-//            isStop = ! isStop;
+            Sp.change ( );
         }
         catch ( InterruptedException e ) {
             e.printStackTrace ( );
