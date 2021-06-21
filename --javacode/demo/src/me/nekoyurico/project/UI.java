@@ -1,8 +1,8 @@
 package me.nekoyurico.project;
 
 import Test.*;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -99,16 +99,13 @@ public class UI {
                         if(Port=="[]"){
                             setUnable();
                         }else{
-//                            thread1.close ( );
                             Sp.close ( );
                             mainButton.setText ( "重新启动" );
-//                            TimeLabel.setText ( "已暂停" );
-                            Label1.setText("已暂停");
+                            labell.setText("已暂停");
                             IsRun[ 0 ] = false;
                         }
                     }
                 } else {
-//                    thread1.open ( );
                     Sp.open ( );
                     mainButton.setText ( "退出/暂停" );
                     Label1.setText("当前没有定时任务");
@@ -283,8 +280,8 @@ public class UI {
         Button3.setEnabled (false);
         LEDStringButton.setEnabled(false);
         TimeSetButton.setEnabled(false);
-        SingleLightControlButton.setEnabled(false);
-        JOptionPane.showMessageDialog(null , "已与设备断开连接！" , "提示" , JOptionPane.YES_OPTION  );
+        SingleLightControlButton.setEnabled ( false );
+        JOptionPane.showMessageDialog ( null , "已与设备断开连接！" , "提示" , JOptionPane.ERROR_MESSAGE );
     }
     //
     public static void main ( String[] args ) {
