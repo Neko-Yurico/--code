@@ -101,7 +101,7 @@ public class UI {
                         }else{
                             Sp.close ( );
                             mainButton.setText ( "重新启动" );
-                            labell.setText("已暂停");
+                            Label1.setText("已暂停");
                             IsRun[ 0 ] = false;
                         }
                     }
