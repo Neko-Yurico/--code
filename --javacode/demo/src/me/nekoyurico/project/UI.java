@@ -283,7 +283,7 @@ public class UI {
         SingleLightControlButton.setEnabled ( false );
         JOptionPane.showMessageDialog ( null , "已与设备断开连接！" , "提示" , JOptionPane.ERROR_MESSAGE );
     }
-    //
+    //main方法
     public static void main ( String[] args ) {
         JFrame frame = new JFrame ( "UI" );
         frame.setBounds ( 500 , 200 , 0 , 0 );
