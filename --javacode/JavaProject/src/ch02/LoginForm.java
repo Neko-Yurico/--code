@@ -2,6 +2,8 @@ package ch02;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 
 /**
@@ -30,8 +32,8 @@ public class LoginForm {
 }
 
 class Login extends JFrame {
-    public Login ( String string ) {
-        super ( string );
+    public Login ( String str ) {
+        super ( str );
         JTextField usernameField;
         JPasswordField passwordField;
         JLabel label1, label2;
@@ -59,20 +61,23 @@ class Login extends JFrame {
         okButton.setBounds ( 150 , 20 , 320 , 20 );
         okButton.setFont ( s32 );
         
-        okButton.addActionListener ( actionEvent -> {
-            String c = String.valueOf ( passwordField.getPassword ( ) );
-            String n = usernameField.getText ( );
-            if ( Objects.equals ( c , n ) && ! Objects.equals ( c , "" ) ) {
-                JOptionPane.showMessageDialog ( null , "欢迎用户" + n , "登录成功" , JOptionPane.PLAIN_MESSAGE );
-                JOptionPane.showMessageDialog ( null , "用户" + n + "的密码为" + c , "登录成功" , JOptionPane.PLAIN_MESSAGE );
-                JOptionPane.showMessageDialog ( null , "flag{Thl3_1s_@_fIa9}" , "Flag" , JOptionPane.PLAIN_MESSAGE );
-            } else if ( Objects.equals ( c , "" ) || Objects.equals ( n , "" ) ) {
-                JOptionPane.showMessageDialog ( null , "用户名或密码未输入" , "登录失败" , JOptionPane.ERROR_MESSAGE );
-            } else {
-                JOptionPane.showMessageDialog ( null , "用户名与密码不匹配" , "登录失败" , JOptionPane.ERROR_MESSAGE );
+        okButton.addActionListener ( new ActionListener ( ) {
+            @Override
+            public void actionPerformed ( ActionEvent actionEvent ) {
+                String c = String.valueOf ( passwordField.getPassword ( ) );
+                String n = usernameField.getText ( );
+                if ( Objects.equals ( c , n ) && ! Objects.equals ( c , "" ) ) {
+                    JOptionPane.showMessageDialog ( null , "欢迎用户" + n , "登录成功" , JOptionPane.PLAIN_MESSAGE );
+                    JOptionPane.showMessageDialog ( null , "用户" + n + "的密码为" + c , "登录成功" , JOptionPane.PLAIN_MESSAGE );
+                    JOptionPane.showMessageDialog ( null , "flag{Thl3_1s_@_fIa9}" , "Flag" , JOptionPane.PLAIN_MESSAGE );
+                } else if ( Objects.equals ( c , "" ) || Objects.equals ( n , "" ) ) {
+                    JOptionPane.showMessageDialog ( null , "用户名或密码未输入" , "登录失败" , JOptionPane.ERROR_MESSAGE );
+                } else {
+                    JOptionPane.showMessageDialog ( null , "用户名与密码不匹配" , "登录失败" , JOptionPane.ERROR_MESSAGE );
+                }
+                usernameField.setText ( "" );
+                passwordField.setText ( "" );
             }
-            usernameField.setText ( "" );
-            passwordField.setText ( "" );
         } );
         
         add ( label1 );

@@ -1,0 +1,143 @@
+C51 COMPILER V9.54   1602                                                                  07/03/2021 12:59:52 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE 1602
+OBJECT MODULE PLACED IN .\Objects\1602.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE src\1602.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -1602.lst) TABS(2) OBJECT(.\Objects\1602.obj)
+
+line level    source
+
+   1          /************************************************************************************
+   2           
+   3          程序名称： 1602显示屏驱动程序    
+   4          功能说明:  包括1602初始化,清屏,写字符串等           
+   5          程序版本：1.0 （2014/08）
+   6          
+   7          ************************************************************************************/
+   8           #include "delay.h"
+   9           #include "stc15f2k60s2.h"
+  10           #include <intrins.h>     // 加入此头文件后,可使用_nop_库函数
+  11          
+  12          
+  13           sbit RS=P5^5;
+  14           sbit RW=P5^4;
+  15           sbit EN=P5^3;
+  16           
+  17          
+  18          
+  19           #define RS_CLR RS=0
+  20           #define RS_SET RS=1
+  21          
+  22           #define RW_CLR RW=0
+  23           #define RW_SET RW=1
+  24          
+  25           #define EN_CLR EN=0
+  26           #define EN_SET EN=1
+  27          
+  28           #define dataport P4
+  29          
+  30          
+  31          bit lcd_check_busy(void)  //LCD判忙检查
+  32          {
+  33   1        dataport= 0xFF;
+  34   1        RS_CLR;
+  35   1        RW_SET;
+  36   1        EN_CLR;
+  37   1        _nop_();
+  38   1        EN_SET;
+  39   1        return (bit) (dataport & 0x80); 
+  40   1      }
+  41          
+  42          void lcd_write_com(unsigned char com) //LCD 写指令函数
+  43          {
+  44   1        while(lcd_check_busy());
+  45   1        RS_CLR;
+  46   1        RW_CLR;
+  47   1        EN_SET;
+  48   1        dataport= com;
+  49   1        _nop_();
+  50   1        EN_CLR;
+  51   1      }
+  52          
+  53          void lcd_write_data(unsigned char Data)
+  54          {
+C51 COMPILER V9.54   1602                                                                  07/03/2021 12:59:52 PAGE 2   
+
+  55   1        while(lcd_check_busy());
+  56   1        RS_SET;
+  57   1        RW_CLR;
+  58   1        EN_SET;
+  59   1        dataport= Data;
+  60   1        _nop_();
+  61   1        EN_CLR;
+  62   1      }
+  63          
+  64          void lcd_clear(void)  //清屏函数
+  65          {
+  66   1        lcd_write_com(0x01);
+  67   1        DelayMS(5);
+  68   1      }
+  69          
+  70          void lcd_write_string(unsigned char x,unsigned char y,unsigned char *s) //字符串显示函数
+  71          {
+  72   1        if (y==0)
+  73   1        {
+  74   2          lcd_write_com(0x80 + x);
+  75   2        }
+  76   1          else 
+  77   1          {
+  78   2            lcd_write_com(0xC0 + x);
+  79   2          }
+  80   1         while(*s)
+  81   1        {
+  82   2          lcd_write_data(*s);
+  83   2          s++;
+  84   2        }
+  85   1      }
+  86          
+  87          /*                   //字符显示函数 */
+  88          void lcd_write_char(unsigned char x,unsigned char y, unsigned char Data)
+  89          {
+  90   1        if(y==0)
+  91   1          {
+  92   2            lcd_write_com(0x80 + x);
+  93   2          }
+  94   1          else
+  95   1          {
+  96   2            lcd_write_com(0xC0 + x);
+  97   2          }
+  98   1        lcd_write_data(Data);
+  99   1      }
+ 100          
+ 101          void lcd_init(void)   //LCD初始化
+ 102          {
+ 103   1        lcd_write_com(0x38);
+ 104   1        DelayMS(5);
+ 105   1        lcd_write_com(0x38);
+ 106   1        DelayMS(5);
+ 107   1        lcd_write_com(0x38);
+ 108   1        DelayMS(5);
+ 109   1        lcd_write_com(0x38);
+ 110   1        lcd_write_com(0x08);
+ 111   1        lcd_write_com(0x01);
+ 112   1        lcd_write_com(0x06);
+ 113   1        DelayMS(5);
+ 114   1        lcd_write_com(0x0c);
+ 115   1      }
+
+C51 COMPILER V9.54   1602                                                                  07/03/2021 12:59:52 PAGE 3   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    189    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

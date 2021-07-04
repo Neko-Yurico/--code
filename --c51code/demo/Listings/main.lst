@@ -1,0 +1,281 @@
+C51 COMPILER V9.54   MAIN                                                                  07/03/2021 16:35:42 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE src\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /************************************************************************************
+   2          
+   3          程序名称：1602显示屏测试程序   （晶振频率12MHz） 
+   4          功能说明: 通过1602显示屏显示字符            
+   5          程序版本：1.0 （2015/06）
+   6          
+   7          ************************************************************************************/
+   8          
+   9          
+  10          #include <stdio.h>
+  11          #include "stc15f2k60s2.h"        // 单片机STC15F2K60S2头文件,可以不再加入reg51.h
+  12          #include <intrins.h>                // 加入此头文件后,可使用_nop_库函数
+  13          #include "delay.h"                // 延时函数头文件
+  14          #include "1602.h"                  // 1602显示屏驱动程序头文件
+  15          
+  16          sbit Data = P1 ^7;
+  17          sbit key1 = P2 ^3;
+  18          sbit key2 = P2 ^2;
+  19          sbit key3 = P2 ^1;
+  20          sbit key4 = P2 ^0;
+  21          sbit d1 = P5 ^2;
+  22          sbit d2 = P5 ^1;
+  23          sbit d3 = P5 ^0;
+  24          
+  25          unsigned char rec_dat[16] = "   RH       C   ";
+  26          int limit = 30;
+  27          
+  28          void io_init(void);
+  29          
+  30          void DHT11_receive();
+  31          
+  32          void main(void) {
+  33   1          unsigned char i = 0;
+  34   1          unsigned char flag = 1;
+  35   1          char strTemp[20]; 
+  36   1          io_init();
+  37   1          d3 = 0;
+  38   1          lcd_init();
+  39   1          DelayMS(5);
+  40   1          lcd_clear();
+  41   1          DelayMS(5);
+  42   1          lcd_write_string(0, 0, "hello EIE 194");
+  43   1          DelayMS(1000);
+  44   1          while (1) {
+  45   2              if (key1 == 0) {
+  46   3                  DelayMS(30);
+  47   3                  if (key1 == 0) {
+  48   4                      d1 = 0;
+  49   4                      d2 = 1;
+  50   4                      d3 = 1;
+  51   4                      lcd_clear();
+  52   4                      DelayMS(5);
+  53   4                      lcd_write_string(0, 0, "MOD1         ");
+  54   4                      if (flag == 1) {
+C51 COMPILER V9.54   MAIN                                                                  07/03/2021 16:35:42 PAGE 2   
+
+  55   5                          flag = 0;
+  56   5                      } else {
+  57   5                          flag = 1;
+  58   5                      }
+  59   4                      while (key1 == 0);
+  60   4                      DelayMS(200);
+  61   4                  }
+  62   3              }
+  63   2              if (key2 == 0) {
+  64   3                  DelayMS(30);
+  65   3                  if (key2 == 0) {
+  66   4                      d1 = 1;
+  67   4                      d2 = 0;
+  68   4                      d3 = 1;
+  69   4                      lcd_clear();
+  70   4                      DelayMS(5);
+  71   4                      lcd_write_string(0, 0, "MOD2         ");
+  72   4                      while (key2 == 0);
+  73   4                      DelayMS(200);
+  74   4                      DHT11_receive();
+  75   4                      lcd_clear();
+  76   4                      DelayMS(5);
+  77   4                      lcd_write_string(0, 0, "COMMAND Mod");
+  78   4                      lcd_write_string(0, 1, "Use K4 To UPDATE");
+  79   4                  }
+  80   3              }
+  81   2              if (key3 == 0) {
+  82   3                  DelayMS(30);
+  83   3                  if (key3 == 0) {
+  84   4                      d1 = 1;
+  85   4                      d2 = 1;
+  86   4                      d3 = 0;
+  87   4                      lcd_clear();
+  88   4                      DelayMS(5);
+  89   4                      lcd_write_string(0, 0, "MOD3         ");
+  90   4                      while (key3 == 0);
+  91   4                      DelayMS(200);
+  92   4                      d3 = 1;
+  93   4                      DHT11_receive();
+  94   4                      lcd_clear();
+  95   4                      DelayMS(5);
+  96   4                      lcd_write_string(0, 0, "SET upper limit");
+  97   4                      lcd_write_string(0, 1, "USE K4 to SET");
+  98   4                  }
+  99   3              }
+ 100   2              if (d1 == 0) {
+ 101   3                  DHT11_receive();
+ 102   3                  lcd_clear();
+ 103   3                  DelayMS(5);
+ 104   3                  lcd_write_string(0, 0, "Auto detecting");
+ 105   3                  lcd_write_string(0, 1, rec_dat);
+ 106   3                  DelayMS(200);
+ 107   3              }
+ 108   2              if (d2 == 0) {
+ 109   3                  if (key4 == 0) {
+ 110   4                      DelayMS(30);
+ 111   4                      if (key4 == 0) {
+ 112   5                          DHT11_receive();
+ 113   5                          lcd_clear();
+ 114   5                          DelayMS(5);
+ 115   5                          lcd_write_string(0, 0, "COMMAND Mod");
+ 116   5                          lcd_write_string(0, 1, rec_dat);
+C51 COMPILER V9.54   MAIN                                                                  07/03/2021 16:35:42 PAGE 3   
+
+ 117   5                          while (key4 == 0);
+ 118   5                          DelayMS(100);
+ 119   5                      }
+ 120   4                  }
+ 121   3              }
+ 122   2              if (d1 == 1 && d2 == 1 && d3 == 1) {
+ 123   3                  if (key4 == 0) {
+ 124   4                      DelayMS(30);
+ 125   4                      if (key4 == 0) {
+ 126   5                          while (key4 == 0);
+ 127   5                          DelayMS(100);
+ 128   5                      }
+ 129   4                      while (key4 != 0) {
+ 130   5                          DHT11_receive();
+ 131   5                          lcd_clear();
+ 132   5                          DelayMS(5);
+ 133   5                          lcd_write_string(0, 0, "k1=up k2=down");
+ 134   5                          sprintf(strTemp, "%d", limit); 
+ 135   5                          lcd_write_string(0, 1, "    K4 to exit");
+ 136   5                          lcd_write_string(0, 1, strTemp);
+ 137   5                          if (key1 == 0) {
+ 138   6                              DelayMS(30);
+ 139   6                              if (key1 == 0) {
+ 140   7                                  limit ++;
+ 141   7                                  while (key1 == 0);
+ 142   7                              }
+ 143   6                          }
+ 144   5                          if (key2 == 0) {
+ 145   6                              DelayMS(30);
+ 146   6                              if (key2 == 0) {
+ 147   7                                  limit --;
+ 148   7                                  while (key2 == 0);
+ 149   7                              }
+ 150   6                          }
+ 151   5                      }
+ 152   4                      d3=0;
+ 153   4                      DHT11_receive();
+ 154   4                      lcd_clear();
+ 155   4                      DelayMS(5);
+ 156   4                      lcd_write_string(0, 0, "SET Finish");
+ 157   4                      lcd_write_string(0, 1, "USE K1/K2 to Exit");
+ 158   4                  }
+ 159   3              }
+ 160   2          }
+ 161   1      }
+ 162          
+ 163          
+ 164          //将IO口设定为普通模式
+ 165          void io_init(void) {
+ 166   1      
+ 167   1          P0M0 = 0X00;
+ 168   1          P0M1 = 0X00;
+ 169   1          P1M0 = 0X00;
+ 170   1          P1M1 = 0X00;
+ 171   1          P2M0 = 0X00;
+ 172   1          P2M1 = 0X00;
+ 173   1          //P3M0=0X00;
+ 174   1          //P3M1=0X00;
+ 175   1          P4M0 = 0X00;
+ 176   1          P4M1 = 0X00;
+ 177   1          P5M0 = 0X00;
+ 178   1          P5M1 = 0X00;
+C51 COMPILER V9.54   MAIN                                                                  07/03/2021 16:35:42 PAGE 4   
+
+ 179   1          DelayMS(5);
+ 180   1      }
+ 181          
+ 182          
+ 183          void DHT11_start() {
+ 184   1          Data = 1;
+ 185   1          Delay2US(1);
+ 186   1          Data = 0;
+ 187   1          DelayMS(20);
+ 188   1          Data = 1;
+ 189   1          Delay2US(10);
+ 190   1      }
+ 191          
+ 192          unsigned char DHT11_rec_byte() {
+ 193   1          unsigned char i, dat = 0;
+ 194   1          for (i = 0; i < 8; i ++) {
+ 195   2              dat <<= 1;
+ 196   2              while (Data == 0);
+ 197   2              Delay2US(20);
+ 198   2              if (Data == 1) {
+ 199   3                  dat += 1;
+ 200   3                  while (Data);
+ 201   3              }
+ 202   2          }
+ 203   1          return dat;
+ 204   1      }
+ 205          
+ 206          void DHT11_receive() {
+ 207   1          unsigned char RH, RL, TH, TL, revise;
+ 208   1      
+ 209   1          DHT11_start();
+ 210   1      
+ 211   1          if (Data == 0) {
+ 212   2      
+ 213   2              while (Data == 0);
+ 214   2      
+ 215   2              while (Data == 1);
+ 216   2              RH = DHT11_rec_byte();
+ 217   2              RL = DHT11_rec_byte();
+ 218   2              TH = DHT11_rec_byte();
+ 219   2              TL = DHT11_rec_byte();
+ 220   2              revise = DHT11_rec_byte();
+ 221   2      
+ 222   2              Delay2US(12);
+ 223   2      
+ 224   2              if ((RH + RL + TH + TL) == revise) {
+ 225   3      
+ 226   3                  rec_dat[0] = '0' + (RH / 10);;
+ 227   3                  rec_dat[1] = '0' + (RH % 10);
+ 228   3                  rec_dat[2] =' ';
+ 229   3                  rec_dat[3] = 'R' ;
+ 230   3                  rec_dat[4] = 'H';
+ 231   3                  rec_dat[5]=' ';
+ 232   3                  rec_dat[6]=' ';
+ 233   3                  rec_dat[7]=' ';
+ 234   3                  rec_dat[8]=' ';
+ 235   3                  rec_dat[9] = '0' + (TH / 10);
+ 236   3                  rec_dat[10] = '0' + (TH % 10);
+ 237   3                  rec_dat[11] ='0'+TL;
+ 238   3                  rec_dat[12] = 'C';
+ 239   3                  rec_dat[13] = ' ' ;
+ 240   3                  rec_dat[14]=' ';
+C51 COMPILER V9.54   MAIN                                                                  07/03/2021 16:35:42 PAGE 5   
+
+ 241   3              }
+ 242   2          }
+ 243   1      }
+ 244          
+ 245          
+ 246          
+ 247          
+ 248          
+ 249          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    882    ----
+   CONSTANT SIZE    =    191    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18      29
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
