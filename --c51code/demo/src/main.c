@@ -45,19 +45,19 @@ void main(void) {
     lcd_clear();																	//清屏函数
     DelayMS(5);
     lcd_write_string(0, 0, "hello EIE 194");
-    DelayMS(1000);
-		TMOD = 0x02;
-		TH0 = 0x06;
-		TL0 = 0x06;
+    //DelayMS(1000);
+		TMOD = 0x01;
+		TH0 = 0xD8;
+		TL0 = 0xf0;
 	  EA = 1;
 	  ET0 = 1;
-		i = 0;
 		TR0 = 1;
+	  i = 0;
     while (1) {
-			  //if(TF0){
-					//TF0 = 0;
+			  if(i = 100){
+					i = 0;
 					DHT11_receive();	
-				//}
+				}
         if (key1 == 0) {													//进入模式1
             DelayMS(30);
             if (key1 == 0) {
@@ -149,6 +149,7 @@ void main(void) {
                 lcd_write_string(0, 1, "Use K4 To UPDATE");
 						}*/
 							
+						DelayMS(200);
 				}
 				if (d1 == 1 && d2 == 1 && d3 == 1 && warnFlag == 0) {      //设定温度上限2
 						if (key4 == 0) {
@@ -156,10 +157,10 @@ void main(void) {
 								if (key4 == 0) {
 										while (key4 == 0); 
 										DelayMS(100);
+									  lcd_clear();
 								}
 								while (key4 != 0) {
 										//DHT11_receive();
-										lcd_clear();
 										DelayMS(5);
 										lcd_write_string(0, 0, "k1=up k2=down");
 										sprintf(strTemp, "%d", limit); 
@@ -245,15 +246,11 @@ void main(void) {
 }*/
 }
 
-//void time0_int(void) interrupt 1{
-	//TH0 = 0xD8;
-	//TL0 = 0xf0;
-	//i++;
-	//if(i == 25){
-		//DHT11_receive();	
-		//i = 0;
-	//}
-//}
+void time0_int(void) interrupt 1{
+	TH0 = 0xD8;
+	TL0 = 0xf0;
+	i++;
+}
 
 
 //将IO口设定为普通模式
