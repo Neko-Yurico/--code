@@ -2,6 +2,7 @@
 ".\Objects\1602.obj",
 ".\Objects\delay.obj",
 ".\Objects\main.obj",
-".\Objects\uart.obj" 
+".\Objects\uart.obj",
+".\Objects\timer.obj" 
 TO ".\Objects\demo" 
 PRINT(".\Listings\demo.m51") RAMSIZE(256) 

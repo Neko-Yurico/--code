@@ -141,14 +141,7 @@ void main(void) {
 										while (key4 == 0);
 										DelayMS(100);
 								}
-						}/*else{
-							  DHT11_receive();
-                lcd_clear();
-                DelayMS(5);
-                lcd_write_string(0, 0, "COMMAND Mod");
-                lcd_write_string(0, 1, "Use K4 To UPDATE");
-						}*/
-							
+						}
 						DelayMS(200);
 				}
 				if (d1 == 1 && d2 == 1 && d3 == 1 && warnFlag == 0) {      //设定温度上限2
@@ -218,32 +211,6 @@ void main(void) {
 					}
 				} 
      }
-/*				if(TH >= limit && flag == 1){
-					if (key4 != 0) {
-						DelayMS(30);
-						if (key4 != 0) {
-							warning();
-							DelayMS(200);
-					  }
-					}
-					if (key4 == 0) {	
-						DelayMS(30);
-						if (key4 == 0) {
-							flag=0;
-							d3 = 1;
-							DHT11_receive();
-              lcd_clear();
-              DelayMS(5);
-							lcd_write_string(0, 0, "ALARM turned off");
-							DelayMS(100);
-					  }
-					}
-			  }
-				if(TH<limit){
-					flag = 1;
-				}
-		}
-}*/
 }
 
 void time0_int(void) interrupt 1{
