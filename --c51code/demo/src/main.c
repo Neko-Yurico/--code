@@ -23,18 +23,19 @@ sbit d1 = P5 ^2;
 sbit d2 = P5 ^1;
 sbit d3 = P5 ^0;
 
-int limit = 30;																		//温度上限
-unsigned char rec_dat[14] = "   RH       C ";
+int limit = 35;																		//温度上限
+unsigned char rec_dat[13] = "   RH       C";
 unsigned char RH, RL, TH, TL, revise;
 unsigned char warnFlag = 0;												//是否报警
 unsigned char kickFlag = 0;												//是否取消报警
+char i;
 
 void io_init(void);
 void UartInit(void);
 void DHT11_receive();
 
 void main(void) {
-    unsigned char i = 0;
+    //unsigned char i = 0;
     unsigned char flag = 1;
 		char strTemp[20]; 
     io_init();
@@ -45,8 +46,18 @@ void main(void) {
     DelayMS(5);
     lcd_write_string(0, 0, "hello EIE 194");
     DelayMS(1000);
+		TMOD = 0x02;
+		TH0 = 0x06;
+		TL0 = 0x06;
+	  EA = 1;
+	  ET0 = 1;
+		i = 0;
+		TR0 = 1;
     while (1) {
-			  DHT11_receive();	
+			  //if(TF0){
+					//TF0 = 0;
+					DHT11_receive();	
+				//}
         if (key1 == 0) {													//进入模式1
             DelayMS(30);
             if (key1 == 0) {
@@ -119,13 +130,16 @@ void main(void) {
 					lcd_write_string(0, 1, rec_dat);
 					if (key4 == 0) {
 								DelayMS(30);
-								if (key4 == 0) {
-										lcd_write_string(0, 0, "Has been sent      ");
+								if (key4 == 0) {					
+										lcd_clear();
+										DelayMS(5);
+										lcd_write_string(0, 0, "Has been sent");
+										lcd_write_string(0, 1, rec_dat);
 										UartInit();
 										SendString(rec_dat);
 										DelayMS(1000);
 										while (key4 == 0);
-										//DelayMS(100);
+										DelayMS(100);
 								}
 						}/*else{
 							  DHT11_receive();
@@ -188,15 +202,18 @@ void main(void) {
 					lcd_write_string(0, 1, "KICK K4 TO CLOSE");
 					DelayMS(200);
 					if(key4 == 0){
-						d3 = 1;
-						kickFlag = 1;
-						warnFlag = 0;
-						//DHT11_receive();
-            lcd_clear();
-            DelayMS(5);
-					  lcd_write_string(0, 0, "ALARM turned off");
-						DelayMS(1500);
-						lcd_write_string(0, 0, "hello EIE 194   ");
+						DelayMS(30);
+						if(key4==0){
+							d3 = 1;
+							kickFlag = 1;
+							warnFlag = 0;
+							//DHT11_receive();
+							lcd_clear();
+							DelayMS(5);
+							lcd_write_string(0, 0, "ALARM turned off");
+							DelayMS(1500);
+							lcd_write_string(0, 0, "hello EIE 194   ");
+						}
 					}
 				} 
      }
@@ -227,6 +244,18 @@ void main(void) {
 		}
 }*/
 }
+
+//void time0_int(void) interrupt 1{
+	//TH0 = 0xD8;
+	//TL0 = 0xf0;
+	//i++;
+	//if(i == 25){
+		//DHT11_receive();	
+		//i = 0;
+	//}
+//}
+
+
 //将IO口设定为普通模式
 void io_init(void) {
 
@@ -300,8 +329,8 @@ void DHT11_receive() {                             //获取DHT11上的湿度和温度
             rec_dat[10] = '.';
 						rec_dat[11] ='0'+TL;
 						rec_dat[12] = 'C';
-						//rec_dat[13] = ' ' ;
-						//rec_dat[14]=' ';
+						rec_dat[13] = ' ' ;
+						rec_dat[14]=' ';
         }
     }
 }

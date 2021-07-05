@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  07/05/2021 17:47:42 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -33,315 +33,499 @@ line level    source
   23          sbit d2 = P5 ^1;
   24          sbit d3 = P5 ^0;
   25          
-  26          int limit = 30;                                   //温度上限
-  27          unsigned char rec_dat[14] = "   RH       C ";
+  26          int limit = 35;                                   //温度上限
+  27          unsigned char rec_dat[13] = "   RH       C";
   28          unsigned char RH, RL, TH, TL, revise;
   29          unsigned char warnFlag = 0;                       //是否报警
   30          unsigned char kickFlag = 0;                       //是否取消报警
-  31          
-  32          void io_init(void);
-  33          void UartInit(void);
-  34          void DHT11_receive();
-  35          
-  36          void main(void) {
-  37   1          unsigned char i = 0;
-  38   1          unsigned char flag = 1;
-  39   1          char strTemp[20]; 
-  40   1          io_init();
-  41   1          d3 = 0;
-  42   1          lcd_init();                                   //LCD初始化
-  43   1          DelayMS(5);
-  44   1          lcd_clear();                                  //清屏函数
-  45   1          DelayMS(5);
-  46   1          lcd_write_string(0, 0, "hello EIE 194");
-  47   1          DelayMS(1000);
-  48   1          while (1) {
-  49   2              DHT11_receive();  
-  50   2              if (key1 == 0) {                          //进入模式1
-  51   3                  DelayMS(30);
-  52   3                  if (key1 == 0) {
-  53   4                      d1 = 0;
-  54   4                      d2 = 1;
-C51 COMPILER V9.54   MAIN                                                                  07/05/2021 17:47:42 PAGE 2   
+  31          char i;
+  32          
+  33          void io_init(void);
+  34          void UartInit(void);
+  35          void DHT11_receive();
+  36          
+  37          void main(void) {
+  38   1          //unsigned char i = 0;
+  39   1          unsigned char flag = 1;
+  40   1          char strTemp[20]; 
+  41   1          io_init();
+  42   1          d3 = 0;
+  43   1          lcd_init();                                   //LCD初始化
+  44   1          DelayMS(5);
+  45   1          lcd_clear();                                  //清屏函数
+  46   1          DelayMS(5);
+  47   1          lcd_write_string(0, 0, "hello EIE 194");
+  48   1          DelayMS(1000);
+  49   1          TMOD = 0x02;
+  50   1          TH0 = 0x06;
+  51   1          TL0 = 0x06;
+  52   1          EA = 1;
+  53   1          ET0 = 1;
+  54   1          i = 0;
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 2   
 
-  55   4                      d3 = 1;
-  56   4                      lcd_clear();
-  57   4                      DelayMS(5);
-  58   4                      lcd_write_string(0, 0, "MOD1         ");
-  59   4                      lcd_write_string(0, 1, "The default mode");
-  60   4                      while (key1 == 0);
-  61   4                      DelayMS(200);
-  62   4                      kickFlag = 0;
-  63   4                      warnFlag = 0;
-  64   4                  }
-  65   3              }
-  66   2              if (key2 == 0) {                          //进入模式2
-  67   3                  DelayMS(30);
-  68   3                  if (key2 == 0) {
-  69   4                      d1 = 1;
-  70   4                      d2 = 0;
-  71   4                      d3 = 1;
-  72   4                      lcd_clear();
-  73   4                      DelayMS(5);
-  74   4                      lcd_write_string(0, 0, "MOD2         ");
-  75   4                      while (key2 == 0);
-  76   4                      DelayMS(200);
-  77   4                      DHT11_receive();
-  78   4                      lcd_clear();
-  79   4                      DelayMS(5);
-  80   4                      lcd_write_string(0, 0, "COMMAND Mod");
-  81   4                      lcd_write_string(0, 1, "Use K4 To UPDATE");
-  82   4                      kickFlag = 0;
-  83   4                      warnFlag = 0;
-  84   4                  }
-  85   3              }
-  86   2              if (key3 == 0 && warnFlag == 0) {         //进入模式3——设定温度上限1
-  87   3                  DelayMS(30);
-  88   3                  if (key3 == 0) {
-  89   4                      d1 = 1;
-  90   4                      d2 = 1;
-  91   4                      d3 = 0;
-  92   4                      lcd_clear();
-  93   4                      DelayMS(5);
-  94   4                      lcd_write_string(0, 0, "MOD3         ");
-  95   4                      while (key3 == 0);
-  96   4                      DelayMS(200);
-  97   4                      d3 = 1;
-  98   4                      lcd_clear();
-  99   4                      DelayMS(5);
- 100   4                      lcd_write_string(0, 0, "SET upper limit");
- 101   4                      lcd_write_string(0, 1, "USE K4 to SET");
- 102   4                  }
- 103   3              }
- 104   2              if (d1 == 0) {                            //当蓝灯亮时，显示温度和湿度，并发送给上位机
- 105   3                  //DHT11_receive();  
- 106   3                  lcd_clear();
- 107   3                  DelayMS(5);
- 108   3                  lcd_write_string(0, 0, "Auto detecting");
- 109   3                  lcd_write_string(0, 1, rec_dat);
- 110   3                  UartInit();
- 111   3                  SendString(rec_dat);
- 112   3                  DelayMS(1000);
- 113   3              }
- 114   2              if (d2 == 0) {                            //当绿灯亮时，按下k4可显示温度和湿度，并发送给上位机
- 115   3                //DHT11_receive();
- 116   3                lcd_clear();
-C51 COMPILER V9.54   MAIN                                                                  07/05/2021 17:47:42 PAGE 3   
+  55   1          TR0 = 1;
+  56   1          while (1) {
+  57   2              //if(TF0){
+  58   2                //TF0 = 0;
+  59   2                //DHT11_receive();  
+  60   2              //}
+  61   2       /*       if (key1 == 0) {                          //进入模式1
+  62   2                  DelayMS(30);
+  63   2                  if (key1 == 0) {
+  64   2                      d1 = 0;
+  65   2                      d2 = 1;
+  66   2                      d3 = 1;
+  67   2                      lcd_clear();
+  68   2                      DelayMS(5);
+  69   2                      lcd_write_string(0, 0, "MOD1         ");
+  70   2                      lcd_write_string(0, 1, "The default mode");
+  71   2                      while (key1 == 0);
+  72   2                      DelayMS(200);
+  73   2                      kickFlag = 0;
+  74   2                      warnFlag = 0;
+  75   2                  }
+  76   2              }
+  77   2              if (key2 == 0) {                          //进入模式2
+  78   2                  DelayMS(30);
+  79   2                  if (key2 == 0) {
+  80   2                      d1 = 1;
+  81   2                      d2 = 0;
+  82   2                      d3 = 1;
+  83   2                      lcd_clear();
+  84   2                      DelayMS(5);
+  85   2                      lcd_write_string(0, 0, "MOD2         ");
+  86   2                      while (key2 == 0);
+  87   2                      DelayMS(200);
+  88   2                      DHT11_receive();
+  89   2                      lcd_clear();
+  90   2                      DelayMS(5);
+  91   2                      lcd_write_string(0, 0, "COMMAND Mod");
+  92   2                      lcd_write_string(0, 1, "Use K4 To UPDATE");
+  93   2                      kickFlag = 0;
+  94   2                      warnFlag = 0;
+  95   2                  }
+  96   2              }
+  97   2              if (key3 == 0 && warnFlag == 0) {         //进入模式3——设定温度上限1
+  98   2                  DelayMS(30);
+  99   2                  if (key3 == 0) {
+ 100   2                      d1 = 1;
+ 101   2                      d2 = 1;
+ 102   2                      d3 = 0;
+ 103   2                      lcd_clear();
+ 104   2                      DelayMS(5);
+ 105   2                      lcd_write_string(0, 0, "MOD3         ");
+ 106   2                      while (key3 == 0);
+ 107   2                      DelayMS(200);
+ 108   2                      d3 = 1;
+ 109   2                      lcd_clear();
+ 110   2                      DelayMS(5);
+ 111   2                      lcd_write_string(0, 0, "SET upper limit");
+ 112   2                      lcd_write_string(0, 1, "USE K4 to SET");
+ 113   2                  }
+ 114   2              }
+ 115   2              if (d1 == 0) {                            //当蓝灯亮时，显示温度和湿度，并发送给上位机
+ 116   2                  //DHT11_receive();  
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 3   
 
- 117   3                DelayMS(5);
- 118   3                lcd_write_string(0, 0, "COMMAND Mod");
- 119   3                lcd_write_string(0, 1, rec_dat);
- 120   3                if (key4 == 0) {
- 121   4                      DelayMS(30);
- 122   4                      if (key4 == 0) {
- 123   5                          lcd_write_string(0, 0, "Has been sent      ");
- 124   5                          UartInit();
- 125   5                          SendString(rec_dat);
- 126   5                          DelayMS(1000);
- 127   5                          while (key4 == 0);
- 128   5                          //DelayMS(100);
- 129   5                      }
- 130   4                  }/*else{
- 131   3                      DHT11_receive();
- 132   3                      lcd_clear();
- 133   3                      DelayMS(5);
- 134   3                      lcd_write_string(0, 0, "COMMAND Mod");
- 135   3                      lcd_write_string(0, 1, "Use K4 To UPDATE");
- 136   3                  }*/
- 137   3                    
- 138   3              }
- 139   2              if (d1 == 1 && d2 == 1 && d3 == 1 && warnFlag == 0) {      //设定温度上限2
- 140   3                  if (key4 == 0) {
- 141   4                      DelayMS(30);
- 142   4                      if (key4 == 0) {
- 143   5                          while (key4 == 0); 
- 144   5                          DelayMS(100);
- 145   5                      }
- 146   4                      while (key4 != 0) {
- 147   5                          //DHT11_receive();
- 148   5                          lcd_clear();
- 149   5                          DelayMS(5);
- 150   5                          lcd_write_string(0, 0, "k1=up k2=down");
- 151   5                          sprintf(strTemp, "%d", limit); 
- 152   5                          lcd_write_string(0, 1, "    K4 to exit");
- 153   5                          lcd_write_string(0, 1, strTemp);
- 154   5                          if (key1 == 0) {
- 155   6                              DelayMS(30);
- 156   6                              if (key1 == 0) {
- 157   7                                  limit ++;
- 158   7                                  while (key1 == 0);
- 159   7                              }
- 160   6                          }
- 161   5                          if (key2 == 0) {
- 162   6                              DelayMS(30);
- 163   6                              if (key2 == 0) {
- 164   7                                  limit --;
- 165   7                                  while (key2 == 0);
- 166   7                              }
- 167   6                          }
- 168   5                      }
- 169   4                      d3=0;
- 170   4                      DHT11_receive();
- 171   4                      lcd_clear();
- 172   4                      DelayMS(5);
- 173   4                      lcd_write_string(0, 0, "SET Finish");
- 174   4                      lcd_write_string(0, 1, "USE K1/K2 to Exit");
- 175   4                      kickFlag = 0;
- 176   4                      warnFlag = 0;
- 177   4                  }
- 178   3              }
-C51 COMPILER V9.54   MAIN                                                                  07/05/2021 17:47:42 PAGE 4   
+ 117   2                  lcd_clear();
+ 118   2                  DelayMS(5);
+ 119   2                  lcd_write_string(0, 0, "Auto detecting");
+ 120   2                  lcd_write_string(0, 1, rec_dat);
+ 121   2                  UartInit();
+ 122   2                  SendString(rec_dat);
+ 123   2                  DelayMS(1000);
+ 124   2              }
+ 125   2              if (d2 == 0) {                            //当绿灯亮时，按下k4可显示温度和湿度，并发送给上位机
+ 126   2                //DHT11_receive();
+ 127   2                lcd_clear();
+ 128   2                DelayMS(5);
+ 129   2                lcd_write_string(0, 0, "COMMAND Mod");
+ 130   2                lcd_write_string(0, 1, rec_dat);
+ 131   2                if (key4 == 0) {
+ 132   2                      DelayMS(30);
+ 133   2                      if (key4 == 0) {          
+ 134   2                          lcd_clear();
+ 135   2                          DelayMS(5);
+ 136   2                          lcd_write_string(0, 0, "Has been sent");
+ 137   2                          lcd_write_string(0, 1, rec_dat);
+ 138   2                          UartInit();
+ 139   2                          SendString(rec_dat);
+ 140   2                          DelayMS(1000);
+ 141   2                          while (key4 == 0);
+ 142   2                          DelayMS(100);
+ 143   2                      }
+ 144   2                  }/*else{
+ 145   2                      DHT11_receive();
+ 146   2                      lcd_clear();
+ 147   2                      DelayMS(5);
+ 148   2                      lcd_write_string(0, 0, "COMMAND Mod");
+ 149   2                      lcd_write_string(0, 1, "Use K4 To UPDATE");
+ 150   2                  }
+ 151   2                    
+ 152   2              }
+ 153   2              if (d1 == 1 && d2 == 1 && d3 == 1 && warnFlag == 0) {      //设定温度上限2
+ 154   2                  if (key4 == 0) {
+ 155   2                      DelayMS(30);
+ 156   2                      if (key4 == 0) {
+ 157   2                          while (key4 == 0); 
+ 158   2                          DelayMS(100);
+ 159   2                      }
+ 160   2                      while (key4 != 0) {
+ 161   2                          //DHT11_receive();
+ 162   2                          lcd_clear();
+ 163   2                          DelayMS(5);
+ 164   2                          lcd_write_string(0, 0, "k1=up k2=down");
+ 165   2                          sprintf(strTemp, "%d", limit); 
+ 166   2                          lcd_write_string(0, 1, "    K4 to exit");
+ 167   2                          lcd_write_string(0, 1, strTemp);
+ 168   2                          if (key1 == 0) {
+ 169   2                              DelayMS(30);
+ 170   2                              if (key1 == 0) {
+ 171   2                                  limit ++;
+ 172   2                                  while (key1 == 0);
+ 173   2                              }
+ 174   2                          }
+ 175   2                          if (key2 == 0) {
+ 176   2                              DelayMS(30);
+ 177   2                              if (key2 == 0) {
+ 178   2                                  limit --;
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 4   
 
- 179   2              while(TH >= limit && kickFlag == 0){
- 180   3                d1 = 1;
- 181   3                d2 = 1;
- 182   3                d3 = ~d3;
- 183   3                warnFlag = 1;
- 184   3                //DHT11_receive();
- 185   3                lcd_clear();
- 186   3                DelayMS(5);
- 187   3                lcd_write_string(0, 0, "TEMP OVERRUN!"); 
- 188   3                lcd_write_string(0, 1, "KICK K4 TO CLOSE");
- 189   3                DelayMS(200);
- 190   3                if(key4 == 0){
- 191   4                  d3 = 1;
- 192   4                  kickFlag = 1;
- 193   4                  warnFlag = 0;
- 194   4                  //DHT11_receive();
- 195   4                  lcd_clear();
- 196   4                  DelayMS(5);
- 197   4                  lcd_write_string(0, 0, "ALARM turned off");
- 198   4                  DelayMS(1500);
- 199   4                  lcd_write_string(0, 0, "hello EIE 194   ");
- 200   4                }
- 201   3              } 
- 202   2           }
- 203   1      /*        if(TH >= limit && flag == 1){
- 204   1                if (key4 != 0) {
- 205   1                  DelayMS(30);
- 206   1                  if (key4 != 0) {
- 207   1                    warning();
- 208   1                    DelayMS(200);
- 209   1                  }
- 210   1                }
- 211   1                if (key4 == 0) {  
- 212   1                  DelayMS(30);
- 213   1                  if (key4 == 0) {
- 214   1                    flag=0;
- 215   1                    d3 = 1;
- 216   1                    DHT11_receive();
- 217   1                    lcd_clear();
- 218   1                    DelayMS(5);
- 219   1                    lcd_write_string(0, 0, "ALARM turned off");
- 220   1                    DelayMS(100);
- 221   1                  }
- 222   1                }
- 223   1              }
- 224   1              if(TH<limit){
- 225   1                flag = 1;
- 226   1              }
- 227   1          }
- 228   1      }*/
- 229   1      }
- 230          //将IO口设定为普通模式
- 231          void io_init(void) {
- 232   1      
- 233   1          P0M0 = 0X00;
- 234   1          P0M1 = 0X00;
- 235   1          P1M0 = 0X00;
- 236   1          P1M1 = 0X00;
- 237   1          P2M0 = 0X00;
- 238   1          P2M1 = 0X00;
- 239   1          //P3M0=0X00;
- 240   1          //P3M1=0X00;
-C51 COMPILER V9.54   MAIN                                                                  07/05/2021 17:47:42 PAGE 5   
+ 179   2                                  while (key2 == 0);
+ 180   2                              }
+ 181   2                          }
+ 182   2                      }
+ 183   2                      d3=0;
+ 184   2                      DHT11_receive();
+ 185   2                      lcd_clear();
+ 186   2                      DelayMS(5);
+ 187   2                      lcd_write_string(0, 0, "SET Finish");
+ 188   2                      lcd_write_string(0, 1, "USE K1/K2 to Exit");
+ 189   2                      kickFlag = 0;
+ 190   2                      warnFlag = 0;
+ 191   2                  }
+ 192   2              }
+ 193   2              while(TH >= limit && kickFlag == 0){
+ 194   2                d1 = 1;
+ 195   2                d2 = 1;
+ 196   2                d3 = ~d3;
+ 197   2                warnFlag = 1;
+ 198   2                //DHT11_receive();
+ 199   2                lcd_clear();
+ 200   2                DelayMS(5);
+ 201   2                lcd_write_string(0, 0, "TEMP OVERRUN!"); 
+ 202   2                lcd_write_string(0, 1, "KICK K4 TO CLOSE");
+ 203   2                DelayMS(200);
+ 204   2                if(key4 == 0){
+ 205   2                  DelayMS(30);
+ 206   2                  if(key4==0){
+ 207   2                    d3 = 1;
+ 208   2                    kickFlag = 1;
+ 209   2                    warnFlag = 0;
+ 210   2                    //DHT11_receive();
+ 211   2                    lcd_clear();
+ 212   2                    DelayMS(5);
+ 213   2                    lcd_write_string(0, 0, "ALARM turned off");
+ 214   2                    DelayMS(1500);
+ 215   2                    lcd_write_string(0, 0, "hello EIE 194   ");
+ 216   2                  }
+ 217   2                }
+ 218   2              }*/ 
+ 219   2           }
+ 220   1      /*        if(TH >= limit && flag == 1){
+ 221   1                if (key4 != 0) {
+ 222   1                  DelayMS(30);
+ 223   1                  if (key4 != 0) {
+ 224   1                    warning();
+ 225   1                    DelayMS(200);
+ 226   1                  }
+ 227   1                }
+ 228   1                if (key4 == 0) {  
+ 229   1                  DelayMS(30);
+ 230   1                  if (key4 == 0) {
+ 231   1                    flag=0;
+ 232   1                    d3 = 1;
+ 233   1                    DHT11_receive();
+ 234   1                    lcd_clear();
+ 235   1                    DelayMS(5);
+ 236   1                    lcd_write_string(0, 0, "ALARM turned off");
+ 237   1                    DelayMS(100);
+ 238   1                  }
+ 239   1                }
+ 240   1              }
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 5   
 
- 241   1          P4M0 = 0X00;
- 242   1          P4M1 = 0X00;
- 243   1          P5M0 = 0X00;
- 244   1          P5M1 = 0X00;
- 245   1          DelayMS(5);
+ 241   1              if(TH<limit){
+ 242   1                flag = 1;
+ 243   1              }
+ 244   1          }
+ 245   1      }*/
  246   1      }
+*** WARNING C280 IN LINE 40 OF src\main.c: 'strTemp': unreferenced local variable
  247          
- 248          
- 249          void DHT11_start() {
- 250   1          Data = 1;
- 251   1          Delay2US(1);
- 252   1          Data = 0;
- 253   1          DelayMS(20);
- 254   1          Data = 1;
- 255   1          Delay2US(10);
- 256   1      }
- 257          
- 258          unsigned char DHT11_rec_byte() {                   //DHT11获取数据
- 259   1          unsigned char i, dat = 0;
- 260   1          for (i = 0; i < 8; i ++) {
- 261   2              dat <<= 1;
- 262   2              while (Data == 0);
- 263   2              Delay2US(20);
- 264   2              if (Data == 1) {
- 265   3                  dat += 1;
- 266   3                  while (Data);
- 267   3              }
- 268   2          }
- 269   1          return dat;
- 270   1      }
- 271          
- 272          void DHT11_receive() {                             //获取DHT11上的湿度和温度
- 273   1          DHT11_start();
- 274   1      
- 275   1          if (Data == 0) {
- 276   2      
- 277   2              while (Data == 0);
- 278   2      
- 279   2              while (Data == 1);
- 280   2              RH = DHT11_rec_byte();
- 281   2              RL = DHT11_rec_byte();
- 282   2              TH = DHT11_rec_byte();
- 283   2              TL = DHT11_rec_byte();
- 284   2              revise = DHT11_rec_byte();
- 285   2      
- 286   2              Delay2US(12);
- 287   2      
- 288   2              if ((RH + RL + TH + TL) == revise) {
- 289   3      
- 290   3                  rec_dat[0] = '0' + (RH / 10);;
- 291   3                  rec_dat[1] = '0' + (RH % 10);
- 292   3                  rec_dat[2] =' ';
- 293   3                  rec_dat[3] = 'R' ;
- 294   3                  rec_dat[4] = 'H';
- 295   3                  rec_dat[5]=' ';
- 296   3                  rec_dat[6]=' ';
- 297   3                  rec_dat[7]=' ';
- 298   3                  rec_dat[8]='0' + (TH / 10);
- 299   3                  rec_dat[9] = '0' + (TH % 10);
- 300   3                  rec_dat[10] = '.';
- 301   3                  rec_dat[11] ='0'+TL;
- 302   3                  rec_dat[12] = 'C';
-C51 COMPILER V9.54   MAIN                                                                  07/05/2021 17:47:42 PAGE 6   
+ 248          void time0_int() interrupt 1{
+ 249   1        //TH0 = 0xD8;
+ 250   1        //TL0 = 0xf0;
+ 251   1        //i++;
+ 252   1        //if(i == 25){
+ 253   1          DHT11_receive();  
+ 254   1          //i = 0;
+ 255   1        //}
+ 256   1        if (key1 == 0) {                          //进入模式1
+ 257   2                  DelayMS(30);
+ 258   2                  if (key1 == 0) {
+ 259   3                      d1 = 0;
+ 260   3                      d2 = 1;
+ 261   3                      d3 = 1;
+ 262   3                      lcd_clear();
+ 263   3                      DelayMS(5);
+ 264   3                      lcd_write_string(0, 0, "MOD1         ");
+ 265   3                      lcd_write_string(0, 1, "The default mode");
+ 266   3                      while (key1 == 0);
+ 267   3                      DelayMS(200);
+ 268   3                      kickFlag = 0;
+ 269   3                      warnFlag = 0;
+ 270   3                  }
+ 271   2              }
+ 272   1              if (key2 == 0) {                          //进入模式2
+ 273   2                  DelayMS(30);
+ 274   2                  if (key2 == 0) {
+ 275   3                      d1 = 1;
+ 276   3                      d2 = 0;
+ 277   3                      d3 = 1;
+ 278   3                      lcd_clear();
+ 279   3                      DelayMS(5);
+ 280   3                      lcd_write_string(0, 0, "MOD2         ");
+ 281   3                      while (key2 == 0);
+ 282   3                      DelayMS(200);
+ 283   3                      DHT11_receive();
+ 284   3                      lcd_clear();
+ 285   3                      DelayMS(5);
+ 286   3                      lcd_write_string(0, 0, "COMMAND Mod");
+ 287   3                      lcd_write_string(0, 1, "Use K4 To UPDATE");
+ 288   3                      kickFlag = 0;
+ 289   3                      warnFlag = 0;
+ 290   3                  }
+ 291   2              }
+ 292   1              if (key3 == 0 && warnFlag == 0) {         //进入模式3——设定温度上限1
+ 293   2                  DelayMS(30);
+ 294   2                  if (key3 == 0) {
+ 295   3                      d1 = 1;
+ 296   3                      d2 = 1;
+ 297   3                      d3 = 0;
+ 298   3                      lcd_clear();
+ 299   3                      DelayMS(5);
+ 300   3                      lcd_write_string(0, 0, "MOD3         ");
+ 301   3                      while (key3 == 0);
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 6   
 
- 303   3                  //rec_dat[13] = ' ' ;
- 304   3                  //rec_dat[14]=' ';
- 305   3              }
- 306   2          }
- 307   1      }
- 308          
- 309          
- 310          
- 311          
- 312          
- 313          
+ 302   3                      DelayMS(200);
+ 303   3                      d3 = 1;
+ 304   3                      lcd_clear();
+ 305   3                      DelayMS(5);
+ 306   3                      lcd_write_string(0, 0, "SET upper limit");
+ 307   3                      lcd_write_string(0, 1, "USE K4 to SET");
+ 308   3                  }
+ 309   2              }
+ 310   1              if (d1 == 0) {                            //当蓝灯亮时，显示温度和湿度，并发送给上位机
+ 311   2                  //DHT11_receive();  
+ 312   2                  lcd_clear();
+ 313   2                  DelayMS(5);
+ 314   2                  lcd_write_string(0, 0, "Auto detecting");
+ 315   2                  lcd_write_string(0, 1, rec_dat);
+ 316   2                  UartInit();
+ 317   2                  SendString(rec_dat);
+ 318   2                  DelayMS(1000);
+ 319   2              }
+ 320   1              if (d2 == 0) {                            //当绿灯亮时，按下k4可显示温度和湿度，并发送给上位机
+ 321   2                //DHT11_receive();
+ 322   2                lcd_clear();
+ 323   2                DelayMS(5);
+ 324   2                lcd_write_string(0, 0, "COMMAND Mod");
+ 325   2                lcd_write_string(0, 1, rec_dat);
+ 326   2                if (key4 == 0) {
+ 327   3                      DelayMS(30);
+ 328   3                      if (key4 == 0) {          
+ 329   4                          lcd_clear();
+ 330   4                          DelayMS(5);
+ 331   4                          lcd_write_string(0, 0, "Has been sent");
+ 332   4                          lcd_write_string(0, 1, rec_dat);
+ 333   4                          UartInit();
+ 334   4                          SendString(rec_dat);
+ 335   4                          DelayMS(1000);
+ 336   4                          while (key4 == 0);
+ 337   4                          DelayMS(100);
+ 338   4                      }
+ 339   3                  }/*else{
+ 340   2                      DHT11_receive();
+ 341   2                      lcd_clear();
+ 342   2                      DelayMS(5);
+ 343   2                      lcd_write_string(0, 0, "COMMAND Mod");
+ 344   2                      lcd_write_string(0, 1, "Use K4 To UPDATE");
+ 345   2                  }*/
+ 346   2                    
+ 347   2              }
+ 348   1              if (d1 == 1 && d2 == 1 && d3 == 1 && warnFlag == 0) {      //设定温度上限2
+ 349   2                  if (key4 == 0) {
+ 350   3                      DelayMS(30);
+ 351   3                      if (key4 == 0) {
+ 352   4                          while (key4 == 0); 
+ 353   4                          DelayMS(100);
+ 354   4                      }
+ 355   3                      while (key4 != 0) {
+ 356   4                          //DHT11_receive();
+ 357   4                          lcd_clear();
+ 358   4                          DelayMS(5);
+ 359   4                          lcd_write_string(0, 0, "k1=up k2=down");
+ 360   4                          sprintf(strTemp, "%d", limit); 
+*** ERROR C202 IN LINE 360 OF src\main.c: 'strTemp': undefined identifier
+ 361   4                          lcd_write_string(0, 1, "    K4 to exit");
+ 362   4                          lcd_write_string(0, 1, strTemp);
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 7   
 
+*** ERROR C202 IN LINE 362 OF src\main.c: 'strTemp': undefined identifier
+ 363   4                          if (key1 == 0) {
+ 364   5                              DelayMS(30);
+ 365   5                              if (key1 == 0) {
+ 366   6                                  limit ++;
+ 367   6                                  while (key1 == 0);
+ 368   6                              }
+ 369   5                          }
+ 370   4                          if (key2 == 0) {
+ 371   5                              DelayMS(30);
+ 372   5                              if (key2 == 0) {
+ 373   6                                  limit --;
+ 374   6                                  while (key2 == 0);
+ 375   6                              }
+ 376   5                          }
+ 377   4                      }
+ 378   3                      d3=0;
+ 379   3                      DHT11_receive();
+ 380   3                      lcd_clear();
+ 381   3                      DelayMS(5);
+ 382   3                      lcd_write_string(0, 0, "SET Finish");
+ 383   3                      lcd_write_string(0, 1, "USE K1/K2 to Exit");
+ 384   3                      kickFlag = 0;
+ 385   3                      warnFlag = 0;
+ 386   3                  }
+ 387   2              }
+ 388   1              while(TH >= limit && kickFlag == 0){
+ 389   2                d1 = 1;
+ 390   2                d2 = 1;
+ 391   2                d3 = ~d3;
+ 392   2                warnFlag = 1;
+ 393   2                //DHT11_receive();
+ 394   2                lcd_clear();
+ 395   2                DelayMS(5);
+ 396   2                lcd_write_string(0, 0, "TEMP OVERRUN!"); 
+ 397   2                lcd_write_string(0, 1, "KICK K4 TO CLOSE");
+ 398   2                DelayMS(200);
+ 399   2                if(key4 == 0){
+ 400   3                  DelayMS(30);
+ 401   3                  if(key4==0){
+ 402   4                    d3 = 1;
+ 403   4                    kickFlag = 1;
+ 404   4                    warnFlag = 0;
+ 405   4                    //DHT11_receive();
+ 406   4                    lcd_clear();
+ 407   4                    DelayMS(5);
+ 408   4                    lcd_write_string(0, 0, "ALARM turned off");
+ 409   4                    DelayMS(1500);
+ 410   4                    lcd_write_string(0, 0, "hello EIE 194   ");
+ 411   4                  }
+ 412   3                }
+ 413   2              }
+ 414   1      }
+ 415          
+ 416          
+ 417          //将IO口设定为普通模式
+ 418          void io_init(void) {
+ 419   1      
+ 420   1          P0M0 = 0X00;
+ 421   1          P0M1 = 0X00;
+ 422   1          P1M0 = 0X00;
+ 423   1          P1M1 = 0X00;
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 8   
 
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1049    ----
-   CONSTANT SIZE    =    293    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =     23      24
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
+ 424   1          P2M0 = 0X00;
+ 425   1          P2M1 = 0X00;
+ 426   1          //P3M0=0X00;
+ 427   1          //P3M1=0X00;
+ 428   1          P4M0 = 0X00;
+ 429   1          P4M1 = 0X00;
+ 430   1          P5M0 = 0X00;
+ 431   1          P5M1 = 0X00;
+ 432   1          DelayMS(5);
+ 433   1      }
+ 434          
+ 435          
+ 436          void DHT11_start() {
+ 437   1          Data = 1;
+ 438   1          Delay2US(1);
+ 439   1          Data = 0;
+ 440   1          DelayMS(20);
+ 441   1          Data = 1;
+ 442   1          Delay2US(10);
+ 443   1      }
+ 444          
+ 445          unsigned char DHT11_rec_byte() {                   //DHT11获取数据
+ 446   1          unsigned char i, dat = 0;
+ 447   1          for (i = 0; i < 8; i ++) {
+ 448   2              dat <<= 1;
+ 449   2              while (Data == 0);
+ 450   2              Delay2US(20);
+ 451   2              if (Data == 1) {
+ 452   3                  dat += 1;
+ 453   3                  while (Data);
+ 454   3              }
+ 455   2          }
+ 456   1          return dat;
+ 457   1      }
+ 458          
+ 459          void DHT11_receive() {                             //获取DHT11上的湿度和温度
+ 460   1          DHT11_start();
+ 461   1      
+ 462   1          if (Data == 0) {
+ 463   2      
+ 464   2              while (Data == 0);
+ 465   2      
+ 466   2              while (Data == 1);
+ 467   2              RH = DHT11_rec_byte();
+ 468   2              RL = DHT11_rec_byte();
+ 469   2              TH = DHT11_rec_byte();
+ 470   2              TL = DHT11_rec_byte();
+ 471   2              revise = DHT11_rec_byte();
+ 472   2      
+ 473   2              Delay2US(12);
+ 474   2      
+ 475   2              if ((RH + RL + TH + TL) == revise) {
+ 476   3      
+ 477   3                  rec_dat[0] = '0' + (RH / 10);;
+ 478   3                  rec_dat[1] = '0' + (RH % 10);
+ 479   3                  rec_dat[2] =' ';
+ 480   3                  rec_dat[3] = 'R' ;
+ 481   3                  rec_dat[4] = 'H';
+ 482   3                  rec_dat[5]=' ';
+ 483   3                  rec_dat[6]=' ';
+ 484   3                  rec_dat[7]=' ';
+ 485   3                  rec_dat[8]='0' + (TH / 10);
+C51 COMPILER V9.54   MAIN                                                                  07/05/2021 21:09:36 PAGE 9   
 
+ 486   3                  rec_dat[9] = '0' + (TH % 10);
+ 487   3                  rec_dat[10] = '.';
+ 488   3                  rec_dat[11] ='0'+TL;
+ 489   3                  rec_dat[12] = 'C';
+ 490   3                  rec_dat[13] = ' ' ;
+ 491   3                  rec_dat[14]=' ';
+ 492   3              }
+ 493   2          }
+ 494   1      }
+ 495          
+ 496          
+ 497          
+ 498          
+ 499          
+ 500          
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  2 ERROR(S)
