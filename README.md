@@ -14,7 +14,7 @@
 >
 > web： WebStorm 2020.3.2 x64（educational）& Google Web Designer 
 >
-> c51： Keil uVision5（我也不知道是哪个年代的哪个版本）& ISIS7 （我也不知道是哪个年代的哪个版本）（教学版）
+> c51： Keil uVision5 & ISIS7 （学校机房版）
 >
 > php：PhpStorm 2021.2 x64（educational）
 >
