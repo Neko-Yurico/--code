@@ -19,6 +19,8 @@
 > php：PhpStorm 2021.2 x64（educational）
 >
 > harmonyOS：DevEco Studio 2.1.0.501 x64
+>
+> Android：IntelliJ IDEA 2020.3.2 x64（educational）& Android Studio Arctic Fox 2020.3.1 Patch 2
 
 # 合作成员
 
