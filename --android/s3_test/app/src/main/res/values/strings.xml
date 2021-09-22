@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">s3_test</string>
+    <string name="hello">\n 荷塘月色
+        \n 1234567
+        \n 7654321
+    </string>
+</resources>
