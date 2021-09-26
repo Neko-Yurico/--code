@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">s3_3test</string>
+    <string name="hello">helloworld,MainActivity!</string>
+    <string name="button">单击我，改变文字背景颜色</string>
+</resources>
