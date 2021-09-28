@@ -3,10 +3,10 @@ import requests
 import re
 
 if __name__ == '__main__':
-    target = 'https://ygocdb.com/?search='
-    req = requests.get(url = target)
+    target = 'https://ygocdb.com/?search=%E7%81%B0%E6%B5%81%E4%B8%BD'
+    req = requests.get(url=target)
     html = req.text
-    get = BeautifulSoup(html)
+    get = BeautifulSoup(html,'lxml')
     texts = get.find_all('div', class_ = 'col-md-6 col-xs-8 names')
     texts = texts[0].text.replace('\n', '')
     number = "".join(re.findall("\d+",texts))

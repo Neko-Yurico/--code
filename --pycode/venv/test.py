@@ -15,7 +15,7 @@ def getID(key:str) -> str :
         number = "".join(re.findall("\d+", texts))
     return number
 
-msg=""
+msg="image 灰流丽"
 msg = msg.strip().split(' ')
 if len(msg) == 1:
 
