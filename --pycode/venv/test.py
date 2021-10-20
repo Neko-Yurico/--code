@@ -3,19 +3,19 @@ from bs4 import BeautifulSoup
 import requests
 import re
 
-def getID(key:str) -> str :
+def getID(key:str) -> int :
     if __name__ == '__main__':
         key = parse.quote(key)
         target = f'https://ygocdb.com/?search={key}'
         req = requests.get(url=target)
         html = req.text
-        get = BeautifulSoup(html)
+        get = BeautifulSoup(html,'lxml')
         texts = get.find_all('div', class_='col-md-6 col-xs-8 names')
         texts = texts[0].text.replace('\n', '')
         number = "".join(re.findall("\d+", texts))
     return number
 
-msg="image 灰流丽"
+msg=input("/ocg " )
 msg = msg.strip().split(' ')
 if len(msg) == 1:
 

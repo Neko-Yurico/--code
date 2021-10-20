@@ -3,7 +3,7 @@ import requests
 import re
 
 if __name__ == '__main__':
-    target = 'https://ygocdb.com/?search=%E7%81%B0%E6%B5%81%E4%B8%BD'
+    target = 'https://ygocdb.com/?search=灰流丽'
     req = requests.get(url=target)
     html = req.text
     get = BeautifulSoup(html,'lxml')
