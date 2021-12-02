@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".MainActivity" style="@style/LinearLayout"
+android:orientation="vertical">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="姓名："
+                          android:textSize="24sp" tools:ignore="HardcodedText"/>
+                <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="张三"
+                          android:textSize="24sp" tools:ignore="HardcodedText"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="性别："
+                          android:textSize="24sp" tools:ignore="HardcodedText"/>
+                <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="男"
+                          android:textSize="24sp" tools:ignore="HardcodedText"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView android:layout_width="0pt" android:layout_height="0pt" android:layout_weight="1"/>
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/img1"
+                   android:id="@+id/image1" tools:srcCompat="@drawable/img1"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="家庭住址："
+                  android:textSize="24sp" tools:ignore="HardcodedText"/>
+        <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="家庭住址家庭住址"
+                  android:textSize="24sp" tools:ignore="HardcodedText"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="联系电话："
+                  android:textSize="24sp" tools:ignore="HardcodedText"/>
+        <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="123456789"
+                  android:textSize="24sp" tools:ignore="HardcodedText"/>
+    </LinearLayout>
+</LinearLayout>
