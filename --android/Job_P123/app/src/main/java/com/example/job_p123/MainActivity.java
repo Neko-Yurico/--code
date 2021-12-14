@@ -1,22 +1,20 @@
 package com.example.job_p123;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
-    ProgressDialog mydialog;
-    AlertDialog.Builder dialog=new AlertDialog.Builder ( MainActivity.this );
-    AlertDialog.Builder dialog2=new AlertDialog.Builder ( MainActivity.this );
-    Button button;
-    LinearLayout calculate;
+    Button button=null;
+    LinearLayout calculate=null;
     @Override
     public void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
@@ -24,13 +22,15 @@ public class MainActivity extends Activity {
         button=findViewById ( R.id.button1 );
         button.setOnClickListener ( new mClick ( ) );
     }
-    
     class mClick implements View.OnClickListener {
+        Builder dialog=new AlertDialog.Builder ( MainActivity.this );
+        @SuppressLint ( "InflateParams" )
         @Override
         public void onClick ( View view ) {
             if ( view==button ){
                 calculate=(LinearLayout ) getLayoutInflater ().inflate ( R.layout.second_activity,null );
                 dialog.setTitle ( "计算：" );
+                dialog.setView ( calculate );
                 dialog.setPositiveButton ( "确定",new calculateClick() );
                 dialog.setNegativeButton ( "取消",new exitClick() );
                 dialog.create ();
@@ -43,16 +43,15 @@ public class MainActivity extends Activity {
         EditText editText;
         @Override
         public void onClick ( DialogInterface dialogInterface , int i ) {
-            editText=(EditText )calculate.findViewById ( R.id.input );
+            editText= calculate.findViewById ( R.id.input );
             try {
-                Fx fx=new Fx ( (editText.getText ().toString ()).trim () );
+                Fx fx=new Fx ( ( editText.getText ( ).toString ( ) ).trim ( ) );
+                Toast.makeText ( getApplicationContext (),fx.getX (),Toast.LENGTH_LONG ).show ();
             }
             catch ( FxException e ) {
-                dialog2.setTitle ( "计算结果" );
-                dialog2.setMessage ( e.getMessage () );
-                dialog2.setPositiveButton ( "确定" ,new okClick());
+                Toast.makeText ( getApplicationContext (),e.getMessage (),Toast.LENGTH_LONG ).show ();
             }
-            dialog.dismiss();
+            dialogInterface.dismiss ();
         }
     }
     
@@ -60,13 +59,6 @@ public class MainActivity extends Activity {
         @Override
         public void onClick ( DialogInterface dialogInterface , int i ) {
             MainActivity.this.finish ();
-        }
-    }
-    
-    class okClick implements DialogInterface.OnClickListener {
-        @Override
-        public void onClick ( DialogInterface dialogInterface , int i ) {
-            dialog2.cancel();
         }
     }
 }
