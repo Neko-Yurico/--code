@@ -60,28 +60,6 @@ public class CreatBitTree {
         }
         System.out.print(root.val + " ");
     }//后根遍历
- //    public static void inOrderTraversal ( Tree root){
-//        //中续遍历
-//        //左根右
-//        if(root.left != null){
-//            inOrderTraversal ( root.left);
-//        }
-//        System.out.print(root.val + " ");
-//        if(root.right != null){
-//            inOrderTraversal ( root.right);
-//        }
-//    }
-//    public static void preOrderTraversal ( Tree root){
-//        //前续遍历
-//        //根左右
-//        System.out.print(root.val + " ");
-//        if(root.left != null){
-//            preOrderTraversal ( root.left);
-//        }
-//        if(root.right != null){
-//            preOrderTraversal ( root.right);
-//        }
-//    }
     public static void main(String[] args) {
         System.out.print ("请输入前根序列：" );
         Scanner scanner=new Scanner ( System.in );

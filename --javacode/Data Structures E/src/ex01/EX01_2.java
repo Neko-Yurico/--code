@@ -4,30 +4,6 @@ import java.util.*;
 
 public class EX01_2 {
     public static void main ( String[] args ) {
-/*        System.out.println ("请输入杨辉三角的行数：" );
-        Scanner scanner=new Scanner ( System.in );
-        int n=scanner.nextInt ();
-        int i=0;
-        SeqQueue<Integer> seqQueue = new SeqQueue<Integer>();
-        seqQueue.enqueue(0);
-        seqQueue.enqueue (1);
-        while ( i<=n ){
-            int x=seqQueue.dequeue();
-            int y=seqQueue.dequeue ();
-            if ( x==0 ){
-                i++;
-                seqQueue.enqueue ( 0 );
-            }
-            seqQueue.enqueue ( x+y );
-            if ( x==0 ){
-                System.out.println ( );
-                for ( int j=0;j<2*(n-1);j++ ){
-                    System.out.print ("\t");
-                }
-            }else {
-                System.out.print (x+"\t");
-            }
-        }*/
         System.out.println("请输入杨辉三角的行数：");
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();

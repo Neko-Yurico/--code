@@ -5,15 +5,6 @@ import java.util.Scanner;
 
 import static java.lang.Math.*;
 
-/**
- * @author Neko_Yurico
- * @description
- * @date 2021/4/27 11:33
- * ========================
- * WELCOME TO MY WEBSITE
- * https://nekoyurico.me/
- * ========================
- */
 class FxException extends Exception{
     String message;
     FxException(int a){
